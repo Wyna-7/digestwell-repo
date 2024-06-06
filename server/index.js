@@ -108,8 +108,21 @@ router.post('/entries', async (req, res) => {
 });
 
 // to modify an entry
-router.put('/entries/:id', (req, res) => {
-  res.send('Modified the entry');
+router.put('/entries/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const [rowUpdate, updatedEntries] = await Items.update(req.body, {
+      returning: true,
+      where: { id },
+    });
+    if (rowUpdate === 0) {
+      return res.status(404).json('Entry not found');
+    }
+    const updatedEntry = updatedEntries[0];
+    res.json(updatedEntry);
+  } catch (error) {
+    res.status(500).json('Failed to update the entry');
+  }
 });
 
 router.delete('/entries/:id', (req, res) => {
