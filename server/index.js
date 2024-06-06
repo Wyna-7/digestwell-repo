@@ -91,15 +91,20 @@ const router = express.Router();
 
 router.get('/entries', async (req, res) => {
   try {
-    const entries = await entry.getAll();
+    const entries = await Items.findAll();
     res.status(200).json(entries);
   } catch (error) {
     res.status(500).json('Failed to fetch entries');
   }
 });
 
-router.post('/entries', (req, res) => {
-  res.send('Got a POST request');
+router.post('/entries', async (req, res) => {
+  try {
+    const newEntry = await Items.create(req.body);
+    res.status(201).json(newEntry);
+  } catch (error) {
+    res.status(500).json('Failed to post the new entry');
+  }
 });
 
 // to modify an entry
