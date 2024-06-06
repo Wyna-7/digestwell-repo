@@ -1,8 +1,16 @@
 const express = require('express');
-const sequelize = require('sequelize');
+const Sequelize = require('sequelize');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
+
+const router = express.Router();
+
+router.get('/entries', (req, res) => {
+  res.send('hello from the router');
+});
+
+app.use(router);
 
 app.get('/', (req, res) => {
   res.send('Hello, World by Brice');
