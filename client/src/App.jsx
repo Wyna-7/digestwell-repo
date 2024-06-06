@@ -4,7 +4,7 @@ import { getEntries } from './apiService';
 
 function App() {
   useEffect(() => {
-    getEntries().then(console.log());
+    getEntries().then((data) => console.log(data));
   }, []);
 
   return (
