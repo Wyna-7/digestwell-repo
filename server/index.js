@@ -89,8 +89,13 @@ Symptoms.belongsTo(Items, { foreignKey: 'itemId' });
 app.use(express.json());
 const router = express.Router();
 
-router.get('/entries', (req, res) => {
-  res.send('hello from the router');
+router.get('/entries', async (req, res) => {
+  try {
+    const entries = await entry.getAll();
+    res.status(200).json(entries);
+  } catch (error) {
+    res.status(500).json('Failed to fetch entries');
+  }
 });
 
 router.post('/entries', (req, res) => {
