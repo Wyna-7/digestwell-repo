@@ -9,13 +9,35 @@ const sequelize = new Sequelize('digestwell', 'brice', 'null', {
   dialect: 'postgres',
 });
 
-const User = sequelize.define('user', {
-  user_id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
+const User = sequelize.define(
+  'user',
+  {
+    user_id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    firstName: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    lastName: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true,
+      },
+    },
   },
-});
+  {
+    timestamps: true,
+  }
+);
 
 const Items = sequelize.define('items', {
   name: {
@@ -103,6 +125,7 @@ router.post('/entries', async (req, res) => {
     const newEntry = await Items.create(req.body);
     res.status(201).json(newEntry);
   } catch (error) {
+    console.log('ERROR', error);
     res.status(500).json('Failed to post the new entry');
   }
 });
@@ -134,7 +157,7 @@ router.delete('/entries/:id', async (req, res) => {
     }
 
     await entry.destroy();
-    res.status(200).send().json('Delete was successful');
+    res.status(200).json('Delete was successful');
   } catch (error) {
     res.status(500).json('Failed to delete the entry');
   }
@@ -146,6 +169,7 @@ app.get('/', (req, res) => {
   res.send('Hello, World by Brice');
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+(async () => {
+  await sequelize.sync({ alter: true });
+  app.listen(PORT, () => console.log(`Running on port ${PORT}`));
+})();
