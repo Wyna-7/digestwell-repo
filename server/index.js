@@ -134,7 +134,7 @@ router.delete('/entries/:id', async (req, res) => {
     }
 
     await entry.destroy();
-    res.status(204).send().json('Delete was successful');
+    res.status(200).send().json('Delete was successful');
   } catch (error) {
     res.status(500).json('Failed to delete the entry');
   }
