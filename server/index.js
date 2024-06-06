@@ -111,22 +111,33 @@ router.post('/entries', async (req, res) => {
 router.put('/entries/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const [rowUpdate, updatedEntries] = await Items.update(req.body, {
-      returning: true,
-      where: { id },
-    });
-    if (rowUpdate === 0) {
+    const entry = await Items.findByPk(id);
+
+    if (!entry) {
       return res.status(404).json('Entry not found');
     }
-    const updatedEntry = updatedEntries[0];
+
+    const updatedEntry = await entry.update(req.body, { returning: true });
     res.json(updatedEntry);
   } catch (error) {
     res.status(500).json('Failed to update the entry');
   }
 });
 
-router.delete('/entries/:id', (req, res) => {
-  res.send('Deleted the entry');
+router.delete('/entries/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const entry = await Items.findByPk(id);
+
+    if (!entry) {
+      return res.status(404).json('Entry not found');
+    }
+
+    await entry.destroy();
+    res.status(204).send().json('Delete was successful');
+  } catch (error) {
+    res.status(500).json('Failed to delete the entry');
+  }
 });
 
 app.use(router);
