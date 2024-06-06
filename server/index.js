@@ -20,11 +20,11 @@ const User = sequelize.define('user', {
 const Items = sequelize.define('items', {
   name: {
     type: DataTypes.TEXT,
-    allowNull: true,
+    allowNull: false,
   },
   select: {
     type: DataTypes.ENUM('Food', 'Beverage', 'Medication', 'Supplement'),
-    allowNull: true,
+    allowNull: false,
   },
   health_impact: {
     type: DataTypes.ENUM('Beneficial', 'Neutral', 'Avoid'),
@@ -75,6 +75,16 @@ const Symptoms = sequelize.define('symptoms', {
     },
   },
 });
+
+// table relationships
+User.hasMany(Items, { foreignKey: 'userId' });
+Items.belongsTo(User, { foreignKey: 'userId' });
+
+User.hasMany(Symptoms, { foreignKey: 'userId' });
+Symptoms.belongsTo(User, { foreignKey: 'userId' });
+
+Items.hasMany(Symptoms, { foreignKey: 'itemId' });
+Symptoms.belongsTo(Items, { foreignKey: 'itemId' });
 
 app.use(express.json());
 const router = express.Router();
