@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { postEntry } from '../../apiService';
+
 function EntriesForm({ setEntriesList }) {
   const [item, setItem] = useState('');
   const [selectedOption, setSelectedOption] = useState('Food');
@@ -14,13 +15,15 @@ function EntriesForm({ setEntriesList }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const entry = { name: item, select: selectedOption };
-    postEntry(entry)
-      .then((data) => {
-        setEntriesList((prevList) => [...prevList, data]);
-      })
-      .catch(console.error);
-    setItem('');
+    const newItem = { name: item, select: selectedOption };
+    postEntry(newItem).then((newEntry) => {
+      setEntriesList((prevList) => [
+        ...prevList,
+        { ...newEntry, isEditing: false },
+      ]);
+      setItem('');
+      setSelectedOption('Food');
+    });
   };
 
   return (
@@ -34,7 +37,7 @@ function EntriesForm({ setEntriesList }) {
           placeholder='What did you consume?'
         />
         <div>
-          <label> Select an option</label>
+          <label>Select an option</label>
           <select value={selectedOption} onChange={handleDropdownChange}>
             <option value='Food'>Food</option>
             <option value='Beverage'>Beverage</option>

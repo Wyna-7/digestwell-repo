@@ -8,7 +8,10 @@ function App() {
   const [entriesList, setEntriesList] = useState([]);
 
   useEffect(() => {
-    getEntries().then((data) => setEntriesList(data));
+    getEntries().then((data) =>
+      // isEditing: false --> all entries start in view mode (not editable)
+      setEntriesList(data.map((entry) => ({ ...entry, isEditing: false })))
+    );
   }, []);
 
   return (
