@@ -15,14 +15,14 @@ const editEntry = async (id, data) => {
   return resp;
 };
 
-// const postEntry = async (item) => {
-//   const entry = await fetch(`${baseUrl}/entries`, {
-//     method: 'PUT',
-//     headers: { 'Content-Type': 'application/json' },
-//     body: JSON.stringify(data),
-//   });
-//   const resp = await entry.json();
-//   return resp;
-// };
+const postEntry = async (item) => {
+  const entry = await fetch(`${baseUrl}/entries`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(item),
+  });
+  const resp = await entry.json();
+  return resp;
+};
 
-export { getEntries, editEntry };
+export { getEntries, editEntry, postEntry };
