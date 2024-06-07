@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { postEntry } from '../../apiService';
 function EntriesForm() {
   const [item, setItem] = useState('');
-  const [selectedOption, setSelectedOption] = useState('food');
+  const [selectedOption, setSelectedOption] = useState('Food');
 
   const handleChange = (event) => {
     setItem(event.target.value);
@@ -14,8 +14,8 @@ function EntriesForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const entry = { name: item, select: selectedOption }; // Create the entry object
-    console.log('Submitting Entry:', entry); // Log the entry before sending
+    const entry = { name: item, select: selectedOption };
+    console.log('Submitting Entry:', entry);
     postEntry(entry).then(console.log).catch(console.error);
   };
 
