@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { postEntry } from '../../apiService';
-function EntriesForm() {
+function EntriesForm({ setEntriesList }) {
   const [item, setItem] = useState('');
   const [selectedOption, setSelectedOption] = useState('Food');
 
@@ -16,7 +16,11 @@ function EntriesForm() {
     event.preventDefault();
     const entry = { name: item, select: selectedOption };
     console.log('Submitting Entry:', entry);
-    postEntry(entry).then(console.log).catch(console.error);
+    postEntry(entry)
+      .then((data) => {
+        setEntriesList((prevList) => [...prevList, data]);
+      })
+      .catch(console.error);
   };
 
   return (

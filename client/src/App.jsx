@@ -13,7 +13,7 @@ function App() {
 
   return (
     <>
-      <EntriesForm />
+      <EntriesForm setEntriesList={setEntriesList} />
       <EntriesList entriesList={entriesList} setEntriesList={setEntriesList} />
     </>
   );
