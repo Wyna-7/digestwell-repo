@@ -15,12 +15,12 @@ function EntriesForm({ setEntriesList }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const entry = { name: item, select: selectedOption };
-    console.log('Submitting Entry:', entry);
     postEntry(entry)
       .then((data) => {
         setEntriesList((prevList) => [...prevList, data]);
       })
       .catch(console.error);
+    setItem('');
   };
 
   return (
