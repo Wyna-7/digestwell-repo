@@ -11,8 +11,8 @@ router.get('/entries', getEntries);
 
 router.post('/entries', postEntry);
 
-// to modify an entry
-router.put('/entries/:id', modifyEntry);
+// to edit an entry
+router.put('/entries/:id/edit', modifyEntry);
 
 router.delete('/entries/:id', deleteEntry);
 
