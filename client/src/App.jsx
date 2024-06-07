@@ -14,7 +14,7 @@ function App() {
   return (
     <>
       <EntriesForm />
-      <EntriesList entriesList={entriesList} />
+      <EntriesList entriesList={entriesList} setEntriesList={setEntriesList} />
     </>
   );
 }

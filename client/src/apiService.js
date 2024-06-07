@@ -1,7 +1,7 @@
-const baseUrl = 'http://localhost:3000';
+const baseUrl = 'http://localhost:3000/entries';
 
 const getEntries = async () => {
-  const entries = await fetch(`${baseUrl}/entries`).then((resp) => resp.json());
+  const entries = await fetch(baseUrl).then((resp) => resp.json());
   return entries;
 };
 
@@ -16,7 +16,7 @@ const editEntry = async (id, data) => {
 };
 
 const postEntry = async (item) => {
-  const entry = await fetch(`${baseUrl}/entries`, {
+  const entry = await fetch(baseUrl, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(item),
@@ -26,9 +26,11 @@ const postEntry = async (item) => {
 };
 
 const deleteEntry = async (id) => {
-  await fetch(`${baseUrl}/${id}`, {
+  const entry = await fetch(`${baseUrl}/${id}`, {
     method: 'DELETE',
   });
+  const resp = await entry.json();
+  return resp;
 };
 
 export { getEntries, editEntry, postEntry, deleteEntry };

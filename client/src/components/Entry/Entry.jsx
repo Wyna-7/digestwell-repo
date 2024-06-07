@@ -1,10 +1,11 @@
 import React from 'react';
-
-const Entry = ({ name, select, createdAt }) => {
-  const handleEdit = (event) => {
-    // do something
+import { deleteEntry } from '../../apiService';
+const Entry = ({ name, select, createdAt, id, setEntriesList }) => {
+  const handleDelete = (event) => {
+    deleteEntry(id).then(() => {
+      setEntriesList((prevList) => prevList.filter((entry) => entry.id !== id));
+    });
   };
-
   return (
     <div>
       <div>
@@ -14,10 +15,10 @@ const Entry = ({ name, select, createdAt }) => {
       </div>
 
       <div>
-        <button onClick={handleEdit}>👏</button>
+        <button>👏</button>
       </div>
       <div>
-        <button>⏹️</button>
+        <button onClick={handleDelete}>🗑️</button>
       </div>
     </div>
   );
