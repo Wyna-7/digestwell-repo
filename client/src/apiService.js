@@ -25,4 +25,10 @@ const postEntry = async (item) => {
   return resp;
 };
 
-export { getEntries, editEntry, postEntry };
+const deleteEntry = async (id) => {
+  await fetch(`${baseUrl}/${id}`, {
+    method: 'DELETE',
+  });
+};
+
+export { getEntries, editEntry, postEntry, deleteEntry };
