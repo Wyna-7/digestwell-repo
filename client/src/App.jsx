@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import './App.css';
+import EntriesForm from './components/EntriesForm/EntriesForm';
 import { getEntries } from './apiService';
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
 
   return (
     <>
-      <h1>Hello from the App</h1>
+      <EntriesForm />
     </>
   );
 }
