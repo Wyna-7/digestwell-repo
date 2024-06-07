@@ -1,11 +1,11 @@
-const baseUrl = 'http://localhost:3000/entries';
+const baseUrl = 'http://localhost:3000';
 
 const getEntries = async () => {
-  const entries = await fetch(baseUrl).then((resp) => resp.json());
+  const entries = await fetch(`${baseUrl}/entries`).then((resp) => resp.json());
   return entries;
 };
 
-const editEntries = async (id, data) => {
+const editEntry = async (id, data) => {
   const entry = await fetch(`${baseUrl}/${id}/edit`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
@@ -15,4 +15,14 @@ const editEntries = async (id, data) => {
   return resp;
 };
 
-export { getEntries, editEntries };
+// const postEntry = async (item) => {
+//   const entry = await fetch(`${baseUrl}/entries`, {
+//     method: 'PUT',
+//     headers: { 'Content-Type': 'application/json' },
+//     body: JSON.stringify(data),
+//   });
+//   const resp = await entry.json();
+//   return resp;
+// };
+
+export { getEntries, editEntry };
