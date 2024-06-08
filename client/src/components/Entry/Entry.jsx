@@ -13,6 +13,7 @@ import {
 import EditCalendarIcon from '@mui/icons-material/EditCalendar';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
+import { blue, green } from '@mui/material/colors';
 
 const Entry = ({
   name,
@@ -62,6 +63,9 @@ const Entry = ({
     setEntriesList((prevList) => {
       const updatedEntries = prevList.map((entry) => {
         // check if current entry matches with entry being edited.
+        console.log('entry.id', entry.id);
+        console.log('id', id);
+        console.log('check id', entry.id === id);
         if (entry.id === id) {
           return { ...entry, ...editedEntry, isEditing: false };
         } else {
@@ -72,6 +76,28 @@ const Entry = ({
       return updatedEntries;
     });
   };
+
+  function colorPicker(value) {
+    switch (value) {
+      case 'Beneficial':
+        return {
+          color: 'green',
+          fontWeight: 'bold',
+        };
+      case 'Neutral':
+        return {
+          color: 'secondary.main',
+          fontWeight: 'bold',
+        };
+      case 'Avoid':
+        return {
+          color: 'red',
+          fontWeight: 'bold',
+        };
+      default:
+        return blue;
+    }
+  }
 
   const handleChangeName = (event) => {
     setUpdatedName(event.target.value);
@@ -135,13 +161,25 @@ const Entry = ({
                   </Select>
                 </Box>
               ) : (
-                <Typography
-                  variant='body1'
-                  sx={{ color: 'primary.main' }}
-                  noWrap
-                >
-                  {select}
-                </Typography>
+                <>
+                  <Typography
+                    variant='body1'
+                    sx={{ color: 'primary.main' }}
+                    noWrap
+                  >
+                    {select}
+                  </Typography>
+                  <Typography
+                    variant='body1'
+                    sx={{
+                      // changes the color depending on the selected health impact
+                      color: colorPicker(health_impact),
+                    }}
+                    noWrap
+                  >
+                    {health_impact}
+                  </Typography>
+                </>
               )}
             </Box>
             <Typography variant='body2' color='textSecondary'>
