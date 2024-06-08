@@ -1,5 +1,19 @@
 import React, { useState } from 'react';
 import { deleteEntry, editEntry } from '../../apiService';
+import {
+  Button,
+  Container,
+  Box,
+  Paper,
+  TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from '@mui/material';
+import EditCalendarIcon from '@mui/icons-material/EditCalendar';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+
 const Entry = ({ name, select, createdAt, id, isEditing, setEntriesList }) => {
   const [updatedName, setUpdatedName] = useState(name);
   const [updatedSelect, setUpdatedSelect] = useState(select);
@@ -56,44 +70,81 @@ const Entry = ({ name, select, createdAt, id, isEditing, setEntriesList }) => {
   };
 
   return (
-    <div>
-      <ul>
-        <li>
-          Name:
-          {isEditing ? (
-            <input
-              type='text'
-              value={updatedName}
-              onChange={handleChangeName}
-            />
-          ) : (
-            <span>{name}</span>
-          )}
-        </li>
-        <li>
-          Type:
-          {isEditing ? (
-            <select value={updatedSelect} onChange={handleChangeSelect}>
-              <option value='Food'>Food</option>
-              <option value='Beverage'>Beverage</option>
-              <option value='Medication'>Medication</option>
-              <option value='Supplement'>Supplement</option>
-            </select>
-          ) : (
-            <span>{select}</span>
-          )}
-        </li>
-        <li>Added on {new Date(createdAt).toLocaleString()}</li>
-      </ul>
-      <div>
-        {isEditing ? (
-          <button onClick={handleSave}>Save</button>
-        ) : (
-          <button onClick={toggleEdit}>Edit</button>
-        )}
-        <button onClick={handleDelete}>Delete</button>
-      </div>
-    </div>
+    <Container>
+      <Box
+        display='flex'
+        flexDirection='column'
+        alignItems='center'
+        justifyContent='center'
+        width='100%'
+        maxWidth={1200}
+      >
+        <Paper elevation={10} sx={{ p: 2, pb: 3.2, width: '100%', m: 2 }}>
+          <Box display='flex' flexDirection='row'>
+            <Box display='flex' flexDirection='row'>
+              <Box>
+                {isEditing ? (
+                  <TextField
+                    type='text'
+                    value={updatedName}
+                    onChange={handleChangeName}
+                    variant='outlined'
+                    margin='normal'
+                    sx={{
+                      mr: { sm: 2 },
+                      mb: { xs: 2, sm: 0 },
+                      width: { xs: '100%', sm: '50%' },
+                    }}
+                    required
+                  />
+                ) : (
+                  <span>{name}</span>
+                )}
+              </Box>
+              <Box>
+                {isEditing ? (
+                  <Select value={updatedSelect} onChange={handleChangeSelect}>
+                    <MenuItem value='Food'>Food</MenuItem>
+                    <MenuItem value='Beverage'>Beverage</MenuItem>
+                    <MenuItem value='Medication'>Medication</MenuItem>
+                    <MenuItem value='Supplement'>Supplement</MenuItem>
+                  </Select>
+                ) : (
+                  <span>{select}</span>
+                )}
+              </Box>
+              <Box>{new Date(createdAt).toLocaleString()}</Box>
+            </Box>
+            <Box display='flex' flexDirection='row'>
+              {isEditing ? (
+                <Button onClick={handleSave}>Save</Button>
+              ) : (
+                <EditCalendarIcon
+                  sx={{
+                    cursor: 'pointer',
+                    color: 'secondary.main',
+                    '&:hover': { color: 'primary.dark' },
+                  }}
+                  onClick={toggleEdit}
+                >
+                  Edit
+                </EditCalendarIcon>
+              )}
+              <DeleteOutlineIcon
+                sx={{
+                  cursor: 'pointer',
+                  color: 'secondary.main',
+                  '&:hover': { color: 'error.main' },
+                }}
+                onClick={handleDelete}
+              >
+                Delete
+              </DeleteOutlineIcon>
+            </Box>
+          </Box>
+        </Paper>
+      </Box>
+    </Container>
   );
 };
 
