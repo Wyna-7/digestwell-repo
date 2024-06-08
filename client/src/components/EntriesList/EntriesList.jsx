@@ -9,13 +9,14 @@ const EntriesList = ({ entriesList, setEntriesList }) => {
         justifyContent: 'center',
         maxWidth: 'none',
         width: '100%',
+        height: '400px',
+        overflowY: 'auto',
+        bgcolor: '#F3F6F6',
+        borderRadius: 10,
       }}
     >
       <Box
         sx={{
-          border: '2px solid #F3F6F6',
-          bgcolor: '#F3F6F6',
-          borderRadius: 2,
           width: '100%',
           maxWidth: 1200,
           p: 10,
@@ -27,6 +28,7 @@ const EntriesList = ({ entriesList, setEntriesList }) => {
             listStyleType: 'none',
             padding: 0,
             margin: 0,
+            paddingBottom: '20px',
           }}
         >
           {entriesList.map((entry) => (

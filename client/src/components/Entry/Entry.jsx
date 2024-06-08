@@ -12,6 +12,7 @@ import {
 } from '@mui/material';
 import EditCalendarIcon from '@mui/icons-material/EditCalendar';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
 
 const Entry = ({ name, select, createdAt, id, isEditing, setEntriesList }) => {
   const [updatedName, setUpdatedName] = useState(name);
@@ -69,86 +70,171 @@ const Entry = ({ name, select, createdAt, id, isEditing, setEntriesList }) => {
   };
 
   return (
-    <Container>
-      <Box
-        display='flex'
-        flexDirection='column'
-        alignItems='center'
-        justifyContent='center'
-        width='100%'
-        maxWidth={1200}
-      >
-        <Paper elevation={10} sx={{ p: 2, pb: 3.2, width: '100%', mb: 2 }}>
-          <Box
-            display='flex'
-            flexDirection='row'
-            justifyContent='space-between'
-            alignContent='center'
-            // sx={{ pt: 1 }}
-          >
-            <Box display='flex' gap={5}>
-              <Box>
-                {isEditing ? (
-                  <TextField
-                    type='text'
-                    value={updatedName}
-                    onChange={handleChangeName}
-                    variant='outlined'
-                    margin='normal'
-                    sx={{
-                      width: '100%',
-                    }}
-                    required
-                  />
-                ) : (
-                  <Typography variant='body1' noWrap>
-                    {name}
-                  </Typography>
-                )}
-              </Box>
-              <Box>
-                {isEditing ? (
-                  <Select value={updatedSelect} onChange={handleChangeSelect}>
-                    <MenuItem value='Food'>Food</MenuItem>
-                    <MenuItem value='Beverage'>Beverage</MenuItem>
-                    <MenuItem value='Medication'>Medication</MenuItem>
-                    <MenuItem value='Supplement'>Supplement</MenuItem>
-                  </Select>
-                ) : (
-                  <span>{select}</span>
-                )}
-              </Box>
-              <Box>{new Date(createdAt).toLocaleString()}</Box>
-            </Box>
-            <Box display='flex' flexDirection='row'>
+    // <Container>
+    //   <Box
+    //     display='flex'
+    //     flexDirection='column'
+    //     alignItems='center'
+    //     justifyContent='center'
+    //     width='100%'
+    //     maxWidth={1200}
+    //   >
+    //     <Paper elevation={10} sx={{ p: 2, pb: 3.2, width: '100%', mb: 2 }}>
+    //       <Box
+    //         display='flex'
+    //         flexDirection='row'
+    //         justifyContent='space-between'
+    //         alignContent='center'
+    //       >
+    //         <Box display='flex' gap={5}>
+    //           <Box>
+    //             {isEditing ? (
+    //               <TextField
+    //                 type='text'
+    //                 value={updatedName}
+    //                 onChange={handleChangeName}
+    //                 variant='outlined'
+    //                 margin='normal'
+    //                 sx={{
+    //                   width: '100%',
+    //                 }}
+    //                 required
+    //               />
+    //             ) : (
+    //               <Typography variant='body1' noWrap>
+    //                 {name}
+    //               </Typography>
+    //             )}
+    //           </Box>
+    //           <Box>
+    //             {isEditing ? (
+    //               <Select value={updatedSelect} onChange={handleChangeSelect}>
+    //                 <MenuItem value='Food'>Food</MenuItem>
+    //                 <MenuItem value='Beverage'>Beverage</MenuItem>
+    //                 <MenuItem value='Medication'>Medication</MenuItem>
+    //                 <MenuItem value='Supplement'>Supplement</MenuItem>
+    //               </Select>
+    //             ) : (
+    //               <Typography variant='body1' noWrap>
+    //                 {select}
+    //               </Typography>
+    //             )}
+    //           </Box>
+    //           <Box>{new Date(createdAt).toLocaleString()}</Box>
+    //         </Box>
+    //         <Box display='flex' flexDirection='row'>
+    //           {isEditing ? (
+    //             <Button onClick={handleSave}>Save</Button>
+    //           ) : (
+    //             <EditCalendarIcon
+    //               sx={{
+    //                 cursor: 'pointer',
+    //                 color: 'secondary.main',
+    //                 '&:hover': { color: 'primary.dark' },
+    //               }}
+    //               onClick={toggleEdit}
+    //             >
+    //               Edit
+    //             </EditCalendarIcon>
+    //           )}
+    //           <DeleteOutlineIcon
+    //             sx={{
+    //               cursor: 'pointer',
+    //               color: 'secondary.main',
+    //               '&:hover': { color: 'error.main' },
+    //             }}
+    //             onClick={handleDelete}
+    //           >
+    //             Delete
+    //           </DeleteOutlineIcon>
+    //         </Box>
+    //       </Box>
+    //     </Paper>
+    //   </Box>
+    // </Container>
+
+    <Container maxWidth='md' sx={{ mb: 2 }}>
+      <Paper elevation={10} sx={{ p: 2 }}>
+        <Box
+          display='flex'
+          flexDirection='row'
+          justifyContent='space-between'
+          alignItems='center'
+        >
+          <Box display='flex' flexDirection='column' gap={1} flexGrow={1}>
+            <Box display='flex' flexDirection='row' alignItems='center' gap={3}>
               {isEditing ? (
-                <Button onClick={handleSave}>Save</Button>
+                <TextField
+                  type='text'
+                  value={updatedName}
+                  onChange={handleChangeName}
+                  variant='outlined'
+                  margin='normal'
+                  fullWidth
+                  required
+                />
               ) : (
-                <EditCalendarIcon
-                  sx={{
-                    cursor: 'pointer',
-                    color: 'secondary.main',
-                    '&:hover': { color: 'primary.dark' },
-                  }}
-                  onClick={toggleEdit}
-                >
-                  Edit
-                </EditCalendarIcon>
+                <Typography variant='body1' noWrap>
+                  {name}
+                </Typography>
               )}
-              <DeleteOutlineIcon
+              {isEditing ? (
+                <Select
+                  value={updatedSelect}
+                  onChange={handleChangeSelect}
+                  sx={{ minWidth: 150, mr: 2, mt: 1 }}
+                >
+                  <MenuItem value='Food'>Food</MenuItem>
+                  <MenuItem value='Beverage'>Beverage</MenuItem>
+                  <MenuItem value='Medication'>Medication</MenuItem>
+                  <MenuItem value='Supplement'>Supplement</MenuItem>
+                </Select>
+              ) : (
+                <Typography
+                  variant='body1'
+                  sx={{ color: 'primary.main' }}
+                  noWrap
+                >
+                  {select}
+                </Typography>
+              )}
+            </Box>
+            <Typography variant='body2' color='textSecondary'>
+              {new Date(createdAt).toLocaleString()}
+            </Typography>
+          </Box>
+          <Box display='flex' flexDirection='row' gap={1}>
+            {isEditing ? (
+              <BookmarkAddedIcon
+                onClick={handleSave}
+                sx={{
+                  cursor: 'pointer',
+                  color: 'primary.dark',
+                  '&:hover': {
+                    color: 'secondary.main',
+                  },
+                }}
+              ></BookmarkAddedIcon>
+            ) : (
+              <EditCalendarIcon
+                onClick={toggleEdit}
                 sx={{
                   cursor: 'pointer',
                   color: 'secondary.main',
-                  '&:hover': { color: 'error.main' },
+                  '&:hover': {
+                    color: 'primary.dark',
+                  },
                 }}
-                onClick={handleDelete}
-              >
-                Delete
-              </DeleteOutlineIcon>
-            </Box>
+              ></EditCalendarIcon>
+            )}
+            <DeleteOutlineIcon
+              onClick={handleDelete}
+              cursor='pointer'
+              color='error'
+            ></DeleteOutlineIcon>
           </Box>
-        </Paper>
-      </Box>
+        </Box>
+      </Paper>
     </Container>
   );
 };

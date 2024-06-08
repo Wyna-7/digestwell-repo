@@ -23,6 +23,7 @@ function App() {
         alignItems='center'
         justifyContent='center'
         minHeight='100vh'
+        padding={2}
       >
         <EntriesForm setEntriesList={setEntriesList} />
         <EntriesList
