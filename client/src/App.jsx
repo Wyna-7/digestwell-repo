@@ -3,6 +3,7 @@ import './App.css';
 import { getEntries } from './apiService';
 import EntriesForm from './components/EntriesForm/EntriesForm';
 import EntriesList from './components/EntriesList/EntriesList';
+import Header from './components/Header/Header';
 import { Box, Container } from '@mui/material';
 
 function App() {
@@ -16,22 +17,26 @@ function App() {
   }, []);
 
   return (
-    <Container>
-      <Box
-        display='flex'
-        flexDirection='column'
-        alignItems='center'
-        justifyContent='center'
-        minHeight='100vh'
-        padding={2}
-      >
-        <EntriesForm setEntriesList={setEntriesList} />
-        <EntriesList
-          entriesList={entriesList}
-          setEntriesList={setEntriesList}
-        />
-      </Box>
-    </Container>
+    <>
+      <Header />
+
+      <Container>
+        <Box
+          display='flex'
+          flexDirection='column'
+          alignItems='center'
+          justifyContent='center'
+          minHeight='100vh'
+          padding={2}
+        >
+          <EntriesForm setEntriesList={setEntriesList} />
+          <EntriesList
+            entriesList={entriesList}
+            setEntriesList={setEntriesList}
+          />
+        </Box>
+      </Container>
+    </>
   );
 }
 
