@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { deleteEntry, editEntry } from '../../apiService';
-
 const Entry = ({ name, select, createdAt, id, isEditing, setEntriesList }) => {
   const [updatedName, setUpdatedName] = useState(name);
   const [updatedSelect, setUpdatedSelect] = useState(select);
