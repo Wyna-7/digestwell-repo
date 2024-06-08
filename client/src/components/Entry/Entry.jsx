@@ -14,9 +14,20 @@ import EditCalendarIcon from '@mui/icons-material/EditCalendar';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
 
-const Entry = ({ name, select, createdAt, id, isEditing, setEntriesList }) => {
+const Entry = ({
+  name,
+  select,
+  createdAt,
+  id,
+  isEditing,
+  health_impact,
+  setEntriesList,
+}) => {
   const [updatedName, setUpdatedName] = useState(name);
   const [updatedSelect, setUpdatedSelect] = useState(select);
+  const [updatedHealthImpact, setUpdatedHealthImpact] = useState(
+    health_impact || 'Neutral'
+  );
 
   const handleDelete = () => {
     deleteEntry(id).then(() => {
@@ -41,6 +52,7 @@ const Entry = ({ name, select, createdAt, id, isEditing, setEntriesList }) => {
     const editedEntry = {
       name: updatedName,
       select: updatedSelect,
+      health_impact: updatedHealthImpact,
     };
 
     // update entry on the server
@@ -67,6 +79,11 @@ const Entry = ({ name, select, createdAt, id, isEditing, setEntriesList }) => {
 
   const handleChangeSelect = (event) => {
     setUpdatedSelect(event.target.value);
+  };
+
+  //to add health impact when editing an entry
+  const handleHealthImpact = (event) => {
+    setUpdatedHealthImpact(event.target.value);
   };
 
   return (
@@ -96,16 +113,27 @@ const Entry = ({ name, select, createdAt, id, isEditing, setEntriesList }) => {
                 </Typography>
               )}
               {isEditing ? (
-                <Select
-                  value={updatedSelect}
-                  onChange={handleChangeSelect}
-                  sx={{ minWidth: 150, mr: 2, mt: 1 }}
-                >
-                  <MenuItem value='Food'>Food</MenuItem>
-                  <MenuItem value='Beverage'>Beverage</MenuItem>
-                  <MenuItem value='Medication'>Medication</MenuItem>
-                  <MenuItem value='Supplement'>Supplement</MenuItem>
-                </Select>
+                <Box sx={{ display: 'flex', gap: 2 }}>
+                  <Select
+                    value={updatedSelect}
+                    onChange={handleChangeSelect}
+                    sx={{ minWidth: 150, mt: 1 }}
+                  >
+                    <MenuItem value='Food'>Food</MenuItem>
+                    <MenuItem value='Beverage'>Beverage</MenuItem>
+                    <MenuItem value='Medication'>Medication</MenuItem>
+                    <MenuItem value='Supplement'>Supplement</MenuItem>
+                  </Select>
+                  <Select
+                    value={updatedHealthImpact}
+                    onChange={handleHealthImpact}
+                    sx={{ minWidth: 150, mt: 1 }}
+                  >
+                    <MenuItem value='Beneficial'>Beneficial</MenuItem>
+                    <MenuItem value='Neutral'>Neutral</MenuItem>
+                    <MenuItem value='Avoid'>Avoid</MenuItem>
+                  </Select>
+                </Box>
               ) : (
                 <Typography
                   variant='body1'
