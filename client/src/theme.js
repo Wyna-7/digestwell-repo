@@ -17,7 +17,15 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: 'Roboto',
+    fontFamily: 'Ariel, sans-serif',
+    h1: {
+      fontSize: '2rem',
+      fontWeight: 700,
+    },
+    h2: {
+      fontSize: '1.5rem',
+      fontWeight: 500,
+    },
   },
 });
 

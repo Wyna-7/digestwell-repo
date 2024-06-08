@@ -6,10 +6,9 @@ import {
   Box,
   Paper,
   TextField,
-  FormControl,
-  InputLabel,
   Select,
   MenuItem,
+  Typography,
 } from '@mui/material';
 import EditCalendarIcon from '@mui/icons-material/EditCalendar';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
@@ -79,9 +78,15 @@ const Entry = ({ name, select, createdAt, id, isEditing, setEntriesList }) => {
         width='100%'
         maxWidth={1200}
       >
-        <Paper elevation={10} sx={{ p: 2, pb: 3.2, width: '100%', m: 2 }}>
-          <Box display='flex' flexDirection='row'>
-            <Box display='flex' flexDirection='row'>
+        <Paper elevation={10} sx={{ p: 2, pb: 3.2, width: '100%', mb: 2 }}>
+          <Box
+            display='flex'
+            flexDirection='row'
+            justifyContent='space-between'
+            alignContent='center'
+            // sx={{ pt: 1 }}
+          >
+            <Box display='flex' gap={5}>
               <Box>
                 {isEditing ? (
                   <TextField
@@ -91,14 +96,14 @@ const Entry = ({ name, select, createdAt, id, isEditing, setEntriesList }) => {
                     variant='outlined'
                     margin='normal'
                     sx={{
-                      mr: { sm: 2 },
-                      mb: { xs: 2, sm: 0 },
-                      width: { xs: '100%', sm: '50%' },
+                      width: '100%',
                     }}
                     required
                   />
                 ) : (
-                  <span>{name}</span>
+                  <Typography variant='body1' noWrap>
+                    {name}
+                  </Typography>
                 )}
               </Box>
               <Box>
