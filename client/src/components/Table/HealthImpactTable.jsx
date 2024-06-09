@@ -7,29 +7,20 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Typography } from '@mui/material';
-import { Box, Container, bgcolor, textTransform } from '@mui/system';
+import { Box, Container } from '@mui/system';
 
 const HealthImpactTable = ({ entriesList }) => {
-  const beneficialItems = entriesList.filter((item) => {
-    if (item.health_impact === 'Beneficial') {
-      return true;
-    }
-    return false;
-  });
+  const beneficialItems = entriesList.filter((item) =>
+    item.health_impact === 'Beneficial' ? true : false
+  );
 
-  const neutralItems = entriesList.filter((item) => {
-    if (item.health_impact === 'Neutral') {
-      return true;
-    }
-    return false;
-  });
+  const neutralItems = entriesList.filter((item) =>
+    item.health_impact === 'Neutral' ? true : false
+  );
 
-  const avoidItems = entriesList.filter((item) => {
-    if (item.health_impact === 'Avoid') {
-      return true;
-    }
-    return false;
-  });
+  const avoidItems = entriesList.filter((item) =>
+    item.health_impact === 'Avoid' ? true : false
+  );
 
   console.log(beneficialItems);
 
