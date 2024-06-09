@@ -1,45 +1,40 @@
 import React from 'react';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
-function createData(number, item, qty, price) {
-  return { number, item, qty, price };
-}
+const HealthImpactTable = ({ entriesList }) => {
+  const beneficialItems = entriesList.filter((item) => {
+    if (item.health_impact === 'Beneficial') {
+      return true;
+    }
+    return false;
+  });
 
-const rows = [
-  createData(1, 'Apple', 5, 3),
-  createData(2, 'Orange', 2, 2),
-  createData(3, 'Grapes', 3, 1),
-  createData(4, 'Tomato', 2, 1.6),
-  createData(5, 'Mango', 1.5, 4),
-];
+  console.log(beneficialItems);
 
-const HealthImpactTable = () => {
   return (
     <TableContainer component={Paper}>
       <Table aria-label='simple table'>
         <TableHead>
           <TableRow>
-            <TableCell>S.No</TableCell>
+            <TableCell>#</TableCell>
             <TableCell align='right'>Item</TableCell>
-            <TableCell align='right'>Quantity&nbsp;(kg)</TableCell>
-            <TableCell align='right'>Price&nbsp;($)</TableCell>
+            <TableCell align='right'>Health Impact</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.number}>
+          {beneficialItems.map((entry, index) => (
+            <TableRow key={index}>
               <TableCell component='th' scope='row'>
-                {row.number}
+                {index + 1}
               </TableCell>
-              <TableCell align='right'>{row.item}</TableCell>
-              <TableCell align='right'>{row.qty}</TableCell>
-              <TableCell align='right'>{row.price}</TableCell>
+              <TableCell align='right'>{entry.name}</TableCell>
+              <TableCell align='right'>{entry.health_impact}</TableCell>
             </TableRow>
           ))}
         </TableBody>

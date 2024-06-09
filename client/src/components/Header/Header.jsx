@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,10 +12,8 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
-// import AdbIcon from '@mui/icons-material/Adb';
 import logo from '../../../public/logo-icon.svg';
 
-// const pages = ['My lists', 'Info'];
 const pages = [
   { name: 'My lists', path: '/my-lists' },
   { name: 'Info', path: '/info' },
@@ -23,186 +21,192 @@ const pages = [
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Header = () => {
-  {
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
 
-    const handleOpenNavMenu = (event) => {
-      setAnchorElNav(event.currentTarget);
-    };
-    const handleOpenUserMenu = (event) => {
-      setAnchorElUser(event.currentTarget);
-    };
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
 
-    const handleCloseNavMenu = () => {
-      setAnchorElNav(null);
-    };
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
 
-    const handleCloseUserMenu = () => {
-      setAnchorElUser(null);
-    };
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
 
-    return (
-      <AppBar position='sticky'>
-        <Container maxWidth='xl'>
-          <Toolbar disableGutters>
-            <Link to={'/'}>
-              <Box
-                component='img'
-                src={logo}
-                alt={logo}
-                sx={{
-                  display: { xs: 'none', md: 'flex' },
-                  marginRight: '1rem',
-                  width: '50px',
-                  height: '50px',
-                }}
-              />
-            </Link>
-
-            <Link to={'/'} style={{ textDecoration: 'none', color: 'inherit' }}>
-              <Typography
-                variant='h6'
-                noWrap
-                component='a'
-                href='#app-bar-with-responsive-menu'
-                sx={{
-                  mr: 2,
-                  display: { xs: 'none', md: 'flex' },
-                  fontFamily: 'monospace',
-                  fontWeight: 700,
-                  letterSpacing: '.3rem',
-                  color: 'inherit',
-                  textDecoration: 'none',
-                }}
-              >
-                DigestWell
-              </Typography>
-            </Link>
-
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-              <IconButton
-                size='large'
-                aria-label='account of current user'
-                aria-controls='menu-appbar'
-                aria-haspopup='true'
-                onClick={handleOpenNavMenu}
-                color='inherit'
-              >
-                <MenuIcon />
-              </IconButton>
-              <Menu
-                id='menu-appbar'
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'left',
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: 'block', md: 'none' },
-                }}
-              >
-                {pages.map((page) => (
-                  <Link key={page.name} to={page.path}>
-                    <MenuItem onClick={handleCloseNavMenu}>
-                      <Typography textAlign='center'>{page.name}</Typography>
-                    </MenuItem>
-                  </Link>
-                ))}
-              </Menu>
-            </Box>
-            <Box
-              component='img'
+  return (
+    <AppBar position='sticky' color='primary'>
+      <Container maxWidth='xl'>
+        <Toolbar disableGutters>
+          <Box
+            component={Link}
+            to='/'
+            sx={{
+              display: { xs: 'none', md: 'flex' },
+              marginRight: '1rem',
+              width: '50px',
+              height: '50px',
+            }}
+          >
+            <img
               src={logo}
-              alt={logo}
-              sx={{
-                display: { xs: 'none', sm: 'flex', md: 'none' },
-                marginRight: '1rem',
-                width: '50px',
-                height: '50px',
-              }}
+              alt='logo'
+              style={{ width: '100%', height: '100%' }}
             />
+          </Box>
 
-            <Typography
-              variant='h5'
-              noWrap
-              component='a'
-              href='#app-bar-with-responsive-menu'
+          <Typography
+            variant='h6'
+            noWrap
+            component={Link}
+            to='/'
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            DigestWell
+          </Typography>
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size='large'
+              aria-label='account of current user'
+              aria-controls='menu-appbar'
+              aria-haspopup='true'
+              onClick={handleOpenNavMenu}
+              color='inherit'
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id='menu-appbar'
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
               sx={{
-                mr: 2,
-                display: { xs: 'flex', md: 'none' },
-                flexGrow: 1,
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
+                display: { xs: 'block', md: 'none' },
               }}
             >
-              DigestWell
-            </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {pages.map((page) => (
-                <Link
-                  key={page.name}
-                  to={page.path}
-                  style={{ textDecoration: 'none', color: 'inherit' }}
-                >
-                  <Button
-                    key={page.name}
-                    onClick={handleCloseNavMenu}
-                    sx={{ my: 2, color: 'white', display: 'block' }}
+                <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+                  <Typography
+                    component={Link}
+                    to={page.path}
+                    textAlign='center'
+                    style={{ textDecoration: 'none', color: 'inherit' }}
                   >
                     {page.name}
-                  </Button>
-                </Link>
+                  </Typography>
+                </MenuItem>
               ))}
-            </Box>
+            </Menu>
+          </Box>
 
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title='Open settings'>
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar
-                    alt='Remy Sharp'
-                    src='../../../public/profile-picture.png'
-                  />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: '45px' }}
-                id='menu-appbar'
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
+          <Box
+            component={Link}
+            to='/'
+            sx={{
+              display: { xs: 'none', sm: 'flex', md: 'none' },
+              marginRight: '1rem',
+              width: '50px',
+              height: '50px',
+            }}
+          >
+            <img
+              src={logo}
+              alt='logo'
+              style={{ width: '100%', height: '100%' }}
+            />
+          </Box>
+
+          <Typography
+            variant='h5'
+            noWrap
+            component={Link}
+            to='/'
+            sx={{
+              mr: 2,
+              display: { xs: 'flex', md: 'none' },
+              flexGrow: 1,
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            DigestWell
+          </Typography>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            {pages.map((page) => (
+              <Button
+                key={page.name}
+                component={Link}
+                to={page.path}
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign='center'>{setting}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
-          </Toolbar>
-        </Container>
-      </AppBar>
-    );
-  }
+                {page.name}
+              </Button>
+            ))}
+          </Box>
+
+          <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title='Open settings'>
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar
+                  alt='Remy Sharp'
+                  src='../../../public/profile-picture.png'
+                />
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: '45px' }}
+              id='menu-appbar'
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              {settings.map((setting) => (
+                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <Typography textAlign='center'>{setting}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
+  );
 };
 
 export default Header;
