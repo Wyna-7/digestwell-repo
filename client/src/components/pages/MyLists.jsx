@@ -10,7 +10,6 @@ const MyLists = () => {
 
   return (
     <div>
-      MyLists
       <HealthImpactTable
         entriesList={entriesList}
         setEntriesList={setEntriesList}
