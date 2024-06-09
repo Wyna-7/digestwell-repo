@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 // import AdbIcon from '@mui/icons-material/Adb';
 import logo from '../../../public/logo-icon.svg';
 
-const pages = ['Food', 'Pricing', 'Blog'];
+const pages = ['My lists', 'Info'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Header = () => {
