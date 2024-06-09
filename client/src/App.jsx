@@ -3,6 +3,7 @@ import './App.css';
 import { getEntries } from './apiService';
 import EntriesForm from './components/EntriesForm/EntriesForm';
 import EntriesList from './components/EntriesList/EntriesList';
+
 import Header from './components/Header/Header';
 import { Box, Container } from '@mui/material';
 
