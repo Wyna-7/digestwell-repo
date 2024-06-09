@@ -11,10 +11,15 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import { Link } from 'react-router-dom';
 // import AdbIcon from '@mui/icons-material/Adb';
 import logo from '../../../public/logo-icon.svg';
 
-const pages = ['My lists', 'Info'];
+// const pages = ['My lists', 'Info'];
+const pages = [
+  { name: 'My lists', path: '/my-lists' },
+  { name: 'Info', path: '/info' },
+];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Header = () => {
@@ -41,35 +46,39 @@ const Header = () => {
       <AppBar position='sticky'>
         <Container maxWidth='xl'>
           <Toolbar disableGutters>
-            <Box
-              component='img'
-              src={logo}
-              alt={logo}
-              sx={{
-                display: { xs: 'none', md: 'flex' },
-                marginRight: '1rem',
-                width: '50px',
-                height: '50px',
-              }}
-            />
+            <Link to={'/'}>
+              <Box
+                component='img'
+                src={logo}
+                alt={logo}
+                sx={{
+                  display: { xs: 'none', md: 'flex' },
+                  marginRight: '1rem',
+                  width: '50px',
+                  height: '50px',
+                }}
+              />
+            </Link>
 
-            <Typography
-              variant='h6'
-              noWrap
-              component='a'
-              href='#app-bar-with-responsive-menu'
-              sx={{
-                mr: 2,
-                display: { xs: 'none', md: 'flex' },
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
-            >
-              DigestWell
-            </Typography>
+            <Link to={'/'} style={{ textDecoration: 'none', color: 'inherit' }}>
+              <Typography
+                variant='h6'
+                noWrap
+                component='a'
+                href='#app-bar-with-responsive-menu'
+                sx={{
+                  mr: 2,
+                  display: { xs: 'none', md: 'flex' },
+                  fontFamily: 'monospace',
+                  fontWeight: 700,
+                  letterSpacing: '.3rem',
+                  color: 'inherit',
+                  textDecoration: 'none',
+                }}
+              >
+                DigestWell
+              </Typography>
+            </Link>
 
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
               <IconButton
@@ -101,9 +110,11 @@ const Header = () => {
                 }}
               >
                 {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign='center'>{page}</Typography>
-                  </MenuItem>
+                  <Link key={page.name} to={page.path}>
+                    <MenuItem onClick={handleCloseNavMenu}>
+                      <Typography textAlign='center'>{page.name}</Typography>
+                    </MenuItem>
+                  </Link>
                 ))}
               </Menu>
             </Box>
@@ -139,13 +150,19 @@ const Header = () => {
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {pages.map((page) => (
-                <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
+                <Link
+                  key={page.name}
+                  to={page.path}
+                  style={{ textDecoration: 'none', color: 'inherit' }}
                 >
-                  {page}
-                </Button>
+                  <Button
+                    key={page.name}
+                    onClick={handleCloseNavMenu}
+                    sx={{ my: 2, color: 'white', display: 'block' }}
+                  >
+                    {page.name}
+                  </Button>
+                </Link>
               ))}
             </Box>
 
