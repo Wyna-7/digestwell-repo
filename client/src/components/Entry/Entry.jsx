@@ -226,7 +226,7 @@ const Entry = ({
         </Typography>
 
         <Typography variant='body2' color='textSecondary'>
-          {symptoms[0].is_bleeding}
+          {symptoms[0].is_bleeding === false ? 'false' : 'true'}
         </Typography>
       </Paper>
     </Container>
