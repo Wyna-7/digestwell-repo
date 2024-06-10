@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
-import Header from '../Header/Header';
 import HealthImpactTable from '../Table/HealthImpactTable';
 import EntriesContext from '../../entriesContext';
 
 const MyLists = () => {
   const { entriesList, setEntriesList } = useContext(EntriesContext);
 
-  console.log('entriesList in MyLists:', entriesList); // Check if data exists
+  console.log('entriesList in MyLists:', entriesList);
 
   return (
     <div>
