@@ -22,7 +22,7 @@ function EntriesForm({ setEntriesList }) {
   const [selectedOption, setSelectedOption] = useState('Food');
   const [otherSymptoms, setOtherSymptoms] = useState('');
   const [selectedStoolType, setSelectedStoolType] = useState('');
-  const [bloodInStool, setBloodInStool] = useState('');
+  const [bloodInStool, setBloodInStool] = useState(false);
 
   const handleChange = (event) => {
     setItem(event.target.value);
@@ -66,6 +66,7 @@ function EntriesForm({ setEntriesList }) {
       setSelectedOption('Food');
       setSelectedStoolType('');
       setOtherSymptoms('');
+      setBloodInStool(false);
     });
   };
 
