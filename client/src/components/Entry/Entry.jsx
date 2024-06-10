@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { deleteEntry, editEntry } from '../../apiService';
 import {
@@ -23,6 +24,7 @@ const Entry = ({
   isEditing,
   health_impact,
   setEntriesList,
+  symptoms,
 }) => {
   const [updatedName, setUpdatedName] = useState(name);
   const [updatedSelect, setUpdatedSelect] = useState(select);
@@ -30,6 +32,7 @@ const Entry = ({
     health_impact || 'Neutral'
   );
 
+  // console.log('my symptoms', symptoms[0].stool_type);
   const handleDelete = () => {
     deleteEntry(id).then(() => {
       setEntriesList((prevList) => prevList.filter((entry) => entry.id !== id));
@@ -63,9 +66,7 @@ const Entry = ({
     setEntriesList((prevList) => {
       const updatedEntries = prevList.map((entry) => {
         // check if current entry matches with entry being edited.
-        console.log('entry.id', entry.id);
-        console.log('id', id);
-        console.log('check id', entry.id === id);
+
         if (entry.id === id) {
           return { ...entry, ...editedEntry, isEditing: false };
         } else {
@@ -217,6 +218,9 @@ const Entry = ({
             ></DeleteOutlineIcon>
           </Box>
         </Box>
+        <Typography variant='body2' color='textSecondary'></Typography>
+        <Typography variant='body2' color='textSecondary'></Typography>
+        <Typography variant='body2' color='textSecondary'></Typography>
       </Paper>
     </Container>
   );

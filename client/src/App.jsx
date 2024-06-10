@@ -10,13 +10,21 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MyLists from './components/pages/MyLists';
 function App() {
   const [entriesList, setEntriesList] = useState([]);
-  console.log(entriesList);
+  console.log('entries list from App.jsx', entriesList);
   useEffect(() => {
     getEntries().then((data) =>
       // isEditing: false --> all entries start in view mode (not editable)
       setEntriesList(data.map((entry) => ({ ...entry, isEditing: false })))
     );
   }, []);
+
+  entriesList.forEach((entry) => {
+    if (entry.symptoms) {
+      entry.symptoms.forEach((symptom) => {
+        console.log('stool_type from ', symptom.stool_type);
+      });
+    }
+  });
 
   return (
     <EntriesContext.Provider value={{ entriesList, setEntriesList }}>

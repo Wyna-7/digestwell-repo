@@ -31,11 +31,13 @@ const EntriesList = ({ entriesList, setEntriesList }) => {
             paddingBottom: '20px',
           }}
         >
-          {entriesList.map((entry) => (
-            <Box component='li' key={entry.id}>
-              <Entry {...entry} setEntriesList={setEntriesList} />
-            </Box>
-          ))}
+          {entriesList.map((entry) => {
+            return (
+              <Box component='li' key={entry.id}>
+                <Entry {...entry} setEntriesList={setEntriesList} />
+              </Box>
+            );
+          })}
         </Box>
       </Box>
     </Container>

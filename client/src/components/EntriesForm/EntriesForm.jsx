@@ -11,8 +11,8 @@ import {
   MenuItem,
   FormGroup,
   FormControlLabel,
-  Checkbox,
   Switch,
+  Checkbox,
 } from '@mui/material';
 
 import { postEntry } from '../../apiService';
@@ -22,6 +22,7 @@ function EntriesForm({ setEntriesList }) {
   const [selectedOption, setSelectedOption] = useState('Food');
   const [otherSymptoms, setOtherSymptoms] = useState('');
   const [selectedStoolType, setSelectedStoolType] = useState('');
+  const [bloodInStool, setBloodInStool] = useState('');
 
   const handleChange = (event) => {
     setItem(event.target.value);
@@ -33,12 +34,17 @@ function EntriesForm({ setEntriesList }) {
 
   const handleSymptoms = (event) => {
     setOtherSymptoms(event.target.value);
-    console.log(event.target.value);
+    console.log('symptoms:', event.target.value);
   };
 
   const handleStoolChange = (event) => {
     setSelectedStoolType(event.target.value);
-    console.log(event.target.value);
+    console.log('stool:', event.target.value);
+  };
+
+  const handleBloodPresenceChange = (event) => {
+    setBloodInStool(event.target.checked);
+    console.log('blood:', event.target.checked);
   };
 
   const handleSubmit = (event) => {
@@ -48,7 +54,9 @@ function EntriesForm({ setEntriesList }) {
       select: selectedOption,
       other_symptoms: otherSymptoms,
       stool_type: selectedStoolType,
+      is_bleeding: bloodInStool,
     };
+
     postEntry(newItem).then((newEntry) => {
       setEntriesList((prevList) => [
         ...prevList,
@@ -56,21 +64,6 @@ function EntriesForm({ setEntriesList }) {
       ]);
       setItem('');
       setSelectedOption('Food');
-      setSelectedStoolType('');
-      setOtherSymptoms('');
-    });
-  };
-  const handleSubmit2 = (event) => {
-    event.preventDefault();
-    const newItem = {
-      other_symptoms: otherSymptoms,
-      stool_type: selectedStoolType,
-    };
-    postEntry(newItem).then((newEntry) => {
-      setEntriesList((prevList) => [
-        ...prevList,
-        { ...newEntry, isEditing: false },
-      ]);
       setSelectedStoolType('');
       setOtherSymptoms('');
     });
@@ -90,7 +83,6 @@ function EntriesForm({ setEntriesList }) {
         flexDirection='column'
         alignItems='center'
         justifyContent='center'
-        height={300}
         width='100%'
         maxWidth={1200}
       >
@@ -99,7 +91,7 @@ function EntriesForm({ setEntriesList }) {
             component='form'
             onSubmit={handleSubmit}
             display='flex'
-            flexDirection={{ xs: 'column', sm: 'row' }}
+            flexDirection='column'
             alignItems='center'
             justifyContent='center'
           >
@@ -112,9 +104,9 @@ function EntriesForm({ setEntriesList }) {
               variant='outlined'
               margin='normal'
               sx={{
-                mr: { sm: 2 },
-                mb: { xs: 2, sm: 0 },
-                width: { xs: '100%', sm: '50%' },
+                width: '100%',
+                maxWidth: 500,
+                mb: 2,
               }}
               required
             />
@@ -122,10 +114,9 @@ function EntriesForm({ setEntriesList }) {
               variant='outlined'
               margin='normal'
               sx={{
-                mr: { sm: 2 },
-                mb: { xs: 2, sm: 0 },
-                minWidth: 150,
-                width: { xs: '100%', sm: '25%' },
+                width: '100%',
+                maxWidth: 500,
+                mb: 2,
               }}
             >
               <InputLabel>Select an option</InputLabel>
@@ -140,52 +131,18 @@ function EntriesForm({ setEntriesList }) {
                 <MenuItem value='Supplement'>Supplement</MenuItem>
               </Select>
             </FormControl>
-            <Box>
-              <FormGroup>
-                <FormControlLabel
-                  control={<Switch defaultChecked />}
-                  label='Symptoms'
-                />
-              </FormGroup>
-            </Box>
-            <Box>
-              <Button
-                type='submit'
-                variant='contained'
-                color='primary'
-                sx={{
-                  width: { xs: '100%', sm: 'auto' },
-                  height: 'fit-content',
-                  alignSelf: 'center',
-                  mt: 1.5,
-                }}
-              >
-                Add
-              </Button>
-            </Box>
-          </Box>
-        </Paper>
-        <Paper elevation={10} sx={{ p: 2, pb: 3.2, width: '100%' }}>
-          <Box
-            component='form'
-            onSubmit={handleSubmit2}
-            display='flex'
-            flexDirection={{ xs: 'column', sm: 'row' }}
-            alignItems='center'
-            justifyContent='center'
-          >
             <TextField
               type='text'
               name='otherSymptoms'
               value={otherSymptoms}
               onChange={handleSymptoms}
-              placeholder='Describe your symptoms'
+              placeholder='What are your symptoms?'
               variant='outlined'
               margin='normal'
               sx={{
-                mr: { sm: 2 },
-                mb: { xs: 2, sm: 0 },
-                width: { xs: '100%', sm: '50%' },
+                width: '100%',
+                maxWidth: 500,
+                mb: 2,
               }}
               required
             />
@@ -193,17 +150,16 @@ function EntriesForm({ setEntriesList }) {
               variant='outlined'
               margin='normal'
               sx={{
-                mr: { sm: 2 },
-                mb: { xs: 2, sm: 0 },
-                minWidth: 150,
-                width: { xs: '100%', sm: '20%' },
+                width: '100%',
+                maxWidth: 500,
+                mb: 2,
               }}
             >
               <InputLabel>Bristol Stool Scale</InputLabel>
               <Select
                 value={selectedStoolType}
                 onChange={handleStoolChange}
-                label='Select an option'
+                label='Bristol Stool Scale'
               >
                 <MenuItem value='Type 1'>Type 1</MenuItem>
                 <MenuItem value='Type 2'>Type 2</MenuItem>
@@ -214,35 +170,39 @@ function EntriesForm({ setEntriesList }) {
                 <MenuItem value='Type 7'>Type 7</MenuItem>
               </Select>
             </FormControl>
-            <FormGroup row>
-              <FormControlLabel
-                control={<Checkbox defaultChecked />}
-                label='Blood in stools'
-              />
-            </FormGroup>
             <Box>
               <FormGroup>
                 <FormControlLabel
                   control={<Switch defaultChecked />}
-                  label='Intakes'
+                  label='Symptoms'
                 />
               </FormGroup>
             </Box>
-            <Box>
-              <Button
-                type='submit'
-                variant='contained'
-                color='primary'
-                sx={{
-                  width: { xs: '100%', sm: 'auto' },
-                  height: 'fit-content',
-                  alignSelf: 'center',
-                  mt: 1.5,
-                }}
-              >
-                Add
-              </Button>
-            </Box>
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={bloodInStool}
+                    onChange={handleBloodPresenceChange}
+                    label='Blood in Stool'
+                  />
+                }
+                label='Label'
+              />
+            </FormGroup>
+            <Button
+              type='submit'
+              variant='contained'
+              color='primary'
+              sx={{
+                width: { xs: '100%', sm: 'auto' },
+                height: 'fit-content',
+                alignSelf: 'center',
+                mt: 1.5,
+              }}
+            >
+              Add
+            </Button>
           </Box>
         </Paper>
       </Box>

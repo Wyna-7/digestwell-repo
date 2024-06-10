@@ -1,20 +1,48 @@
-const { Items } = require('../models/entries');
+const { Items, Symptoms, User } = require('../models/entries');
 
 exports.getEntries = async (req, res) => {
   try {
-    const entries = await Items.findAll();
+    const entries = await Items.findAll({
+      include: [
+        {
+          model: Symptoms,
+          as: 'symptoms',
+        },
+        {
+          model: User,
+          as: 'user',
+        },
+      ],
+    });
     res.status(200).json(entries);
   } catch (error) {
+    console.error('Failed to fetch entries:', error);
     res.status(500).json('Failed to fetch entries');
   }
 };
 
 exports.postEntry = async (req, res) => {
   try {
-    const newEntry = await Items.create(req.body);
-    res.status(201).json(newEntry);
+    const { name, select, other_symptoms, stool_type, is_bleeding, user_id } =
+      req.body;
+
+    const newItem = await Items.create({ name, select, user_id });
+
+    await Symptoms.create({
+      stool_type,
+      is_bleeding,
+      other_symptoms,
+      user_id,
+      // creates a link between the item and the symptom
+      itemId: newItem.id,
+    });
+
+    const createdItemWithSymptoms = await Items.findByPk(newItem.id, {
+      include: Symptoms,
+    });
+
+    res.status(201).json(createdItemWithSymptoms);
   } catch (error) {
-    console.log('ERROR', error);
     res.status(500).json('Failed to post the new entry');
   }
 };
