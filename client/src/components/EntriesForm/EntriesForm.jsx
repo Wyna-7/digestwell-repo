@@ -100,111 +100,93 @@ function EntriesForm({ setEntriesList }) {
             alignItems='center'
             justifyContent='center'
           >
-            {isInputVisible ? (
-              <>
-                <TextField
-                  type='text'
-                  name='item'
-                  value={item}
-                  onChange={handleChange}
-                  placeholder='What did you consume?'
-                  variant='outlined'
-                  margin='normal'
-                  sx={{
-                    width: '100%',
-                    maxWidth: 500,
-                    mb: 2,
-                  }}
-                  required
-                />
-                <FormControl
-                  variant='outlined'
-                  margin='normal'
-                  sx={{
-                    width: '100%',
-                    maxWidth: 500,
-                    mb: 2,
-                  }}
-                >
-                  <InputLabel>Select an option</InputLabel>
-                  <Select
-                    value={selectedOption}
-                    onChange={handleTypeChange}
-                    label='Select an option'
-                  >
-                    <MenuItem value='Food'>Food</MenuItem>
-                    <MenuItem value='Beverage'>Beverage</MenuItem>
-                    <MenuItem value='Medication'>Medication</MenuItem>
-                    <MenuItem value='Supplement'>Supplement</MenuItem>
-                  </Select>
-                </FormControl>
-              </>
-            ) : (
-              <>
-                <TextField
-                  type='text'
-                  name='otherSymptoms'
-                  value={otherSymptoms}
-                  onChange={handleSymptoms}
-                  placeholder='What are your symptoms?'
-                  variant='outlined'
-                  margin='normal'
-                  sx={{
-                    width: '100%',
-                    maxWidth: 500,
-                    mb: 2,
-                  }}
-                  required
-                />
-                <FormControl
-                  variant='outlined'
-                  margin='normal'
-                  sx={{
-                    width: '100%',
-                    maxWidth: 500,
-                    mb: 2,
-                  }}
-                >
-                  <InputLabel>Bristol Stool Scale</InputLabel>
-                  <Select
-                    value={selectedStoolType}
-                    onChange={handleStoolChange}
-                    label='Bristol Stool Scale'
-                  >
-                    <MenuItem value='Type 1'>Type 1</MenuItem>
-                    <MenuItem value='Type 2'>Type 2</MenuItem>
-                    <MenuItem value='Type 3'>Type 3</MenuItem>
-                    <MenuItem value='Type 4'>Type 4</MenuItem>
-                    <MenuItem value='Type 5'>Type 5</MenuItem>
-                    <MenuItem value='Type 6'>Type 6</MenuItem>
-                    <MenuItem value='Type 7'>Type 7</MenuItem>
-                  </Select>
-                </FormControl>
-                <Box>
-                  <FormGroup>
-                    <FormControlLabel
-                      control={<Switch defaultChecked />}
-                      label='Symptoms'
-                      value={selectedStoolType}
-                      onChange={handleFormChange}
-                    />
-                  </FormGroup>
-                </Box>
-                <FormGroup>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={bloodInStool}
-                        onChange={handleBloodPresenceChange}
-                        label='Blood in Stool'
-                      />
-                    }
-                    label='Blood in Stool'
+            <TextField
+              type='text'
+              name='item'
+              value={item}
+              onChange={handleChange}
+              placeholder='What did you consume?'
+              variant='outlined'
+              margin='normal'
+              sx={{
+                width: '100%',
+                maxWidth: 500,
+                mb: 2,
+              }}
+              required
+            />
+            <FormControl
+              variant='outlined'
+              margin='normal'
+              sx={{
+                width: '100%',
+                maxWidth: 500,
+                mb: 2,
+              }}
+            >
+              <InputLabel>Select an option</InputLabel>
+              <Select
+                value={selectedOption}
+                onChange={handleTypeChange}
+                label='Select an option'
+              >
+                <MenuItem value='Food'>Food</MenuItem>
+                <MenuItem value='Beverage'>Beverage</MenuItem>
+                <MenuItem value='Medication'>Medication</MenuItem>
+                <MenuItem value='Supplement'>Supplement</MenuItem>
+              </Select>
+            </FormControl>
+            <TextField
+              type='text'
+              name='otherSymptoms'
+              value={otherSymptoms}
+              onChange={handleSymptoms}
+              placeholder='What are your symptoms?'
+              variant='outlined'
+              margin='normal'
+              sx={{
+                width: '100%',
+                maxWidth: 500,
+                mb: 2,
+              }}
+              required
+            />
+            <FormControl
+              variant='outlined'
+              margin='normal'
+              sx={{
+                width: '100%',
+                maxWidth: 500,
+                mb: 2,
+              }}
+            >
+              <InputLabel>Bristol Stool Scale</InputLabel>
+              <Select
+                value={selectedStoolType}
+                onChange={handleStoolChange}
+                label='Bristol Stool Scale'
+              >
+                <MenuItem value='Type 1'>Type 1</MenuItem>
+                <MenuItem value='Type 2'>Type 2</MenuItem>
+                <MenuItem value='Type 3'>Type 3</MenuItem>
+                <MenuItem value='Type 4'>Type 4</MenuItem>
+                <MenuItem value='Type 5'>Type 5</MenuItem>
+                <MenuItem value='Type 6'>Type 6</MenuItem>
+                <MenuItem value='Type 7'>Type 7</MenuItem>
+              </Select>
+            </FormControl>
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={bloodInStool}
+                    onChange={handleBloodPresenceChange}
+                    name='bloodInStool'
                   />
-                </FormGroup>
-              </>
-            )}
-
+                }
+                label='Blood in Stool'
+              />
+            </FormGroup>
             <Button
               type='submit'
               variant='contained'
