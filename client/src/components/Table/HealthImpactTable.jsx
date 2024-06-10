@@ -59,7 +59,7 @@ const HealthImpactTable = ({ entriesList }) => {
           >
             Positive Health Impact
           </Typography>
-          <TableContainer component={Paper}>
+          <TableContainer component={Paper} elevation={10}>
             <Table aria-label='simple table'>
               <TableHead>
                 <TableRow sx={{ bgcolor: 'secondary.light' }}>
@@ -99,7 +99,7 @@ const HealthImpactTable = ({ entriesList }) => {
           >
             Neutral Health Impact
           </Typography>
-          <TableContainer component={Paper}>
+          <TableContainer component={Paper} elevation={10}>
             <Table aria-label='simple table'>
               <TableHead>
                 <TableRow sx={{ bgcolor: 'secondary.light' }}>
@@ -139,7 +139,7 @@ const HealthImpactTable = ({ entriesList }) => {
           >
             Negative Health Impact
           </Typography>
-          <TableContainer component={Paper}>
+          <TableContainer component={Paper} elevation={10}>
             <Table aria-label='simple table'>
               <TableHead>
                 <TableRow sx={{ bgcolor: 'secondary.light' }}>
