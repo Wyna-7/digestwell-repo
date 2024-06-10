@@ -13,7 +13,7 @@ import {
 import EditCalendarIcon from '@mui/icons-material/EditCalendar';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
-import { blue, green } from '@mui/material/colors';
+import { blue } from '@mui/material/colors';
 
 const Entry = ({
   name,
