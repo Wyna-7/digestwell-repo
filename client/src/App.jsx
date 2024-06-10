@@ -10,7 +10,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MyLists from './components/pages/MyLists';
 function App() {
   const [entriesList, setEntriesList] = useState([]);
-
+  console.log(entriesList);
   useEffect(() => {
     getEntries().then((data) =>
       // isEditing: false --> all entries start in view mode (not editable)
