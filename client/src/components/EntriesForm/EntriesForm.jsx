@@ -207,10 +207,14 @@ function EntriesForm({ setEntriesList, userId }) {
               variant='contained'
               color='primary'
               sx={{
-                width: { xs: '100%', sm: 'auto' },
+                width: { xs: '100%', sm: 'auto', md: 'auto' },
                 height: 'fit-content',
                 alignSelf: 'center',
-                mt: 1.5,
+                mt: 1,
+                pt: '10px',
+                pb: '10px',
+                pl: '80px',
+                pr: '80px',
               }}
             >
               Add
