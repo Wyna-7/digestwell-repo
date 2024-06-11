@@ -1,8 +1,6 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { deleteEntry, editEntry } from '../../apiService';
 import {
-  Button,
   Container,
   Box,
   Paper,
@@ -25,6 +23,9 @@ const Entry = ({
   health_impact,
   setEntriesList,
   symptoms,
+  stool_type,
+  is_bleeding,
+  other_symptoms,
 }) => {
   const [updatedName, setUpdatedName] = useState(name);
   const [updatedSelect, setUpdatedSelect] = useState(select);
@@ -32,48 +33,37 @@ const Entry = ({
     health_impact || 'Neutral'
   );
 
-  // console.log('my symptoms', symptoms[0]?.stool_type);
   const handleDelete = () => {
     deleteEntry(id).then(() => {
       setEntriesList((prevList) => prevList.filter((entry) => entry.id !== id));
     });
   };
 
-  //switch the entry between view and edit mode
   const toggleEdit = () => {
     setEntriesList((prevList) =>
       prevList.map((entry) =>
-        // check if the current entry's id matches with id of the entry to edit.
-        // if match, creates a copy of the current entry with ...entry.
-        // toggles the editing mode of isEditing to true for edit mode, false for view mode.
         entry.id === id ? { ...entry, isEditing: !entry.isEditing } : entry
       )
     );
   };
 
   const handleSave = async () => {
-    // updated values, used to update the backend and frontend.
     const editedEntry = {
       name: updatedName,
       select: updatedSelect,
       health_impact: updatedHealthImpact,
     };
 
-    // update entry on the server
     await editEntry(id, editedEntry);
-    // updates entriesList state (UI).
-    // prevList --> current state of entriesList, before modification
+
     setEntriesList((prevList) => {
       const updatedEntries = prevList.map((entry) => {
-        // check if current entry matches with entry being edited.
-
         if (entry.id === id) {
           return { ...entry, ...editedEntry, isEditing: false };
         } else {
           return entry;
         }
       });
-      // returns updatedEntries array to setEntriesList
       return updatedEntries;
     });
   };
@@ -108,7 +98,6 @@ const Entry = ({
     setUpdatedSelect(event.target.value);
   };
 
-  //to add health impact when editing an entry
   const handleHealthImpact = (event) => {
     setUpdatedHealthImpact(event.target.value);
   };
@@ -118,116 +107,138 @@ const Entry = ({
       <Paper elevation={10} sx={{ p: 2 }}>
         <Box
           display='flex'
-          flexDirection='row'
+          flexDirection='column'
           justifyContent='space-between'
-          alignItems='center'
+          alignItems='flex-start'
         >
-          <Box display='flex' flexDirection='column' gap={1} flexGrow={1}>
-            <Box display='flex' flexDirection='row' alignItems='center' gap={3}>
-              {isEditing ? (
-                <TextField
-                  type='text'
-                  value={updatedName}
-                  onChange={handleChangeName}
-                  variant='outlined'
-                  margin='normal'
-                  fullWidth
-                  required
-                />
-              ) : (
-                <Typography variant='body1' noWrap>
-                  {name}
+          <Box
+            display='flex'
+            flexDirection='row'
+            justifyContent='space-between'
+            width='100%'
+          >
+            <Box display='flex' flexDirection='column' gap={1} flexGrow={1}>
+              {(name || select) && (
+                <Box
+                  display='flex'
+                  flexDirection='row'
+                  alignItems='center'
+                  gap={3}
+                >
+                  {isEditing ? (
+                    <>
+                      <TextField
+                        type='text'
+                        value={updatedName}
+                        onChange={handleChangeName}
+                        variant='outlined'
+                        margin='normal'
+                        fullWidth
+                        required
+                      />
+                      <Select
+                        value={updatedSelect}
+                        onChange={handleChangeSelect}
+                        sx={{ minWidth: 150, mt: 1 }}
+                      >
+                        <MenuItem value='Food'>Food</MenuItem>
+                        <MenuItem value='Beverage'>Beverage</MenuItem>
+                        <MenuItem value='Medication'>Medication</MenuItem>
+                        <MenuItem value='Supplement'>Supplement</MenuItem>
+                      </Select>
+                      <Select
+                        value={updatedHealthImpact}
+                        onChange={handleHealthImpact}
+                        sx={{ minWidth: 150, mt: 1 }}
+                      >
+                        <MenuItem value='Beneficial'>Beneficial</MenuItem>
+                        <MenuItem value='Neutral'>Neutral</MenuItem>
+                        <MenuItem value='Avoid'>Avoid</MenuItem>
+                      </Select>
+                    </>
+                  ) : (
+                    <>
+                      <Typography variant='body1' noWrap>
+                        {name || 'No item name'}
+                      </Typography>
+                      {select && (
+                        <Typography
+                          variant='body1'
+                          sx={{ color: 'primary.main' }}
+                          noWrap
+                        >
+                          {select}
+                        </Typography>
+                      )}
+                      <Typography
+                        variant='body1'
+                        sx={{
+                          color: colorPicker(health_impact),
+                        }}
+                        noWrap
+                      >
+                        {health_impact}
+                      </Typography>
+                    </>
+                  )}
+                </Box>
+              )}
+              {stool_type && (
+                <Typography variant='body2' color='textSecondary'>
+                  Stool Type: {stool_type}
                 </Typography>
               )}
-              {isEditing ? (
-                <Box sx={{ display: 'flex', gap: 2 }}>
-                  <Select
-                    value={updatedSelect}
-                    onChange={handleChangeSelect}
-                    sx={{ minWidth: 150, mt: 1 }}
-                  >
-                    <MenuItem value='Food'>Food</MenuItem>
-                    <MenuItem value='Beverage'>Beverage</MenuItem>
-                    <MenuItem value='Medication'>Medication</MenuItem>
-                    <MenuItem value='Supplement'>Supplement</MenuItem>
-                  </Select>
-                  <Select
-                    value={updatedHealthImpact}
-                    onChange={handleHealthImpact}
-                    sx={{ minWidth: 150, mt: 1 }}
-                  >
-                    <MenuItem value='Beneficial'>Beneficial</MenuItem>
-                    <MenuItem value='Neutral'>Neutral</MenuItem>
-                    <MenuItem value='Avoid'>Avoid</MenuItem>
-                  </Select>
-                </Box>
-              ) : (
-                <>
-                  <Typography
-                    variant='body1'
-                    sx={{ color: 'primary.main' }}
-                    noWrap
-                  >
-                    {select}
-                  </Typography>
-                  <Typography
-                    variant='body1'
-                    sx={{
-                      // changes the color depending on the selected health impact
-                      color: colorPicker(health_impact),
-                    }}
-                    noWrap
-                  >
-                    {health_impact}
-                  </Typography>
-                </>
+              {other_symptoms && (
+                <Typography variant='body2' color='textSecondary'>
+                  Other Symptoms: {other_symptoms}
+                </Typography>
+              )}
+              {stool_type && (
+                <Typography variant='body2' color='textSecondary'>
+                  Bleeding: {is_bleeding ? 'Yes' : 'No'}
+                </Typography>
               )}
             </Box>
-            <Typography variant='body2' color='textSecondary'>
-              {new Date(createdAt).toLocaleString()}
-            </Typography>
-          </Box>
-          <Box display='flex' flexDirection='row' gap={1}>
-            {isEditing ? (
-              <BookmarkAddedIcon
-                onClick={handleSave}
-                sx={{
-                  cursor: 'pointer',
-                  color: 'primary.dark',
-                  '&:hover': {
-                    color: 'secondary.main',
-                  },
-                }}
-              ></BookmarkAddedIcon>
-            ) : (
-              <EditCalendarIcon
-                onClick={toggleEdit}
-                sx={{
-                  cursor: 'pointer',
-                  color: 'secondary.main',
-                  '&:hover': {
-                    color: 'primary.dark',
-                  },
-                }}
-              ></EditCalendarIcon>
-            )}
-            <DeleteOutlineIcon
-              onClick={handleDelete}
-              cursor='pointer'
-              color='error'
-            ></DeleteOutlineIcon>
-          </Box>
-        </Box>
-        <Typography variant='body2' color='textSecondary'>
-          {symptoms && symptoms[0]?.stool_type}
-        </Typography>
-        <Typography variant='body2' color='textSecondary'>
-          {symptoms && symptoms[0]?.other_symptoms}
-        </Typography>
 
-        <Typography variant='body2' color='textSecondary'>
-          {symptoms && symptoms[0]?.is_bleeding === false ? 'false' : 'true'}
-        </Typography>
+            <Box display='flex' flexDirection='row' gap={1}>
+              {isEditing ? (
+                <BookmarkAddedIcon
+                  onClick={handleSave}
+                  sx={{
+                    cursor: 'pointer',
+                    color: 'primary.dark',
+                    '&:hover': {
+                      color: 'secondary.main',
+                    },
+                  }}
+                />
+              ) : (
+                <EditCalendarIcon
+                  onClick={toggleEdit}
+                  sx={{
+                    cursor: 'pointer',
+                    color: 'secondary.main',
+                    '&:hover': {
+                      color: 'primary.dark',
+                    },
+                  }}
+                />
+              )}
+              <DeleteOutlineIcon
+                onClick={handleDelete}
+                cursor='pointer'
+                color='error'
+              />
+            </Box>
+          </Box>
+          <Typography
+            variant='body2'
+            color='textSecondary'
+            sx={{ alignSelf: 'flex-end', mt: 2 }}
+          >
+            {new Date(createdAt).toLocaleString()}
+          </Typography>
+        </Box>
       </Paper>
     </Container>
   );

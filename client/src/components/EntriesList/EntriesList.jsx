@@ -13,6 +13,7 @@ const EntriesList = ({ entriesList, setEntriesList }) => {
         overflowY: 'auto',
         bgcolor: '#F3F6F6',
         borderRadius: 10,
+        mt: 10,
       }}
     >
       <Box

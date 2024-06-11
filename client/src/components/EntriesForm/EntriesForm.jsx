@@ -51,33 +51,11 @@ function EntriesForm({ setEntriesList, userId }) {
   const handleFormChange = (event) => {
     setIsInputVisible(!isInputVisible);
   };
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const newItem = {
-  //     name: item,
-  //     select: selectedOption,
-  //     other_symptoms: otherSymptoms,
-  //     stool_type: selectedStoolType,
-  //     is_bleeding: bloodInStool,
-  //   };
-
-  //   postEntry(newItem).then((newEntry) => {
-  //     setEntriesList((prevList) => [
-  //       ...prevList,
-  //       { ...newEntry, isEditing: false },
-  //     ]);
-  //     setItem('');
-  //     setSelectedOption('Food');
-  //     setSelectedStoolType('');
-  //     setOtherSymptoms('');
-  //     setBloodInStool(false);
-  //   });
-  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (!item && !otherSymptoms) {
+    if (!item && !otherSymptoms && !selectedStoolType) {
       alert(
         'Please fill either the item and select option or other symptoms and stool type.'
       );
@@ -205,7 +183,7 @@ function EntriesForm({ setEntriesList, userId }) {
                 <MenuItem value='Type 7'>Type 7</MenuItem>
               </Select>
             </FormControl>
-            <FormGroup>
+            {/* <FormGroup>
               <FormControlLabel
                 control={
                   <Checkbox
@@ -216,7 +194,21 @@ function EntriesForm({ setEntriesList, userId }) {
                 }
                 label='Blood in Stool'
               />
-            </FormGroup>
+            </FormGroup> */}
+            {selectedStoolType && (
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={bloodInStool}
+                      onChange={handleBloodPresenceChange}
+                      name='bloodInStool'
+                    />
+                  }
+                  label='Blood in Stool'
+                />
+              </FormGroup>
+            )}
             <Button
               type='submit'
               variant='contained'
