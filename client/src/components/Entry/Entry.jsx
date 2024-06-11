@@ -32,6 +32,8 @@ const Entry = ({
   const [updatedHealthImpact, setUpdatedHealthImpact] = useState(
     health_impact || 'Neutral'
   );
+  const [updatedSymptoms, setUpdatedSymptoms] = useState(symptoms);
+  const [updatedStoolType, setUpdatedStoolType] = useState(stool_type);
 
   const handleDelete = () => {
     deleteEntry(id).then(() => {
@@ -52,6 +54,8 @@ const Entry = ({
       name: updatedName,
       select: updatedSelect,
       health_impact: updatedHealthImpact,
+      // other_symptoms: updatedSymptoms,
+      // stool_type: updatedStoolType,
     };
 
     await editEntry(id, editedEntry);
@@ -102,9 +106,17 @@ const Entry = ({
     setUpdatedHealthImpact(event.target.value);
   };
 
+  const handleSymptoms = (event) => {
+    setUpdatedSymptoms(event.target.value);
+  };
+
+  const handleStoolType = (event) => {
+    setUpdatedStoolType(event.target.value);
+  };
+
   return (
     <Container maxWidth='md' sx={{ mb: 2 }}>
-      <Paper elevation={10} sx={{ p: 2 }}>
+      <Paper elevation={10} sx={{ p: 2, borderRadius: '20px' }}>
         <Box
           display='flex'
           flexDirection='column'
@@ -159,7 +171,7 @@ const Entry = ({
                   ) : (
                     <>
                       <Typography variant='body1' noWrap>
-                        {name || 'No item name'}
+                        {name}
                       </Typography>
                       {select && (
                         <Typography
@@ -183,20 +195,36 @@ const Entry = ({
                   )}
                 </Box>
               )}
-              {stool_type && (
-                <Typography variant='body2' color='textSecondary'>
-                  Stool Type: {stool_type}
-                </Typography>
-              )}
+              <Box display={'flex'}>
+                {stool_type && (
+                  <Box display={'flex'}>
+                    <Typography variant='body1' fontWeight={'bold'} noWrap>
+                      Stool Type:
+                    </Typography>
+                    <Box ml={2}>{stool_type}</Box>
+                  </Box>
+                )}
+                {stool_type && (
+                  <Box display={'flex'}>
+                    <Typography
+                      variant='body1'
+                      fontWeight={'bold'}
+                      ml={5}
+                      noWrap
+                    >
+                      Bleeding:
+                    </Typography>
+                    <Box ml={2}> {is_bleeding ? 'Yes' : 'No'}</Box>
+                  </Box>
+                )}
+              </Box>
               {other_symptoms && (
-                <Typography variant='body2' color='textSecondary'>
-                  Other Symptoms: {other_symptoms}
-                </Typography>
-              )}
-              {stool_type && (
-                <Typography variant='body2' color='textSecondary'>
-                  Bleeding: {is_bleeding ? 'Yes' : 'No'}
-                </Typography>
+                <Box display={'flex'}>
+                  <Typography variant='body1' fontWeight={'bold'} noWrap>
+                    Symptoms:
+                  </Typography>
+                  <Box ml={2}>{other_symptoms}</Box>
+                </Box>
               )}
             </Box>
 

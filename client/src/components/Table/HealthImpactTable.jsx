@@ -35,7 +35,7 @@ const HealthImpactTable = ({ entriesList }) => {
         overflowY: 'auto',
         bgcolor: '#F3F6F6',
         borderRadius: 10,
-        mt: 10,
+        mt: 5,
         p: 10,
       }}
     >
@@ -57,7 +57,7 @@ const HealthImpactTable = ({ entriesList }) => {
               mb: '0.625rem',
             }}
           >
-            Positive Health Impact
+            Positive
           </Typography>
           <TableContainer component={Paper} elevation={10}>
             <Table aria-label='simple table'>
@@ -97,7 +97,7 @@ const HealthImpactTable = ({ entriesList }) => {
               mb: '0.625rem',
             }}
           >
-            Neutral Health Impact
+            Neutral
           </Typography>
           <TableContainer component={Paper} elevation={10}>
             <Table aria-label='simple table'>
@@ -137,7 +137,7 @@ const HealthImpactTable = ({ entriesList }) => {
               mb: '0.625rem',
             }}
           >
-            Negative Health Impact
+            Negative
           </Typography>
           <TableContainer component={Paper} elevation={10}>
             <Table aria-label='simple table'>

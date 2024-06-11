@@ -91,6 +91,7 @@ function EntriesForm({ setEntriesList, userId }) {
         justifyContent: 'center',
         maxWidth: 'none',
         width: '100%',
+        mt: 5,
       }}
     >
       <Box
@@ -101,7 +102,10 @@ function EntriesForm({ setEntriesList, userId }) {
         width='100%'
         maxWidth={1200}
       >
-        <Paper elevation={10} sx={{ p: 2, pb: 3.2, width: '100%' }}>
+        <Paper
+          elevation={10}
+          sx={{ p: 2, pb: 3.2, width: '100%', borderRadius: '20px' }}
+        >
           <Box
             component='form'
             onSubmit={handleSubmit}
@@ -183,18 +187,7 @@ function EntriesForm({ setEntriesList, userId }) {
                 <MenuItem value='Type 7'>Type 7</MenuItem>
               </Select>
             </FormControl>
-            {/* <FormGroup>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={bloodInStool}
-                    onChange={handleBloodPresenceChange}
-                    name='bloodInStool'
-                  />
-                }
-                label='Blood in Stool'
-              />
-            </FormGroup> */}
+
             {selectedStoolType && (
               <FormGroup>
                 <FormControlLabel

@@ -38,8 +38,6 @@ exports.getEntries = async (req, res) => {
   }
 };
 
-//
-
 exports.postEntry = async (req, res) => {
   const { name, select, other_symptoms, stool_type, is_bleeding, user_id } =
     req.body;
@@ -48,24 +46,21 @@ exports.postEntry = async (req, res) => {
     let newItem = null;
     let newSymptom = null;
 
-    // Create item if name and select are provided
     if (name && select) {
       newItem = await Items.create({ name, select, userId: user_id });
     }
 
-    // Create symptom if stool_type, other_symptoms, or is_bleeding are provided
     if (stool_type || other_symptoms || is_bleeding !== undefined) {
       const symptomData = {
         stool_type: stool_type || null,
         is_bleeding: is_bleeding || false,
         other_symptoms: other_symptoms || null,
-        userId: user_id, // Associate with the user
-        itemId: newItem ? newItem.id : null, // Associate with item if it was created
+        userId: user_id,
+        itemId: newItem ? newItem.id : null,
       };
       newSymptom = await Symptoms.create(symptomData);
     }
 
-    // Fetch the created item with associated symptoms if an item was created
     let createdItemWithSymptoms = null;
     if (newItem) {
       createdItemWithSymptoms = await Items.findByPk(newItem.id, {
