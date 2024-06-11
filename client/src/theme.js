@@ -16,6 +16,20 @@ const theme = createTheme({
       default: '#F7F9F9',
     },
   },
+
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#228CD3',
+          '&:hover': {
+            backgroundColor: '#1e2ebf',
+          },
+        },
+      },
+    },
+  },
+
   typography: {
     fontFamily: 'Ariel, sans-serif',
     h1: {

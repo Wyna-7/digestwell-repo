@@ -180,8 +180,15 @@ const Header = () => {
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title='Open settings'>
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt='Remy Sharp' src='/profile-picture.png' />
+              <IconButton
+                onClick={handleOpenUserMenu}
+                sx={{ p: 0, width: 60, height: 60 }}
+              >
+                <Avatar
+                  alt='Mr Beast'
+                  src='/profile-picture.png'
+                  sx={{ p: 0, width: 60, height: 60 }}
+                />
               </IconButton>
             </Tooltip>
             <Menu
