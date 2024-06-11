@@ -32,7 +32,7 @@ const Entry = ({
     health_impact || 'Neutral'
   );
 
-  console.log('my symptoms', symptoms[0].stool_type);
+  // console.log('my symptoms', symptoms[0]?.stool_type);
   const handleDelete = () => {
     deleteEntry(id).then(() => {
       setEntriesList((prevList) => prevList.filter((entry) => entry.id !== id));
@@ -219,14 +219,14 @@ const Entry = ({
           </Box>
         </Box>
         <Typography variant='body2' color='textSecondary'>
-          {symptoms[0].stool_type}
+          {symptoms && symptoms[0]?.stool_type}
         </Typography>
         <Typography variant='body2' color='textSecondary'>
-          {symptoms[0].other_symptoms}
+          {symptoms && symptoms[0]?.other_symptoms}
         </Typography>
 
         <Typography variant='body2' color='textSecondary'>
-          {symptoms[0].is_bleeding === false ? 'false' : 'true'}
+          {symptoms && symptoms[0]?.is_bleeding === false ? 'false' : 'true'}
         </Typography>
       </Paper>
     </Container>

@@ -34,11 +34,11 @@ const User = sequelize.define(
 const Items = sequelize.define('items', {
   name: {
     type: DataTypes.TEXT,
-    allowNull: false,
+    allowNull: true,
   },
   select: {
     type: DataTypes.ENUM('Food', 'Beverage', 'Medication', 'Supplement'),
-    allowNull: false,
+    allowNull: true,
   },
   health_impact: {
     type: DataTypes.ENUM('Beneficial', 'Neutral', 'Avoid'),

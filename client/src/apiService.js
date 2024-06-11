@@ -22,6 +22,7 @@ const postEntry = async (item) => {
     body: JSON.stringify(item),
   });
   const resp = await entry.json();
+  console.log(resp);
   return resp;
 };
 

@@ -8,9 +8,12 @@ import Header from './components/Header/Header';
 import { Box, Container } from '@mui/material';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MyLists from './components/pages/MyLists';
+
 function App() {
   const [entriesList, setEntriesList] = useState([]);
+  const userId = 8;
   console.log('entries list from App.jsx', entriesList);
+
   useEffect(() => {
     getEntries().then((data) =>
       // isEditing: false --> all entries start in view mode (not editable)
@@ -44,7 +47,10 @@ function App() {
                   minHeight='100vh'
                   padding={2}
                 >
-                  <EntriesForm setEntriesList={setEntriesList} />
+                  <EntriesForm
+                    setEntriesList={setEntriesList}
+                    userId={userId}
+                  />
                   <EntriesList
                     entriesList={entriesList}
                     setEntriesList={setEntriesList}

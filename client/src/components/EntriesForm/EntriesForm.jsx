@@ -17,7 +17,7 @@ import {
 
 import { postEntry } from '../../apiService';
 
-function EntriesForm({ setEntriesList }) {
+function EntriesForm({ setEntriesList, userId }) {
   const [item, setItem] = useState('');
   const [selectedOption, setSelectedOption] = useState('Food');
   const [otherSymptoms, setOtherSymptoms] = useState('');
@@ -51,14 +51,46 @@ function EntriesForm({ setEntriesList }) {
   const handleFormChange = (event) => {
     setIsInputVisible(!isInputVisible);
   };
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const newItem = {
+  //     name: item,
+  //     select: selectedOption,
+  //     other_symptoms: otherSymptoms,
+  //     stool_type: selectedStoolType,
+  //     is_bleeding: bloodInStool,
+  //   };
+
+  //   postEntry(newItem).then((newEntry) => {
+  //     setEntriesList((prevList) => [
+  //       ...prevList,
+  //       { ...newEntry, isEditing: false },
+  //     ]);
+  //     setItem('');
+  //     setSelectedOption('Food');
+  //     setSelectedStoolType('');
+  //     setOtherSymptoms('');
+  //     setBloodInStool(false);
+  //   });
+  // };
+
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    if (!item && !otherSymptoms) {
+      alert(
+        'Please fill either the item and select option or other symptoms and stool type.'
+      );
+      return;
+    }
+
     const newItem = {
-      name: item,
-      select: selectedOption,
-      other_symptoms: otherSymptoms,
-      stool_type: selectedStoolType,
-      is_bleeding: bloodInStool,
+      name: item || null,
+      select: selectedOption || null,
+      other_symptoms: otherSymptoms || null,
+      stool_type: selectedStoolType || null,
+      is_bleeding: bloodInStool || false,
+      user_id: userId,
     };
 
     postEntry(newItem).then((newEntry) => {
@@ -113,7 +145,6 @@ function EntriesForm({ setEntriesList }) {
                 maxWidth: 500,
                 mb: 2,
               }}
-              required
             />
             <FormControl
               variant='outlined'
@@ -149,7 +180,6 @@ function EntriesForm({ setEntriesList }) {
                 maxWidth: 500,
                 mb: 2,
               }}
-              required
             />
             <FormControl
               variant='outlined'
