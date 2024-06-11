@@ -13,6 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
 import logo from '../../../public/logo-icon.svg';
+import { useLocation } from 'react-router-dom';
 
 const pages = [
   { name: 'My lists', path: '/my-lists' },
@@ -39,18 +40,24 @@ const Header = () => {
     setAnchorElUser(null);
   };
 
+  const location = useLocation();
+
+  if (location.pathname === '/digestWell') {
+    return null;
+  }
+
   return (
     <AppBar position='sticky' color='primary'>
       <Container maxWidth='xl'>
-        <Toolbar disableGutters>
+        <Toolbar disableGutters sx={{ height: '90px' }}>
           <Box
             component={Link}
             to='/'
             sx={{
               display: { xs: 'none', md: 'flex' },
               marginRight: '1rem',
-              width: '50px',
-              height: '50px',
+              width: '80px',
+              height: '80px',
             }}
           >
             <img
@@ -128,8 +135,8 @@ const Header = () => {
             sx={{
               display: { xs: 'none', sm: 'flex', md: 'none' },
               marginRight: '1rem',
-              width: '50px',
-              height: '50px',
+              width: '70px',
+              height: '70px',
             }}
           >
             <img

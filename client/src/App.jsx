@@ -8,6 +8,7 @@ import Header from './components/Header/Header';
 import { Box, Container } from '@mui/material';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MyLists from './components/pages/MyLists';
+import SignIn from './components/pages/LoginPage';
 
 function App() {
   const [entriesList, setEntriesList] = useState([]);
@@ -34,6 +35,7 @@ function App() {
       <Router>
         <Header />
         <Routes>
+          <Route path='/digestwell' element={<SignIn />} />
           <Route path='/my-lists' element={<MyLists />} />
           <Route
             path='/'
