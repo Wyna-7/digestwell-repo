@@ -48,8 +48,13 @@ const Header = () => {
 
   return (
     <AppBar position='sticky' color='primary'>
-      <Container maxWidth='xl'>
-        <Toolbar disableGutters sx={{ height: '90px' }}>
+      <Container maxWidth='1200'>
+        <Toolbar
+          disableGutters
+          sx={{
+            height: '90px',
+          }}
+        >
           <Box
             component={Link}
             to='/'
@@ -177,6 +182,9 @@ const Header = () => {
               </Button>
             ))}
           </Box>
+
+          {/* End part 1 */}
+          {/* Start part 2 */}
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title='Open settings'>
