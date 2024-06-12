@@ -48,6 +48,7 @@ function EntriesForm({ setEntriesList, userId }) {
     console.log('blood:', event.target.checked);
   };
 
+  // For toggle feature of the form
   const handleFormChange = (event) => {
     setIsInputVisible(!isInputVisible);
   };

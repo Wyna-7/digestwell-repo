@@ -45,8 +45,6 @@ export default function SignIn() {
     );
   }
 
-  // TODO remove, this demo shouldn't need to reset the theme.
-
   return (
     <ThemeProvider theme={theme}>
       <Container component='main' maxWidth='xs'>
