@@ -183,9 +183,6 @@ const Header = () => {
             ))}
           </Box>
 
-          {/* End part 1 */}
-          {/* Start part 2 */}
-
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title='Open settings'>
               <IconButton
