@@ -3,11 +3,11 @@ Project: DigestWell
 Project Description: a tracker for IBD patients. It tracks food, beverages, symptoms and bowel movements.
 
 1. Run the project:
-   You will have to hard code a user ID in the users database
+   You will have to hardcode a user ID in the user's database
 
 2. The app login section is fake (this explains the need for a hard-coded user ID)
 
-3. The possibility to edit cards that only have symptoms or stool type edit is not working yet. Maybe you will need to redesign the way the Entry component works with smaller components. That's what I wish to do after the bootcamp.
+3. The possibility to edit and delete cards that only have symptoms or stool type is not working yet. Maybe you will need to redesign the way the Entry component works with smaller components. That's what I wish to do after the bootcamp.
 
 4. The backend needs to be updated to make point 3 work (the edit).
 
