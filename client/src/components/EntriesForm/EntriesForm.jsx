@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import {
   Button,
-  Container,
   Box,
   Paper,
   TextField,
@@ -11,7 +10,6 @@ import {
   MenuItem,
   FormGroup,
   FormControlLabel,
-  Switch,
   Checkbox,
 } from '@mui/material';
 
@@ -19,60 +17,48 @@ import { postEntry } from '../../apiService';
 import './style.css';
 
 function EntriesForm({ setEntriesList, userId }) {
-  const [item, setItem] = useState('');
-  const [selectedOption, setSelectedOption] = useState('Food');
-  const [otherSymptoms, setOtherSymptoms] = useState('');
-  const [selectedStoolType, setSelectedStoolType] = useState('');
-  const [bloodInStool, setBloodInStool] = useState(false);
-  const [isInputVisible, setIsInputVisible] = useState(true);
+  const [formData, setFormData] = useState({
+    item: '',
+    selectedOption: 'Food',
+    otherSymptoms: '',
+    selectedStoolType: '',
+    bloodInStool: false,
+  });
 
   const handleChange = (event) => {
-    setItem(event.target.value);
-  };
+    let { name, value } = event.target;
 
-  const handleTypeChange = (event) => {
-    setSelectedOption(event.target.value);
-  };
+    if (name === 'bloodInStool') {
+      value = value === 'true';
+    }
 
-  const handleSymptoms = (event) => {
-    setOtherSymptoms(event.target.value);
-    console.log('symptoms:', event.target.value);
-  };
-
-  const handleStoolChange = (event) => {
-    setSelectedStoolType(event.target.value);
-    console.log('stool:', event.target.value);
-  };
-
-  const handleBloodPresenceChange = (event) => {
-    setBloodInStool(event.target.checked);
-    console.log('blood:', event.target.checked);
-  };
-
-  // For toggle feature of the form
-  const handleFormChange = (event) => {
-    setIsInputVisible(!isInputVisible);
+    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (!item && !otherSymptoms && !selectedStoolType) {
+    if (
+      !formData.item &&
+      !formData.otherSymptoms &&
+      !formData.selectedStoolType
+    ) {
       alert(
         'Please fill either the item and select option or other symptoms and stool type.'
       );
       return;
     }
 
+    //ADD TO HELPER FUNCTIONS FILE AND MOVE THEN IMPORT
     const newItem = {
-      name: item || null,
-      select: selectedOption || null,
-      other_symptoms: otherSymptoms || null,
-      stool_type: selectedStoolType || null,
-      is_bleeding: bloodInStool || false,
+      name: formData.item || null,
+      select: formData.selectedOption || null,
+      other_symptoms: formData.otherSymptoms || null,
+      stool_type: formData.selectedStoolType || null,
+      is_bleeding: formData.bloodInStool || false,
       user_id: userId,
     };
-
+    //ADD TO HELPER FUNCTIONS FILE AND MOVE THEN IMPORT
     postEntry(newItem).then((newEntry) => {
       setEntriesList((prevList) => [
         ...prevList,
@@ -88,41 +74,23 @@ function EntriesForm({ setEntriesList, userId }) {
 
   return (
     <Paper className="form-container" elevation={10}>
-      <Box
-        component="form"
-        onSubmit={handleSubmit}
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-      >
+      <Box className="form-box" component="form" onSubmit={handleSubmit}>
         <TextField
+          className="form-field"
           type="text"
           name="item"
-          value={item}
+          value={formData.item}
           onChange={handleChange}
           placeholder="What did you consume?"
           variant="outlined"
           margin="normal"
-          sx={{
-            width: '100%',
-            maxWidth: 500,
-            mb: 2,
-          }}
         />
-        <FormControl
-          variant="outlined"
-          margin="normal"
-          sx={{
-            width: '100%',
-            maxWidth: 500,
-            mb: 2,
-          }}
-        >
+        <FormControl className="form-field" variant="outlined" margin="normal">
           <InputLabel>Select an option</InputLabel>
           <Select
-            value={selectedOption}
-            onChange={handleTypeChange}
+            name="selectedOption"
+            value={formData.selectedOption}
+            onChange={handleChange}
             label="Select an option"
           >
             <MenuItem value="Food">Food</MenuItem>
@@ -132,32 +100,21 @@ function EntriesForm({ setEntriesList, userId }) {
           </Select>
         </FormControl>
         <TextField
+          className="form-field"
           type="text"
           name="otherSymptoms"
-          value={otherSymptoms}
-          onChange={handleSymptoms}
+          value={formData.otherSymptoms}
+          onChange={handleChange}
           placeholder="What are your symptoms?"
           variant="outlined"
           margin="normal"
-          sx={{
-            width: '100%',
-            maxWidth: 500,
-            mb: 2,
-          }}
         />
-        <FormControl
-          variant="outlined"
-          margin="normal"
-          sx={{
-            width: '100%',
-            maxWidth: 500,
-            mb: 2,
-          }}
-        >
+        <FormControl className="form-field" variant="outlined" margin="normal">
           <InputLabel>Bristol Stool Scale</InputLabel>
           <Select
-            value={selectedStoolType}
-            onChange={handleStoolChange}
+            name="selectedStoolType"
+            value={formData.selectedStoolType}
+            onChange={handleChange}
             label="Bristol Stool Scale"
           >
             <MenuItem value="Type 1">Type 1</MenuItem>
@@ -170,13 +127,13 @@ function EntriesForm({ setEntriesList, userId }) {
           </Select>
         </FormControl>
 
-        {selectedStoolType && (
+        {formData.selectedStoolType && (
           <FormGroup>
             <FormControlLabel
               control={
                 <Checkbox
-                  checked={bloodInStool}
-                  onChange={handleBloodPresenceChange}
+                  checked={formData.bloodInStool}
+                  onChange={handleChange}
                   name="bloodInStool"
                 />
               }
@@ -185,18 +142,14 @@ function EntriesForm({ setEntriesList, userId }) {
           </FormGroup>
         )}
         <Button
+          className="add-btn"
           type="submit"
           variant="contained"
           color="primary"
           sx={{
             width: { xs: '100%', sm: 'auto', md: 'auto' },
-            height: 'fit-content',
-            alignSelf: 'center',
-            mt: 1,
-            pt: '10px',
-            pb: '10px',
-            pl: '80px',
-            pr: '80px',
+            py: '10px',
+            px: '80px',
           }}
         >
           Add
