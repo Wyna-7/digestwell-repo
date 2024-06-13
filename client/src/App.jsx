@@ -7,8 +7,8 @@ import EntriesContext from './entriesContext';
 import Header from './components/Header/Header';
 import { Box, Container } from '@mui/material';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import MyLists from './components/pages/MyLists';
-import SignIn from './components/pages/LoginPage';
+import MyLists from './components/pages/MyLists/MyLists';
+import SignIn from './components/pages/LoginPage/LoginPage';
 
 function App() {
   const [entriesList, setEntriesList] = useState([]);
@@ -35,18 +35,18 @@ function App() {
       <Router>
         <Header />
         <Routes>
-          <Route path='/digestwell' element={<SignIn />} />
-          <Route path='/my-lists' element={<MyLists />} />
+          <Route path="/" element={<SignIn />} />
+          <Route path="/my-lists" element={<MyLists />} />
           <Route
-            path='/'
+            path="/dashboard"
             element={
               <Container>
                 <Box
-                  display='flex'
-                  flexDirection='column'
-                  alignItems='center'
-                  justifyContent='center'
-                  minHeight='100vh'
+                  display="flex"
+                  flexDirection="column"
+                  alignItems="center"
+                  justifyContent="center"
+                  minHeight="100vh"
                   padding={2}
                 >
                   <EntriesForm

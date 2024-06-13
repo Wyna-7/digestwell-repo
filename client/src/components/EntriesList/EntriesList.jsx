@@ -1,6 +1,8 @@
 import React from 'react';
 import Entry from '../Entry/Entry';
 import { Container, Box, Paper } from '@mui/material';
+import './style.css';
+
 const EntriesList = ({ entriesList, setEntriesList }) => {
   return (
     <Container
@@ -24,7 +26,7 @@ const EntriesList = ({ entriesList, setEntriesList }) => {
         }}
       >
         <Box
-          component='ul'
+          component="ul"
           sx={{
             listStyleType: 'none',
             padding: 0,
@@ -34,7 +36,7 @@ const EntriesList = ({ entriesList, setEntriesList }) => {
         >
           {entriesList.map((entry) => {
             return (
-              <Box component='li' key={entry.id}>
+              <Box component="li" key={entry.id}>
                 <Entry {...entry} setEntriesList={setEntriesList} />
               </Box>
             );

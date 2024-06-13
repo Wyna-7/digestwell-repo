@@ -14,6 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo-icon.svg';
 import { useLocation } from 'react-router-dom';
+import './style.css';
 
 const pages = [
   { name: 'My lists', path: '/my-lists' },

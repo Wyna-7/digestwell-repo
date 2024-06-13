@@ -13,6 +13,7 @@ import EditCalendarIcon from '@mui/icons-material/EditCalendar';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
 import { blue } from '@mui/material/colors';
+import './style.css';
 
 const Entry = ({
   name,
@@ -115,36 +116,36 @@ const Entry = ({
   };
 
   return (
-    <Container maxWidth='md' sx={{ mb: 2 }}>
+    <Container maxWidth="md" sx={{ mb: 2 }}>
       <Paper elevation={10} sx={{ p: 2, borderRadius: '20px' }}>
         <Box
-          display='flex'
-          flexDirection='column'
-          justifyContent='space-between'
-          alignItems='flex-start'
+          display="flex"
+          flexDirection="column"
+          justifyContent="space-between"
+          alignItems="flex-start"
         >
           <Box
-            display='flex'
-            flexDirection='row'
-            justifyContent='space-between'
-            width='100%'
+            display="flex"
+            flexDirection="row"
+            justifyContent="space-between"
+            width="100%"
           >
-            <Box display='flex' flexDirection='column' gap={1} flexGrow={1}>
+            <Box display="flex" flexDirection="column" gap={1} flexGrow={1}>
               {(name || select) && (
                 <Box
-                  display='flex'
-                  flexDirection='row'
-                  alignItems='center'
+                  display="flex"
+                  flexDirection="row"
+                  alignItems="center"
                   gap={3}
                 >
                   {isEditing ? (
                     <>
                       <TextField
-                        type='text'
+                        type="text"
                         value={updatedName}
                         onChange={handleChangeName}
-                        variant='outlined'
-                        margin='normal'
+                        variant="outlined"
+                        margin="normal"
                         fullWidth
                         required
                       />
@@ -153,29 +154,29 @@ const Entry = ({
                         onChange={handleChangeSelect}
                         sx={{ minWidth: 150, mt: 1 }}
                       >
-                        <MenuItem value='Food'>Food</MenuItem>
-                        <MenuItem value='Beverage'>Beverage</MenuItem>
-                        <MenuItem value='Medication'>Medication</MenuItem>
-                        <MenuItem value='Supplement'>Supplement</MenuItem>
+                        <MenuItem value="Food">Food</MenuItem>
+                        <MenuItem value="Beverage">Beverage</MenuItem>
+                        <MenuItem value="Medication">Medication</MenuItem>
+                        <MenuItem value="Supplement">Supplement</MenuItem>
                       </Select>
                       <Select
                         value={updatedHealthImpact}
                         onChange={handleHealthImpact}
                         sx={{ minWidth: 150, mt: 1 }}
                       >
-                        <MenuItem value='Beneficial'>Beneficial</MenuItem>
-                        <MenuItem value='Neutral'>Neutral</MenuItem>
-                        <MenuItem value='Avoid'>Avoid</MenuItem>
+                        <MenuItem value="Beneficial">Beneficial</MenuItem>
+                        <MenuItem value="Neutral">Neutral</MenuItem>
+                        <MenuItem value="Avoid">Avoid</MenuItem>
                       </Select>
                     </>
                   ) : (
                     <>
-                      <Typography variant='body1' noWrap>
+                      <Typography variant="body1" noWrap>
                         {name}
                       </Typography>
                       {select && (
                         <Typography
-                          variant='body1'
+                          variant="body1"
                           sx={{ color: 'primary.main' }}
                           noWrap
                         >
@@ -183,7 +184,7 @@ const Entry = ({
                         </Typography>
                       )}
                       <Typography
-                        variant='body1'
+                        variant="body1"
                         sx={{
                           color: colorPicker(health_impact),
                         }}
@@ -198,7 +199,7 @@ const Entry = ({
               <Box display={'flex'}>
                 {stool_type && (
                   <Box display={'flex'}>
-                    <Typography variant='body1' fontWeight={'bold'} noWrap>
+                    <Typography variant="body1" fontWeight={'bold'} noWrap>
                       Stool Type:
                     </Typography>
                     <Box ml={2}>{stool_type}</Box>
@@ -207,7 +208,7 @@ const Entry = ({
                 {stool_type && (
                   <Box display={'flex'}>
                     <Typography
-                      variant='body1'
+                      variant="body1"
                       fontWeight={'bold'}
                       ml={5}
                       noWrap
@@ -220,7 +221,7 @@ const Entry = ({
               </Box>
               {other_symptoms && (
                 <Box display={'flex'}>
-                  <Typography variant='body1' fontWeight={'bold'} noWrap>
+                  <Typography variant="body1" fontWeight={'bold'} noWrap>
                     Symptoms:
                   </Typography>
                   <Box ml={2}>{other_symptoms}</Box>
@@ -228,7 +229,7 @@ const Entry = ({
               )}
             </Box>
 
-            <Box display='flex' flexDirection='row' gap={1}>
+            <Box display="flex" flexDirection="row" gap={1}>
               {isEditing ? (
                 <BookmarkAddedIcon
                   onClick={handleSave}
@@ -254,14 +255,14 @@ const Entry = ({
               )}
               <DeleteOutlineIcon
                 onClick={handleDelete}
-                cursor='pointer'
-                color='error'
+                cursor="pointer"
+                color="error"
               />
             </Box>
           </Box>
           <Typography
-            variant='body2'
-            color='textSecondary'
+            variant="body2"
+            color="textSecondary"
             sx={{ alignSelf: 'flex-end', mt: 2 }}
           >
             {new Date(createdAt).toLocaleString()}
