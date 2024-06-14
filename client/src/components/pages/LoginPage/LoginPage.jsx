@@ -13,7 +13,6 @@ import Container from '@mui/material/Container';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../../../theme';
 import { useNavigate } from 'react-router-dom';
-import './style.css';
 
 export default function SignIn() {
   const navigate = useNavigate();
