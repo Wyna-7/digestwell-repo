@@ -1,19 +1,27 @@
 const router = require('express').Router();
 
-const {
-  getEntries,
-  postEntry,
-  modifyEntry,
-  deleteEntry,
-} = require('./controller/entries');
+const {postUser, getUser, deleteUser, updateUser} = require('./controller/users');
+// const {postSymptom, getSymptom, deleteSymptom} = require('./controller/symptoms');
+// const {postItem, getItem, deleteItem} = require('./controller/items');
 
-router.get('/entries', getEntries);
+// // users
+router.post('/users', postUser);
+router.get('/users/:id', getUser);
+router.delete('/users/:id', deleteUser);
+router.patch('/users/:id', updateUser);
 
-router.post('/entries', postEntry);
+// // symptoms
+// router.post('/symptoms', postSymptom);
+// router.get('/symptoms/:id', getSymptom);
+// router.delete('/symptoms/:id', deleteSymptom);
+// router.patch('/symptoms/:id', updateSymptom);
 
-// to edit an entry
-router.put('/entries/:id/edit', modifyEntry);
 
-router.delete('/entries/:id', deleteEntry);
+// // items
+// router.post('/items', postItem);
+// router.get('/items/:id', getItem);
+// router.delete('/items/:id', deleteItem);
+// router.patch('/items/:id', updateItem);
+
 
 module.exports = router;
