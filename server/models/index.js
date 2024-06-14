@@ -17,4 +17,24 @@ const sequelize = new Sequelize(
     logging: false,
   });
 
-module.exports = sequelize;
+
+const User = require('./user')(sequelize, Sequelize.DataTypes);
+const Item = require('./item')(sequelize, Sequelize.DataTypes);
+const Symptom = require('./symptom')(sequelize, Sequelize.DataTypes);
+
+User.hasMany(Item, { foreignKey: 'userId' });
+User.hasMany(Symptom, { foreignKey: 'userId' });
+Item.hasMany(Symptom, { foreignKey: 'itemId' });
+
+Item.belongsTo(User, { foreignKey: 'userId' });
+Symptom.belongsTo(User, { foreignKey: 'userId' });
+Symptom.belongsTo(Item, { foreignKey: 'itemId' });
+
+const db = {
+  sequelize,
+  User,
+  Item,
+  Symptom,
+};
+
+module.exports = db;
