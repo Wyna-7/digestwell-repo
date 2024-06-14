@@ -18,7 +18,7 @@ router.delete('/symptoms/:id', deleteSymptom);
 router.patch('/symptoms/:id', updateSymptom);
 
 
-// // items
+// items
 router.post('/items', postItem);
 router.get('/items/:id', getItem);
 router.delete('/items/:id', deleteItem);

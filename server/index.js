@@ -4,11 +4,17 @@ const cors = require('cors');
 const db = require('./models');
 
 const app = express();
-
 const router = require('./router');
-const PORT = process.env.PORT || 3000;
 
-app.use(cors()); // limit cors
+const PORT = process.env.PORT || 3000;
+const URL = process.env.URL || 'localhost';
+
+var corsOptions = {
+  origin: URL,
+  optionsSuccessStatus: 200
+}
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(router);
 
