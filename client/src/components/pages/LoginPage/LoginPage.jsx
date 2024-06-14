@@ -11,7 +11,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { ThemeProvider } from '@mui/material/styles';
-import theme from '../../theme';
+import theme from '../../../theme';
 import { useNavigate } from 'react-router-dom';
 
 export default function SignIn() {
@@ -24,7 +24,7 @@ export default function SignIn() {
       email: data.get('email'),
       password: data.get('password'),
     });
-    navigate('/');
+    navigate('/dashboard');
   };
 
   function Copyright(props) {

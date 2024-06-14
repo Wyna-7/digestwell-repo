@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
+import { useState } from 'react';
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Typography,
+  Menu,
+  Container,
+  Avatar,
+  Button,
+  Tooltip,
+  MenuItem,
+} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
+
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo-icon.svg';
 import { useLocation } from 'react-router-dom';
@@ -47,8 +50,8 @@ const Header = () => {
   }
 
   return (
-    <AppBar position="sticky" color="primary">
-      <Container maxWidth="1200">
+    <AppBar position='sticky' color='primary'>
+      <Container maxWidth='1200'>
         <Toolbar
           disableGutters
           sx={{
@@ -57,7 +60,7 @@ const Header = () => {
         >
           <Box
             component={Link}
-            to="/"
+            to='/'
             sx={{
               display: { xs: 'none', md: 'flex' },
               marginRight: '1rem',
@@ -67,16 +70,16 @@ const Header = () => {
           >
             <img
               src={logo}
-              alt="logo"
+              alt='logo'
               style={{ width: '100%', height: '100%' }}
             />
           </Box>
 
           <Typography
-            variant="h6"
+            variant='h6'
             noWrap
             component={Link}
-            to="/"
+            to='/'
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -92,17 +95,17 @@ const Header = () => {
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
+              size='large'
+              aria-label='account of current user'
+              aria-controls='menu-appbar'
+              aria-haspopup='true'
               onClick={handleOpenNavMenu}
-              color="inherit"
+              color='inherit'
             >
               <MenuIcon />
             </IconButton>
             <Menu
-              id="menu-appbar"
+              id='menu-appbar'
               anchorEl={anchorElNav}
               anchorOrigin={{
                 vertical: 'bottom',
@@ -124,7 +127,7 @@ const Header = () => {
                   <Typography
                     component={Link}
                     to={page.path}
-                    textAlign="center"
+                    textAlign='center'
                     style={{ textDecoration: 'none', color: 'inherit' }}
                   >
                     {page.name}
@@ -136,7 +139,7 @@ const Header = () => {
 
           <Box
             component={Link}
-            to="/"
+            to='/'
             sx={{
               display: { xs: 'none', sm: 'flex', md: 'none' },
               marginRight: '1rem',
@@ -146,16 +149,16 @@ const Header = () => {
           >
             <img
               src={logo}
-              alt="logo"
+              alt='logo'
               style={{ width: '100%', height: '100%' }}
             />
           </Box>
 
           <Typography
-            variant="h5"
+            variant='h5'
             noWrap
             component={Link}
-            to="/"
+            to='/'
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -184,21 +187,21 @@ const Header = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title='Open settings'>
               <IconButton
                 onClick={handleOpenUserMenu}
                 sx={{ p: 0, width: 60, height: 60 }}
               >
                 <Avatar
-                  alt="Mr Beast"
-                  src="/profile-picture.png"
+                  alt='Mr Beast'
+                  src='/profile-picture.png'
                   sx={{ p: 0, width: 60, height: 60 }}
                 />
               </IconButton>
             </Tooltip>
             <Menu
               sx={{ mt: '45px' }}
-              id="menu-appbar"
+              id='menu-appbar'
               anchorEl={anchorElUser}
               anchorOrigin={{
                 vertical: 'top',
@@ -214,7 +217,7 @@ const Header = () => {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Typography textAlign='center'>{setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>

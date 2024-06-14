@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import HealthImpactTable from '../Table/HealthImpactTable';
-import EntriesContext from '../../entriesContext';
+import HealthImpactTable from '../../Table/HealthImpactTable';
+import EntriesContext from '../../../context/EntriesContext';
 
 const MyLists = () => {
   const { entriesList, setEntriesList } = useContext(EntriesContext);

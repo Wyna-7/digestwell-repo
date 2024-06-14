@@ -1,0 +1,26 @@
+.form-container {
+  padding: 2em;
+  padding-bottom: 3.2em;
+  width: 100%;
+  border-radius: 50px;
+}
+
+.form-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-field {
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 2em;
+}
+
+.add-btn {
+  height: fit-content;
+  align-self: center;
+  padding: 10px 80px 10px 80px;
+  margin-top: 8px;
+}
