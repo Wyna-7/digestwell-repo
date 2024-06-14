@@ -1,21 +1,15 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { deleteEntry, editEntry } from '../../apiService';
-import {
-  Container,
-  Box,
-  Paper,
-  TextField,
-  Select,
-  MenuItem,
-  Typography,
-} from '@mui/material';
+import { Box, Paper, Typography } from '@mui/material';
 import EditCalendarIcon from '@mui/icons-material/EditCalendar';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
 import { blue } from '@mui/material/colors';
 import './style.css';
+import ConsumedItemEntry from '../ConsumedItemEntry/ConsumedItemEntry';
+import SymptomsEntry from '../SymptomsEntry/SymptomsEntry';
 
-const Entry = ({
+export default function Entry({
   name,
   select,
   createdAt,
@@ -27,14 +21,14 @@ const Entry = ({
   stool_type,
   is_bleeding,
   other_symptoms,
-}) => {
+}) {
   const [updatedName, setUpdatedName] = useState(name);
   const [updatedSelect, setUpdatedSelect] = useState(select);
   const [updatedHealthImpact, setUpdatedHealthImpact] = useState(
     health_impact || 'Neutral'
   );
-  const [updatedSymptoms, setUpdatedSymptoms] = useState(symptoms);
-  const [updatedStoolType, setUpdatedStoolType] = useState(stool_type);
+  // const [updatedSymptoms, setUpdatedSymptoms] = useState(symptoms);
+  // const [updatedStoolType, setUpdatedStoolType] = useState(stool_type);
 
   const handleDelete = () => {
     deleteEntry(id).then(() => {
@@ -107,19 +101,18 @@ const Entry = ({
     setUpdatedHealthImpact(event.target.value);
   };
 
-  const handleSymptoms = (event) => {
-    setUpdatedSymptoms(event.target.value);
-  };
+  // const handleSymptoms = (event) => {
+  //   setUpdatedSymptoms(event.target.value);
+  // };
 
-  const handleStoolType = (event) => {
-    setUpdatedStoolType(event.target.value);
-  };
+  // const handleStoolType = (event) => {
+  //   setUpdatedStoolType(event.target.value);
+  // };
 
   return (
     <Paper
       elevation={10}
-      maxWidth="md"
-      sx={{ p: 2, borderRadius: '20px', mb: 2 }}
+      sx={{ maxWidth: 'md', p: 2, borderRadius: '20px', mb: 2 }}
     >
       <Box
         display="flex"
@@ -135,96 +128,18 @@ const Entry = ({
         >
           <Box display="flex" flexDirection="column" gap={1} flexGrow={1}>
             {(name || select) && (
-              <Box
-                display="flex"
-                flexDirection="row"
-                alignItems="center"
-                gap={3}
-              >
-                {isEditing ? (
-                  <>
-                    <TextField
-                      type="text"
-                      value={updatedName}
-                      onChange={handleChangeName}
-                      variant="outlined"
-                      margin="normal"
-                      fullWidth
-                      required
-                    />
-                    <Select
-                      value={updatedSelect}
-                      onChange={handleChangeSelect}
-                      sx={{ minWidth: 150, mt: 1 }}
-                    >
-                      <MenuItem value="Food">Food</MenuItem>
-                      <MenuItem value="Beverage">Beverage</MenuItem>
-                      <MenuItem value="Medication">Medication</MenuItem>
-                      <MenuItem value="Supplement">Supplement</MenuItem>
-                    </Select>
-                    <Select
-                      value={updatedHealthImpact}
-                      onChange={handleHealthImpact}
-                      sx={{ minWidth: 150, mt: 1 }}
-                    >
-                      <MenuItem value="Beneficial">Beneficial</MenuItem>
-                      <MenuItem value="Neutral">Neutral</MenuItem>
-                      <MenuItem value="Avoid">Avoid</MenuItem>
-                    </Select>
-                  </>
-                ) : (
-                  <>
-                    <Typography variant="body1" noWrap>
-                      {name}
-                    </Typography>
-                    {select && (
-                      <Typography
-                        variant="body1"
-                        sx={{ color: 'primary.main' }}
-                        noWrap
-                      >
-                        {select}
-                      </Typography>
-                    )}
-                    <Typography
-                      variant="body1"
-                      sx={{
-                        color: colorPicker(health_impact),
-                      }}
-                      noWrap
-                    >
-                      {health_impact}
-                    </Typography>
-                  </>
-                )}
-              </Box>
+              <ConsumedItemEntry
+                name={name}
+                isEditing={isEditing}
+                select={select}
+                health_impact={health_impact}
+              />
             )}
-            <Box display={'flex'}>
-              {stool_type && (
-                <Box display={'flex'}>
-                  <Typography variant="body1" fontWeight={'bold'} noWrap>
-                    Stool Type:
-                  </Typography>
-                  <Box ml={2}>{stool_type}</Box>
-                </Box>
-              )}
-              {stool_type && (
-                <Box display={'flex'}>
-                  <Typography variant="body1" fontWeight={'bold'} ml={5} noWrap>
-                    Bleeding:
-                  </Typography>
-                  <Box ml={2}> {is_bleeding ? 'Yes' : 'No'}</Box>
-                </Box>
-              )}
-            </Box>
-            {other_symptoms && (
-              <Box display={'flex'}>
-                <Typography variant="body1" fontWeight={'bold'} noWrap>
-                  Symptoms:
-                </Typography>
-                <Box ml={2}>{other_symptoms}</Box>
-              </Box>
-            )}
+            <SymptomsEntry
+              stool_type={stool_type}
+              is_bleeding={is_bleeding}
+              other_symptoms={other_symptoms}
+            />
           </Box>
 
           <Box display="flex" flexDirection="row" gap={1}>
@@ -268,6 +183,4 @@ const Entry = ({
       </Box>
     </Paper>
   );
-};
-
-export default Entry;
+}
