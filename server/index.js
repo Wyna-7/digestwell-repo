@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const db = require('./models');
@@ -5,7 +6,7 @@ const db = require('./models');
 const app = express();
 
 const router = require('./router');
-const PORT = 3000; // env variable
+const PORT = process.env.PORT || 3000;
 
 app.use(cors()); // limit cors
 app.use(express.json());
