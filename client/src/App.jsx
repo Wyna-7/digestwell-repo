@@ -15,7 +15,6 @@ function App() {
 
   //TODO userId is hardcoded
   const userId = 8;
-  console.log('entries list from App.jsx', entriesList);
 
   useEffect(() => {
     getEntries().then((data) =>

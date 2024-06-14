@@ -71,6 +71,7 @@ export default function Entry({
     });
   };
 
+  //TODO add this edit logic to EditSympromsEntry component
   // const handleSymptoms = (event) => {
   //   setUpdatedSymptoms(event.target.value);
   // };
