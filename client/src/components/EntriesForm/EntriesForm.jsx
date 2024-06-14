@@ -49,7 +49,6 @@ function EntriesForm({ setEntriesList, userId }) {
       return;
     }
 
-    //ADD TO HELPER FUNCTIONS FILE AND MOVE THEN IMPORT
     const newItem = {
       name: formData.item || null,
       select: formData.selectedOption || null,
@@ -58,17 +57,19 @@ function EntriesForm({ setEntriesList, userId }) {
       is_bleeding: formData.bloodInStool || false,
       user_id: userId,
     };
-    //ADD TO HELPER FUNCTIONS FILE AND MOVE THEN IMPORT
+
     postEntry(newItem).then((newEntry) => {
       setEntriesList((prevList) => [
         ...prevList,
         { ...newEntry, isEditing: false },
       ]);
-      setItem('');
-      setSelectedOption('Food');
-      setSelectedStoolType('');
-      setOtherSymptoms('');
-      setBloodInStool(false);
+      setFormData({
+        item: '',
+        selectedOption: 'Food',
+        otherSymptoms: '',
+        selectedStoolType: '',
+        bloodInStool: false,
+      });
     });
   };
 
