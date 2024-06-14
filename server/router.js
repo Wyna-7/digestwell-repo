@@ -1,8 +1,9 @@
 const router = require('express').Router();
 
-const {postUser, getUser, deleteUser, updateUser} = require('./controllers/users');
-const {postSymptom, getSymptom, deleteSymptom, updateSymptom} = require('./controllers/symptoms');
-const {postItem, getItem, deleteItem, updateItem} = require('./controllers/items');
+const { postUser, getUser, deleteUser, updateUser,
+        postSymptom, getSymptom, deleteSymptom, updateSymptom,
+        postItem, getItem, deleteItem, updateItem
+} = require('./controllers');
 
 // users
 router.post('/users', postUser);
