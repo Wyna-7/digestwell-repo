@@ -9,7 +9,7 @@ const router = require('./router');
 const PORT = process.env.PORT || 3000;
 const URL = process.env.URL || 'localhost';
 
-var corsOptions = {
+const corsOptions = {
   origin: URL,
   optionsSuccessStatus: 200
 }
