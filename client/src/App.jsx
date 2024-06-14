@@ -3,7 +3,7 @@ import './App.css';
 import { getEntries } from './apiService';
 import EntriesForm from './components/EntriesForm/EntriesForm';
 import EntriesList from './components/EntriesList/EntriesList';
-import EntriesContext from './entriesContext';
+import EntriesContext from './context/EntriesContext';
 import Header from './components/Header/Header';
 import { Box, Container } from '@mui/material';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -31,7 +31,8 @@ function App() {
   });
 
   return (
-    <EntriesContext.Provider value={{ entriesList, setEntriesList }}>
+    //TODO userID is hardcoded
+    <EntriesContext.Provider value={{ entriesList, setEntriesList, userId }}>
       <Router>
         <Header />
         <Routes>
@@ -49,14 +50,8 @@ function App() {
                   minHeight="100vh"
                   padding={2}
                 >
-                  <EntriesForm
-                    setEntriesList={setEntriesList}
-                    userId={userId}
-                  />
-                  <EntriesList
-                    entriesList={entriesList}
-                    setEntriesList={setEntriesList}
-                  />
+                  <EntriesForm />
+                  <EntriesList />
                 </Box>
               </Container>
             }

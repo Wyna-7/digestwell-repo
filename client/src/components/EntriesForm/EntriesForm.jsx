@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import {
   Button,
   Box,
@@ -15,8 +15,11 @@ import {
 
 import { postEntry } from '../../apiService';
 import './style.css';
+import EntriesContext from '../../context/EntriesContext';
 
-function EntriesForm({ setEntriesList, userId }) {
+function EntriesForm() {
+  const { setEntriesList, userId } = useContext(EntriesContext);
+
   const [formData, setFormData] = useState({
     item: '',
     selectedOption: '',
@@ -105,8 +108,10 @@ function EntriesForm({ setEntriesList, userId }) {
             onChange={handleChange}
             label="Select an option"
           >
-            {itemOptions.map((item) => (
-              <MenuItem value={item}>{item}</MenuItem>
+            {itemOptions.map((item, index) => (
+              <MenuItem key={index} value={item}>
+                {item}
+              </MenuItem>
             ))}
           </Select>
         </FormControl>
@@ -128,8 +133,10 @@ function EntriesForm({ setEntriesList, userId }) {
             onChange={handleChange}
             label="Bristol Stool Scale"
           >
-            {stoolTypeOptions.map((item) => (
-              <MenuItem value={item}>{item}</MenuItem>
+            {stoolTypeOptions.map((item, index) => (
+              <MenuItem key={index} value={item}>
+                {item}
+              </MenuItem>
             ))}
           </Select>
         </FormControl>

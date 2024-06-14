@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import HealthImpactTable from '../../Table/HealthImpactTable';
-import EntriesContext from '../../../entriesContext';
+import EntriesContext from '../../../context/EntriesContext';
 import './style.css';
 
 const MyLists = () => {
