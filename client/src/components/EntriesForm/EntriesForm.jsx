@@ -19,7 +19,7 @@ import './style.css';
 function EntriesForm({ setEntriesList, userId }) {
   const [formData, setFormData] = useState({
     item: '',
-    selectedOption: 'Food',
+    selectedOption: '',
     otherSymptoms: '',
     selectedStoolType: '',
     bloodInStool: false,
@@ -65,7 +65,7 @@ function EntriesForm({ setEntriesList, userId }) {
       ]);
       setFormData({
         item: '',
-        selectedOption: 'Food',
+        selectedOption: '',
         otherSymptoms: '',
         selectedStoolType: '',
         bloodInStool: false,
