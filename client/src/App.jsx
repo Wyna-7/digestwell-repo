@@ -12,6 +12,8 @@ import SignIn from './components/pages/LoginPage/LoginPage';
 
 function App() {
   const [entriesList, setEntriesList] = useState([]);
+
+  //TODO userId is hardcoded
   const userId = 8;
   console.log('entries list from App.jsx', entriesList);
 
@@ -21,14 +23,6 @@ function App() {
       setEntriesList(data.map((entry) => ({ ...entry, isEditing: false })))
     );
   }, []);
-
-  entriesList.forEach((entry) => {
-    if (entry.symptoms) {
-      entry.symptoms.forEach((symptom) => {
-        console.log('stool_type from ', symptom.stool_type);
-      });
-    }
-  });
 
   return (
     //TODO userID is hardcoded

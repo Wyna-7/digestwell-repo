@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { deleteEntry, editEntry } from '../../apiService';
 import { Box, Paper, Typography } from '@mui/material';
 import EditCalendarIcon from '@mui/icons-material/EditCalendar';
@@ -8,6 +8,7 @@ import { blue } from '@mui/material/colors';
 import './style.css';
 import ConsumedItemEntry from '../ConsumedItemEntry/ConsumedItemEntry';
 import SymptomsEntry from '../SymptomsEntry/SymptomsEntry';
+import EntriesContext from '../../context/EntriesContext';
 
 export default function Entry({
   name,
@@ -16,12 +17,14 @@ export default function Entry({
   id,
   isEditing,
   health_impact,
-  setEntriesList,
+
   symptoms,
   stool_type,
   is_bleeding,
   other_symptoms,
 }) {
+  const { setEntriesList } = useContext(EntriesContext);
+
   const [updatedName, setUpdatedName] = useState(name);
   const [updatedSelect, setUpdatedSelect] = useState(select);
   const [updatedHealthImpact, setUpdatedHealthImpact] = useState(
@@ -37,6 +40,7 @@ export default function Entry({
   };
 
   const toggleEdit = () => {
+    console.log('in toggle edit');
     setEntriesList((prevList) =>
       prevList.map((entry) =>
         entry.id === id ? { ...entry, isEditing: !entry.isEditing } : entry
@@ -65,40 +69,6 @@ export default function Entry({
       });
       return updatedEntries;
     });
-  };
-
-  function colorPicker(value) {
-    switch (value) {
-      case 'Beneficial':
-        return {
-          color: 'green',
-          fontWeight: 'bold',
-        };
-      case 'Neutral':
-        return {
-          color: 'secondary.main',
-          fontWeight: 'bold',
-        };
-      case 'Avoid':
-        return {
-          color: 'red',
-          fontWeight: 'bold',
-        };
-      default:
-        return blue;
-    }
-  }
-
-  const handleChangeName = (event) => {
-    setUpdatedName(event.target.value);
-  };
-
-  const handleChangeSelect = (event) => {
-    setUpdatedSelect(event.target.value);
-  };
-
-  const handleHealthImpact = (event) => {
-    setUpdatedHealthImpact(event.target.value);
   };
 
   // const handleSymptoms = (event) => {

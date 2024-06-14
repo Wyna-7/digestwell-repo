@@ -9,45 +9,24 @@ export default function ConsumedItemEntry({
   select,
   health_impact,
 }) {
-  const [updatedName, setUpdatedName] = useState(name);
-  const [updatedSelect, setUpdatedSelect] = useState(select);
-  const [updatedHealthImpact, setUpdatedHealthImpact] = useState(
-    health_impact || 'Neutral'
-  );
+  const [state, setState] = useState({
+    itemName: name,
+    itemType: select,
+    healthImpact: health_impact || 'Neutral',
+  });
 
-  const handleChangeName = (event) => {
-    setUpdatedName(event.target.value);
+  // const [updatedName, setUpdatedName] = useState(name);
+  // const [updatedSelect, setUpdatedSelect] = useState(select);
+  // const [updatedHealthImpact, setUpdatedHealthImpact] = useState(
+  //   health_impact || 'Neutral'
+  // );
+
+  const handleStateChange = (event) => {
+    console.log(event);
+    const { name, value } = event.target;
+
+    setState((prev) => ({ ...prev, [name]: value }));
   };
-
-  const handleChangeSelect = (event) => {
-    setUpdatedSelect(event.target.value);
-  };
-
-  const handleHealthImpact = (event) => {
-    setUpdatedHealthImpact(event.target.value);
-  };
-
-  function colorPicker(value) {
-    switch (value) {
-      case 'Beneficial':
-        return {
-          color: 'green',
-          fontWeight: 'bold',
-        };
-      case 'Neutral':
-        return {
-          color: 'secondary.main',
-          fontWeight: 'bold',
-        };
-      case 'Avoid':
-        return {
-          color: 'red',
-          fontWeight: 'bold',
-        };
-      default:
-        return blue;
-    }
-  }
 
   return (
     <Box display="flex" flexDirection="row" alignItems="center" gap={3}>
@@ -55,16 +34,18 @@ export default function ConsumedItemEntry({
         <>
           <TextField
             type="text"
-            value={updatedName}
-            onChange={handleChangeName}
+            name="itemName"
+            value={state.itemName}
+            onChange={handleStateChange}
             variant="outlined"
             margin="normal"
             fullWidth
             required
           />
           <Select
-            value={updatedSelect}
-            onChange={handleChangeSelect}
+            name="itemType"
+            value={state.itemType}
+            onChange={handleStateChange}
             sx={{ minWidth: 150, mt: 1 }}
           >
             <MenuItem value="Food">Food</MenuItem>
@@ -73,8 +54,9 @@ export default function ConsumedItemEntry({
             <MenuItem value="Supplement">Supplement</MenuItem>
           </Select>
           <Select
-            value={updatedHealthImpact}
-            onChange={handleHealthImpact}
+            name="healthImpact"
+            value={state.healthImpact}
+            onChange={handleStateChange}
             sx={{ minWidth: 150, mt: 1 }}
           >
             <MenuItem value="Beneficial">Beneficial</MenuItem>
@@ -85,21 +67,19 @@ export default function ConsumedItemEntry({
       ) : (
         <>
           <Typography variant="body1" noWrap>
-            {name}
+            {state.itemName}
           </Typography>
-          {select && (
-            <Typography variant="body1" sx={{ color: 'primary.main' }} noWrap>
-              {select}
+          {state.itemType && (
+            <Typography variant="body1" className="neutral" noWrap>
+              {state.itemType}
             </Typography>
           )}
           <Typography
+            className={`${state.healthImpact.toLowerCase()} font-weight-bold`}
             variant="body1"
-            sx={{
-              color: colorPicker(health_impact),
-            }}
             noWrap
           >
-            {health_impact}
+            {state.healthImpact}
           </Typography>
         </>
       )}
