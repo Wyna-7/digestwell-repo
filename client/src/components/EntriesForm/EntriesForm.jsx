@@ -72,6 +72,17 @@ function EntriesForm({ setEntriesList, userId }) {
     });
   };
 
+  const itemOptions = ['Food', 'Beverage', 'Medication', 'Supplement'];
+  const stoolTypeOptions = [
+    'Type 1',
+    'Type 2',
+    'Type 3',
+    'Type 4',
+    'Type 5',
+    'Type 6',
+    'Type 7',
+  ];
+
   return (
     <Paper className="form-container" elevation={10}>
       <Box className="form-box" component="form" onSubmit={handleSubmit}>
@@ -93,10 +104,9 @@ function EntriesForm({ setEntriesList, userId }) {
             onChange={handleChange}
             label="Select an option"
           >
-            <MenuItem value="Food">Food</MenuItem>
-            <MenuItem value="Beverage">Beverage</MenuItem>
-            <MenuItem value="Medication">Medication</MenuItem>
-            <MenuItem value="Supplement">Supplement</MenuItem>
+            {itemOptions.map((item) => (
+              <MenuItem value={item}>{item}</MenuItem>
+            ))}
           </Select>
         </FormControl>
         <TextField
@@ -117,13 +127,9 @@ function EntriesForm({ setEntriesList, userId }) {
             onChange={handleChange}
             label="Bristol Stool Scale"
           >
-            <MenuItem value="Type 1">Type 1</MenuItem>
-            <MenuItem value="Type 2">Type 2</MenuItem>
-            <MenuItem value="Type 3">Type 3</MenuItem>
-            <MenuItem value="Type 4">Type 4</MenuItem>
-            <MenuItem value="Type 5">Type 5</MenuItem>
-            <MenuItem value="Type 6">Type 6</MenuItem>
-            <MenuItem value="Type 7">Type 7</MenuItem>
+            {stoolTypeOptions.map((item) => (
+              <MenuItem value={item}>{item}</MenuItem>
+            ))}
           </Select>
         </FormControl>
 
