@@ -10,7 +10,7 @@ export default function SymptomsEntry({
       <Box display={'flex'}>
         {stool_type && (
           <Box display={'flex'}>
-            <Typography variant="body1" fontWeight={'bold'} noWrap>
+            <Typography variant='body1' fontWeight={'bold'} noWrap>
               Stool Type:
             </Typography>
             <Box ml={2}>{stool_type}</Box>
@@ -18,7 +18,7 @@ export default function SymptomsEntry({
         )}
         {is_bleeding && (
           <Box display={'flex'}>
-            <Typography variant="body1" fontWeight={'bold'} ml={5} noWrap>
+            <Typography variant='body1' fontWeight={'bold'} ml={5} noWrap>
               Bleeding:
             </Typography>
             <Box ml={2}> {is_bleeding ? 'Yes' : 'No'}</Box>
@@ -26,7 +26,7 @@ export default function SymptomsEntry({
         )}
         {other_symptoms && (
           <Box display={'flex'}>
-            <Typography variant="body1" fontWeight={'bold'} noWrap>
+            <Typography variant='body1' fontWeight={'bold'} noWrap>
               Symptoms:
             </Typography>
             <Box ml={2}>{other_symptoms}</Box>

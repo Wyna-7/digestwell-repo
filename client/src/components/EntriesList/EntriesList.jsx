@@ -8,11 +8,11 @@ const EntriesList = () => {
   const { entriesList } = useContext(EntriesContext);
 
   return (
-    <Container className="entriesList-container">
-      <Box className="entriesList-box">
-        <Box className="entriesList-ul" component="ul">
+    <Container className='entriesList-container'>
+      <Box className='entriesList-box'>
+        <Box className='entriesList-ul' component='ul'>
           {entriesList.map((entry) => (
-            <Entry component="li" key={entry.id} {...entry} />
+            <Entry component='li' key={entry.id} {...entry} />
           ))}
         </Box>
       </Box>

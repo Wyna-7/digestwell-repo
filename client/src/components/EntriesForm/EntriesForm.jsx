@@ -88,25 +88,25 @@ function EntriesForm() {
   ];
 
   return (
-    <Paper className="form-container" elevation={10}>
-      <Box className="form-box" component="form" onSubmit={handleSubmit}>
+    <Paper className='form-container' elevation={10}>
+      <Box className='form-box' component='form' onSubmit={handleSubmit}>
         <TextField
-          className="form-field"
-          type="text"
-          name="item"
+          className='form-field'
+          type='text'
+          name='item'
           value={formData.item}
           onChange={handleChange}
-          placeholder="What did you consume?"
-          variant="outlined"
-          margin="normal"
+          placeholder='What did you consume?'
+          variant='outlined'
+          margin='normal'
         />
-        <FormControl className="form-field" variant="outlined" margin="normal">
+        <FormControl className='form-field' variant='outlined' margin='normal'>
           <InputLabel>Select an option</InputLabel>
           <Select
-            name="selectedOption"
+            name='selectedOption'
             value={formData.selectedOption}
             onChange={handleChange}
-            label="Select an option"
+            label='Select an option'
           >
             {itemOptions.map((item, index) => (
               <MenuItem key={index} value={item}>
@@ -116,22 +116,22 @@ function EntriesForm() {
           </Select>
         </FormControl>
         <TextField
-          className="form-field"
-          type="text"
-          name="otherSymptoms"
+          className='form-field'
+          type='text'
+          name='otherSymptoms'
           value={formData.otherSymptoms}
           onChange={handleChange}
-          placeholder="What are your symptoms?"
-          variant="outlined"
-          margin="normal"
+          placeholder='What are your symptoms?'
+          variant='outlined'
+          margin='normal'
         />
-        <FormControl className="form-field" variant="outlined" margin="normal">
+        <FormControl className='form-field' variant='outlined' margin='normal'>
           <InputLabel>Bristol Stool Scale</InputLabel>
           <Select
-            name="selectedStoolType"
+            name='selectedStoolType'
             value={formData.selectedStoolType}
             onChange={handleChange}
-            label="Bristol Stool Scale"
+            label='Bristol Stool Scale'
           >
             {stoolTypeOptions.map((item, index) => (
               <MenuItem key={index} value={item}>
@@ -148,18 +148,18 @@ function EntriesForm() {
                 <Checkbox
                   checked={formData.bloodInStool}
                   onChange={handleChange}
-                  name="bloodInStool"
+                  name='bloodInStool'
                 />
               }
-              label="Blood in Stool"
+              label='Blood in Stool'
             />
           </FormGroup>
         )}
         <Button
-          className="add-btn"
-          type="submit"
-          variant="contained"
-          color="primary"
+          className='add-btn'
+          type='submit'
+          variant='contained'
+          color='primary'
           sx={{
             width: { xs: '100%', sm: 'auto', md: 'auto' },
             py: '10px',
