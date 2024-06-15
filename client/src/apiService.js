@@ -1,7 +1,7 @@
 const BASE_URL = 'http://localhost:3000/'; 
 
 function isItem(entry) {
-  return entry?.name && entry?.select && entry?.health_impact;
+  return entry?.name && entry?.select;
 }
 
 const getEntries = async (userId) => {

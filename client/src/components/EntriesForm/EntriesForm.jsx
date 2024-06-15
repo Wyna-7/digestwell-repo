@@ -58,7 +58,7 @@ function EntriesForm() {
       other_symptoms: formData.otherSymptoms || null,
       stool_type: formData.selectedStoolType || null,
       is_bleeding: formData.bloodInStool || false,
-      user_id: userId,
+      userId: userId,
     };
 
     postEntry(newItem).then((newEntry) => {
