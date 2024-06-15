@@ -15,7 +15,7 @@ async function getModel(Model, req, res) {
   } catch (e) {
     console.error(e);
     res.status(500).send(e.message);
-  } 
+  }
 }
 
 async function getModelByUser(Model, req, res) {
@@ -25,7 +25,7 @@ async function getModelByUser(Model, req, res) {
   } catch (e) {
     console.error(e);
     res.status(500).send(e.message);
-  } 
+  }
 }
 
 async function deleteModel(Model, req, res) {
@@ -40,7 +40,9 @@ async function deleteModel(Model, req, res) {
 
 async function updateModel(Model, req, res) {
   try {
-    const model = await Model.update(req.body, { where: { id: req.params.id } });
+    const model = await Model.update(req.body, {
+      where: { id: req.params.id },
+    });
     res.status(204).send('Updated successfully');
   } catch (e) {
     console.error(e);
@@ -53,5 +55,5 @@ module.exports = {
   getModel,
   getModelByUser,
   deleteModel,
-  updateModel
+  updateModel,
 };

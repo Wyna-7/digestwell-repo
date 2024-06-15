@@ -1,35 +1,38 @@
-const BASE_URL = 'http://localhost:3000/'; 
+const BASE_URL = 'http://localhost:3000/';
 
 function isItem(entry) {
   return entry?.name && entry?.select;
 }
 
 const getEntries = async (userId) => {
-  const symptoms = await fetch(BASE_URL + `symptoms/${userId}`).then((resp) => resp.json());
-  const items = await fetch(BASE_URL + `items/${userId}`).then((resp) => resp.json());
+  const symptoms = await fetch(BASE_URL + `symptoms/${userId}`).then((resp) =>
+    resp.json()
+  );
+  const items = await fetch(BASE_URL + `items/${userId}`).then((resp) =>
+    resp.json()
+  );
   const entries = [...symptoms, ...items];
   // add missing properties to each entry
   return entries.map((entry) => {
     return {
       // shared properties
-      id: entry?.id  || '',
-      createdAt: entry?.createdAt  || '',
+      id: entry?.id || '',
+      createdAt: entry?.createdAt || '',
       // item properties
-      name: entry?.name  || '',
-      select: entry?.select  || '',
-      health_impact: entry?.health_impact  || '',
+      name: entry?.name || '',
+      select: entry?.select || '',
+      health_impact: entry?.health_impact || '',
       // symptom properties
-      stool_type: entry?.stool_type  || '',
-      is_bleeding: entry?.is_bleeding  || '',
-      other_symptoms: entry?.other_symptoms  || '',
-      userId: entry?.userId  || '',
-      itemId: entry?.itemId  || '',
+      stool_type: entry?.stool_type || '',
+      is_bleeding: entry?.is_bleeding || '',
+      other_symptoms: entry?.other_symptoms || '',
+      userId: entry?.userId || '',
+      itemId: entry?.itemId || '',
     };
   });
 };
 
-async function fetchRequest (method, id, data) {
-  console.log('fetchRequest', method, id, data);
+async function fetchRequest(method, id, data) {
   let endpoint = '';
   if (isItem(data)) {
     endpoint = 'items';
@@ -57,8 +60,8 @@ const postEntry = async (item) => {
   return await fetchRequest('POST', null, item);
 };
 
-const deleteEntry = async (id) => {
-  return await fetchRequest('DELETE', id, undefined);
+const deleteEntry = async (id, data) => {
+  return await fetchRequest('DELETE', id, data);
 };
 
-export { getEntries, editEntry, postEntry, deleteEntry };
+export { getEntries, editEntry, postEntry, deleteEntry, isItem };
