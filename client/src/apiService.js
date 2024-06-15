@@ -1,6 +1,7 @@
 const BASE_URL = 'http://localhost:3000/';
 
 function isItem(entry) {
+  console.log('entry check in api service', entry);
   return entry?.name && entry?.select;
 }
 
@@ -61,8 +62,9 @@ const postEntry = async (item) => {
   return await fetchRequest('POST', null, item);
 };
 
-const deleteEntry = async (id) => {
-  return await fetchRequest('DELETE', id, undefined);
+const deleteEntry = async (id, data) => {
+  console.log('id delete', id);
+  return await fetchRequest('DELETE', id, data);
 };
 
 export { getEntries, editEntry, postEntry, deleteEntry, isItem };

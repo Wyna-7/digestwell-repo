@@ -5,6 +5,7 @@ export default function SymptomsEntry({
   is_bleeding,
   other_symptoms,
 }) {
+  //TODO Make this entry type editable, like the ConsumedItemEntry
   return (
     <>
       <Box display={'flex'}>

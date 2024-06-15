@@ -23,12 +23,11 @@ export default function Entry({
 }) {
   const { setEntriesList } = useContext(EntriesContext);
 
-  //TODO this should go to edit as well
-  const [updatedName, setUpdatedName] = useState(name);
-  const [updatedSelect, setUpdatedSelect] = useState(select);
-  const [updatedHealthImpact, setUpdatedHealthImpact] = useState(
-    health_impact || 'Neutral'
-  );
+  const [itemEntry, setItemEntry] = useState({
+    name: name,
+    select: select,
+    health_impact: health_impact || 'Neutral',
+  });
 
   //TODO change editSymptomsEntry and editConsumedItem
   // const [updatedSymptoms, setUpdatedSymptoms] = useState(symptoms);
@@ -49,20 +48,21 @@ export default function Entry({
   };
 
   const handleSave = async () => {
-    const editedEntry = {
-      name: updatedName,
-      select: updatedSelect,
-      health_impact: updatedHealthImpact,
-      // other_symptoms: updatedSymptoms,
-      // stool_type: updatedStoolType,
-    };
+    // const editedEntry = {
+    //   name: updatedName,
+    //   select: updatedSelect,
+    //   health_impact: updatedHealthImpact,
+    //   // other_symptoms: updatedSymptoms,
+    //   // stool_type: updatedStoolType,
+    // };
 
-    await editEntry(id, editedEntry);
+    console.log('itemEntry', itemEntry);
+    await editEntry(id, itemEntry);
 
     setEntriesList((prevList) => {
       const updatedEntries = prevList.map((entry) => {
         if (entry.id === id) {
-          return { ...entry, ...editedEntry, isEditing: false };
+          return { ...entry, ...itemEntry, isEditing: false };
         } else {
           return entry;
         }
@@ -104,6 +104,8 @@ export default function Entry({
                 isEditing={isEditing}
                 select={select}
                 health_impact={health_impact}
+                itemEntry={itemEntry}
+                setItemEntry={setItemEntry}
               />
             )}
             <SymptomsEntry

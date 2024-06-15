@@ -4,21 +4,14 @@ import { blue } from '@mui/material/colors';
 import './style.css';
 
 export default function ConsumedItemEntry({
-  name,
+  itemEntry,
+  setItemEntry,
   isEditing,
-  select,
-  health_impact,
 }) {
-  const [state, setState] = useState({
-    itemName: name,
-    itemType: select,
-    healthImpact: health_impact || 'Neutral',
-  });
-
   const handleStateChange = (event) => {
     const { name, value } = event.target;
 
-    setState((prev) => ({ ...prev, [name]: value }));
+    setItemEntry((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
@@ -27,8 +20,8 @@ export default function ConsumedItemEntry({
         <>
           <TextField
             type='text'
-            name='itemName'
-            value={state.itemName}
+            name='name'
+            value={itemEntry.name}
             onChange={handleStateChange}
             variant='outlined'
             margin='normal'
@@ -36,8 +29,8 @@ export default function ConsumedItemEntry({
             required
           />
           <Select
-            name='itemType'
-            value={state.itemType}
+            name='select'
+            value={itemEntry.select}
             onChange={handleStateChange}
             sx={{ minWidth: 150, mt: 1 }}
           >
@@ -47,8 +40,8 @@ export default function ConsumedItemEntry({
             <MenuItem value='Supplement'>Supplement</MenuItem>
           </Select>
           <Select
-            name='healthImpact'
-            value={state.healthImpact}
+            name='health_impact'
+            value={itemEntry.health_impact}
             onChange={handleStateChange}
             sx={{ minWidth: 150, mt: 1 }}
           >
@@ -60,19 +53,19 @@ export default function ConsumedItemEntry({
       ) : (
         <>
           <Typography variant='body1' noWrap>
-            {state.itemName}
+            {itemEntry.name}
           </Typography>
-          {state.itemType && (
+          {itemEntry.select && (
             <Typography variant='body1' className='neutral' noWrap>
-              {state.itemType}
+              {itemEntry.select}
             </Typography>
           )}
           <Typography
-            className={`${state.healthImpact.toLowerCase()} font-weight-bold`}
+            className={`${itemEntry.health_impact.toLowerCase()} font-weight-bold`}
             variant='body1'
             noWrap
           >
-            {state.healthImpact}
+            {itemEntry.health_impact}
           </Typography>
         </>
       )}
