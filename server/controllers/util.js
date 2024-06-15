@@ -30,7 +30,6 @@ async function getModelByUser(Model, req, res) {
 
 async function deleteModel(Model, req, res) {
   try {
-    console.log('rq.body delete', req.body);
     const model = await Model.destroy({ where: { id: req.params.id } });
     res.status(204).send('Deleted successfully');
   } catch (e) {

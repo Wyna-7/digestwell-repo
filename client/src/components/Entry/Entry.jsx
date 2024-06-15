@@ -48,15 +48,6 @@ export default function Entry({
   };
 
   const handleSave = async () => {
-    // const editedEntry = {
-    //   name: updatedName,
-    //   select: updatedSelect,
-    //   health_impact: updatedHealthImpact,
-    //   // other_symptoms: updatedSymptoms,
-    //   // stool_type: updatedStoolType,
-    // };
-
-    console.log('itemEntry', itemEntry);
     await editEntry(id, itemEntry);
 
     setEntriesList((prevList) => {
