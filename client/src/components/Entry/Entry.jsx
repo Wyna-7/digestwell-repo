@@ -35,7 +35,7 @@ export default function Entry({
   // const [updatedStoolType, setUpdatedStoolType] = useState(stool_type);
 
   const handleDelete = () => {
-    deleteEntry(id).then(() => {
+    deleteEntry(id, { name, select }).then(() => {
       setEntriesList((prevList) => prevList.filter((entry) => entry.id !== id));
     });
   };
