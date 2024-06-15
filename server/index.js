@@ -7,7 +7,7 @@ const app = express();
 const router = require('./router');
 
 const PORT = process.env.PORT || 3000;
-const URL = process.env.URL || 'localhost';
+const URL = process.env.URL || 'http://localhost:5173';
 
 const corsOptions = {
   origin: URL,

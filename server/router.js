@@ -1,8 +1,8 @@
 const router = require('express').Router();
 
 const { postUser, getUser, deleteUser, updateUser,
-        postSymptom, getSymptom, deleteSymptom, updateSymptom,
-        postItem, getItem, deleteItem, updateItem
+        postSymptom, getUserSymptom, deleteSymptom, updateSymptom,
+        postItem, getUserItem, deleteItem, updateItem
 } = require('./controllers');
 
 // users
@@ -13,14 +13,14 @@ router.patch('/users/:id', updateUser);
 
 // symptoms
 router.post('/symptoms', postSymptom);
-router.get('/symptoms/:id', getSymptom);
+router.get('/symptoms/:userId', getUserSymptom);
 router.delete('/symptoms/:id', deleteSymptom);
 router.patch('/symptoms/:id', updateSymptom);
 
 
 // items
 router.post('/items', postItem);
-router.get('/items/:id', getItem);
+router.get('/items/:userId', getUserItem);
 router.delete('/items/:id', deleteItem);
 router.patch('/items/:id', updateItem);
 
