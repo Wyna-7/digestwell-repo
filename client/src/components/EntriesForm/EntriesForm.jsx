@@ -32,7 +32,7 @@ function EntriesForm() {
     let { name, value } = event.target;
 
     if (name === 'bloodInStool') {
-      value = value === 'true';
+      value = event.target.checked;
     }
 
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
