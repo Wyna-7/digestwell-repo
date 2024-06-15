@@ -3,6 +3,7 @@ import Entry from '../Entry/Entry';
 import { Container, Box } from '@mui/material';
 import './style.css';
 import EntriesContext from '../../context/EntriesContext';
+import { isItem } from '../../apiService';
 
 const EntriesList = () => {
   const { entriesList } = useContext(EntriesContext);
@@ -12,7 +13,11 @@ const EntriesList = () => {
       <Box className='entriesList-box'>
         <Box className='entriesList-ul' component='ul'>
           {entriesList.map((entry) => (
-            <Entry component='li' key={entry.id} {...entry} />
+            <Entry
+              component='li'
+              key={isItem(entry) ? 'i' + entry.id : 's' + entry.id}
+              {...entry}
+            />
           ))}
         </Box>
       </Box>
