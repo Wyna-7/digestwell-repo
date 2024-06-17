@@ -1,7 +1,6 @@
-import { FC } from 'react';
+import { ChangeEvent, FC } from 'react';
 import './style.css';
-import * as React from 'react';
-import { Box, TextField, Select, MenuItem, Typography } from '../../../node_modules/@mui/material/index';
+import { Box, TextField, Select, MenuItem, Typography, SelectChangeEvent } from '../../../node_modules/@mui/material/index';
 
 interface ConsumedItemEntryProps {
   itemEntry: {
@@ -15,7 +14,7 @@ interface ConsumedItemEntryProps {
 export default function ConsumedItemEntry(props: ConsumedItemEntryProps) {
   let { itemEntry, setItemEntry, isEditing } = props;
 
-  const handleStateChange = (event: any) => {
+  const handleStateChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<string>) => {
     const { name, value } = event.target;
 
     setItemEntry((prev: Object) => ({ ...prev, [name]: value }));
