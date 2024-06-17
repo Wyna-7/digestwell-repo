@@ -5,12 +5,8 @@ function isItem(entry) {
 }
 
 const getEntries = async (userId) => {
-  const symptoms = await fetch(BASE_URL + `symptoms/${userId}`).then((resp) =>
-    resp.json()
-  );
-  const items = await fetch(BASE_URL + `items/${userId}`).then((resp) =>
-    resp.json()
-  );
+  const symptoms = await fetch(BASE_URL + `symptoms/${userId}`).then((resp) => resp.json());
+  const items = await fetch(BASE_URL + `items/${userId}`).then((resp) => resp.json());
   const entries = [...symptoms, ...items];
   // add missing properties to each entry
   return entries.map((entry) => {
