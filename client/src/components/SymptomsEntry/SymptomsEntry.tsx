@@ -1,10 +1,7 @@
 import { Box, Typography } from '@mui/material';
+import { SymptomsEntryProps } from '../../types';
 
-export default function SymptomsEntry({
-  stool_type,
-  is_bleeding,
-  other_symptoms,
-}) {
+export default function SymptomsEntry({ stool_type, is_bleeding, other_symptoms }: SymptomsEntryProps) {
   //TODO Make this entry type editable, like the ConsumedItemEntry
   return (
     <>
