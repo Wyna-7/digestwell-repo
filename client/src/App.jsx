@@ -12,10 +12,8 @@ import SignIn from './components/pages/LoginPage/LoginPage';
 
 
 function App() {
+  const [userId , setUserId] = useState(null);
   const [entriesList, setEntriesList] = useState([]);
-
-  //TODO userId is hardcoded
-  const userId = 8;
 
   useEffect(() => {
     // check if the 
@@ -29,7 +27,7 @@ function App() {
 
   return (
     //TODO userID is hardcoded
-    <EntriesContext.Provider value={{ entriesList, setEntriesList, userId }}>
+    <EntriesContext.Provider value={{ entriesList, setEntriesList, userId, setUserId }}>
       <Router>
         <Header />
         <Routes>

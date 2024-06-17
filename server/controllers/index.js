@@ -17,7 +17,7 @@ for (const model of models) {
     if (model.name === 'user' && key === 'getUser') continue;
     controllerFunctions[`${key}${model.name.charAt(0).toUpperCase() + model.name.slice(1)}`] = async function(req, res) {
       await value(model, req, res);
-    }
+    };
   }
 }
 
