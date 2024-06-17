@@ -18,9 +18,10 @@ async function login (req, res) {
     const token = createSession(user.id);
     res.cookie('sessionId', token, {
       httpOnly: true,
-      secure: false, // set to true if your website is served over HTTPS
-      sameSite: 'None',
-      maxAge: 1000 * 60 * 60, // 1 hour
+      path: '/',
+      domain: 'localhost',
+      sameSite: 'lax',
+      maxAge: 1000 * 60 * 60 * 24, // 1 day
     });
     res.status(200).send(JSON.stringify('Logged in successfully'));
   }
