@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "target": "ES6",
+    "outDir": "./dist", // Specify the output folder for compiled JavaScript
+    "allowJs": true
+  },
+  "include": ["./src/**/*.tsx*", "./src/**/*.jsx*"], // Specify the path to your TypeScript files
+  "strict": true
+}
