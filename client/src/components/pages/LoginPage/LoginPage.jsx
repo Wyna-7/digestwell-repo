@@ -28,9 +28,9 @@ export default function SignIn() {
     const resData = await res.json();
     if (res.status === 200) {
       setUserId(resData.userId);
-      // return navigate('/dashboard');
+      return navigate('/dashboard');
     } else {
-      alert(resData);
+      alert(resData.error);
     }
   }
 
