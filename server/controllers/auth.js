@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const { User } = require('../models');
 const { createSession, verifySession } = require('../session_utils');
 
-async function login(req, res) {
+async function login (req, res) {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ where: { email } });
@@ -27,7 +27,7 @@ async function login(req, res) {
   }
 };
 
-async function auth(req, res) {
+async function auth (req, res) {
   try {
     const token = req.cookies.sessionId;
     if (!token) return res.status(401).send('Unauthorized');
@@ -48,7 +48,7 @@ async function auth(req, res) {
   }
 }
 
-async function register(req, res) {
+async function register (req, res) {
   try {
     const { email, password, firstName, lastName } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
