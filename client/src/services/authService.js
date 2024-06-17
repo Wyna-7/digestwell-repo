@@ -19,4 +19,12 @@ async function login (email, password) {
   return response;
 }
 
-export { register, login };
+async function auth () {
+  const response = await fetch(BASE_URL + 'auth', {
+    method: 'GET',
+    credentials: 'include', 
+  });
+  return response;
+}
+
+export { register, login, auth };

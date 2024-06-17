@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import { getEntries } from './services/apiService';
+import { auth } from './services/authService';
 import EntriesForm from './components/EntriesForm/EntriesForm';
 import EntriesList from './components/EntriesList/EntriesList';
 import EntriesContext from './context/EntriesContext';
@@ -16,17 +17,21 @@ function App() {
   const [entriesList, setEntriesList] = useState([]);
 
   useEffect(() => {
-    // check if the 
-    
-    // if it does, get the entries for the user
-    getEntries(userId).then((data) =>
-      // isEditing: false --> all entries start in view mode (not editable)
-      setEntriesList(data.map((entry) => ({ ...entry, isEditing: false })))
-    );
+    async function startup () {
+      const res = await auth();
+      if (res.status === 200) {
+        const resData = await res.json();
+        setUserId(resData.userId);
+        getEntries(resData.userId).then((data) =>
+          // isEditing: false --> all entries start in view mode (not editable)
+          setEntriesList(data.map((entry) => ({ ...entry, isEditing: false })))
+        );
+      }
+    }
+    startup();
   }, []);
-
+    
   return (
-    //TODO userID is hardcoded
     <EntriesContext.Provider value={{ entriesList, setEntriesList, userId, setUserId }}>
       <Router>
         <Header />
