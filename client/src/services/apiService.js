@@ -5,12 +5,8 @@ function isItem(entry) {
 }
 
 const getEntries = async (userId) => {
-  const symptoms = await fetch(BASE_URL + `symptoms/${userId}`).then((resp) =>
-    resp.json()
-  );
-  const items = await fetch(BASE_URL + `items/${userId}`).then((resp) =>
-    resp.json()
-  );
+  const symptoms = await fetch(BASE_URL + `symptoms/${userId}`, {credentials: 'include'}).then((resp) => resp.json());
+  const items = await fetch(BASE_URL + `items/${userId}`, {credentials: 'include'}).then((resp) => resp.json());
   const entries = [...symptoms, ...items];
   // add missing properties to each entry
   return entries.map((entry) => {
@@ -32,7 +28,7 @@ const getEntries = async (userId) => {
   });
 };
 
-async function fetchRequest(method, id, data) {
+async function fetchRequest (method, id, data) {
   let endpoint = '';
   if (isItem(data)) {
     endpoint = 'items';
@@ -46,6 +42,7 @@ async function fetchRequest(method, id, data) {
     method: method,
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
+    credentials: 'include',
   });
   if (['DELETE', 'PATCH'].includes(method)) return;
   const resp = await entry.json();

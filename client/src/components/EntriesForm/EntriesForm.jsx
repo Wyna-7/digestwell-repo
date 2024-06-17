@@ -13,7 +13,7 @@ import {
   Checkbox,
 } from '@mui/material';
 
-import { postEntry } from '../../apiService';
+import { postEntry } from '../../services/apiService';
 import './style.css';
 import EntriesContext from '../../context/EntriesContext';
 

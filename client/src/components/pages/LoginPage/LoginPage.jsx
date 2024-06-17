@@ -13,19 +13,26 @@ import Container from '@mui/material/Container';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../../../theme';
 import { useNavigate } from 'react-router-dom';
+import { login } from '../../../services/authService';
+import EntriesContext from '../../../context/EntriesContext';
 
 export default function SignIn() {
+  const { setUserId } = React.useContext(EntriesContext);
+
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  async function handleSubmit (event) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-    navigate('/dashboard');
-  };
+    const res = await login(data.get('email'), data.get('password'));
+    const resData = await res.json();
+    if (res.status === 200) {
+      setUserId(resData.userId);
+      return navigate('/dashboard');
+    } else {
+      alert(resData.error);
+    }
+  }
 
   function Copyright(props) {
     return (
