@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import { getEntries } from './apiService';
+import { getEntries } from './services/apiService';
 import EntriesForm from './components/EntriesForm/EntriesForm';
 import EntriesList from './components/EntriesList/EntriesList';
 import EntriesContext from './context/EntriesContext';
@@ -18,6 +18,9 @@ function App() {
   const userId = 8;
 
   useEffect(() => {
+    // check if the 
+    
+    // if it does, get the entries for the user
     getEntries(userId).then((data) =>
       // isEditing: false --> all entries start in view mode (not editable)
       setEntriesList(data.map((entry) => ({ ...entry, isEditing: false })))

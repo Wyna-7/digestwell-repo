@@ -61,4 +61,4 @@ const deleteEntry = async (id) => {
   return await fetchRequest('DELETE', id, undefined);
 };
 
-export { getEntries, editEntry, postEntry, deleteEntry };
+export { getEntries, editEntry, postEntry, deleteEntry, isItem };

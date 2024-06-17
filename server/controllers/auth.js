@@ -6,45 +6,48 @@ async function login (req, res) {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ where: { email } });
+
+    if (!user) return res.status(401).send(JSON.stringify('User not found'));
     
-    if (!user || !password) return res.status(400).send('Missing credentials');
+    if (!email || !password) return res.status(400).send(JSON.stringify('Missing credentials'));
     
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
-    if (!isPasswordValid) return res.status(401).send('Invalid password');
+    if (!isPasswordValid) return res.status(401).send(JSON.stringify('Invalid password'));
     
     const token = createSession(user.id);
     res.cookie('sessionId', token, {
       httpOnly: true,
       secure: false, // set to true if your website is served over HTTPS
-      sameSite: 'Strict',
+      sameSite: 'None',
+      maxAge: 1000 * 60 * 60, // 1 hour
     });
-    res.status(200).send(user);
+    res.status(200).send(JSON.stringify('Logged in successfully'));
   }
   catch (error) {
     console.error(error);
-    res.status(500).send('An error occurred while logging in');
+    res.status(500).send(JSON.stringify('An error occurred while logging in'));
   }
 };
 
 async function auth (req, res) {
   try {
     const token = req.cookies.sessionId;
-    if (!token) return res.status(401).send('Unauthorized');
+    if (!token) return res.status(401).send(JSON.stringify('Unauthorized'));
     
     const sessionData = verifySession(token);
 
-    if (!sessionData) return res.status(401).send('Unauthorized');
+    if (!sessionData) return res.status(401).send(JSON.stringify('Unauthorized'));
 
     const user = await User.findByPk(sessionData.userId);
     
-    if (!user) return res.status(401).send('Unauthorized');
+    if (!user) return res.status(401).send(JSON.stringify('Unauthorized'));
     
-    res.status(200).send('Authorized');
+    res.status(200).send(JSON.stringify('Authorized'));
   }
   catch (error) {
     console.error(error);
-    res.status(500).send('An error occurred while authenticating');
+    res.status(500).send(JSON.stringify('An error occurred while authenticating'));
   }
 }
 

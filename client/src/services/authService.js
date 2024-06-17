@@ -14,7 +14,9 @@ async function login (email, password) {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password }),
+    credentials: 'include', 
   });
   return response;
 }
 
+export { register, login };

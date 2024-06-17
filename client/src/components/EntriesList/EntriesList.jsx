@@ -3,7 +3,7 @@ import Entry from '../Entry/Entry';
 import { Container, Box } from '@mui/material';
 import './style.css';
 import EntriesContext from '../../context/EntriesContext';
-import { isItem } from '../../apiService';
+import { isItem } from '../../services/apiService';
 
 const EntriesList = () => {
   const { entriesList } = useContext(EntriesContext);
