@@ -31,6 +31,17 @@ async function login (req, res) {
   }
 };
 
+async function logout (req, res) {
+  try {
+    res.clearCookie('sessionId', { path: '/' });
+    res.status(200).json({ message: 'Logged out' });
+  }
+  catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred while logging out' });
+  }
+}
+
 async function auth (req, res) {
   try {
     const token = req.cookies.sessionId;
@@ -65,4 +76,4 @@ async function register (req, res) {
   }
 }
 
-module.exports = { login, auth, register };
+module.exports = { login, logout, auth, register };
