@@ -9,15 +9,12 @@ import Header from './components/Header/Header';
 import MyLists from './components/pages/MyLists/MyLists';
 import SignIn from './components/pages/LoginPage/LoginPage';
 import { Container, Box } from '../node_modules/@mui/material/index';
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-} from '../node_modules/react-router-dom/dist/index';
+import { BrowserRouter as Router, Route, Routes } from '../node_modules/react-router-dom/dist/index';
+import { EntryFromDataBase, EntryWithEdit } from './types';
 
 function App() {
   const [userId, setUserId] = useState(null);
-  const [entriesList, setEntriesList] = useState<object[]>([]);
+  const [entriesList, setEntriesList] = useState<EntryWithEdit[]>([]);
 
   useEffect(() => {
     async function startup() {
@@ -25,24 +22,9 @@ function App() {
       if (res.status === 200) {
         const resData = await res.json();
         setUserId(resData.userId);
-        getEntries(resData.userId).then((data) =>
+        getEntries(resData.userId).then((data: EntryFromDataBase[]) =>
           // isEditing: false --> all entries start in view mode (not editable)
-          setEntriesList(
-            data.map(
-              (entry: {
-                id: number;
-                createdAt: string;
-                name: string;
-                select: string;
-                health_impact: string;
-                stool_type: string;
-                is_bleeding: boolean;
-                other_symptoms: string;
-                userId: number;
-                itemId: number;
-              }) => ({ ...entry, isEditing: false })
-            )
-          )
+          setEntriesList(data.map((entry) => ({ ...entry, isEditing: false }))),
         );
       }
     }
@@ -50,24 +32,22 @@ function App() {
   }, []);
 
   return (
-    <EntriesContext.Provider
-      value={{ entriesList, setEntriesList, userId, setUserId }}
-    >
+    <EntriesContext.Provider value={{ entriesList, setEntriesList, userId, setUserId }}>
       <Router>
         <Header />
         <Routes>
-          <Route path='/' element={<SignIn />} />
-          <Route path='/my-lists' element={<MyLists />} />
+          <Route path="/" element={<SignIn />} />
+          <Route path="/my-lists" element={<MyLists />} />
           <Route
-            path='/dashboard'
+            path="/dashboard"
             element={
               <Container>
                 <Box
-                  display='flex'
-                  flexDirection='column'
-                  alignItems='center'
-                  justifyContent='center'
-                  minHeight='100vh'
+                  display="flex"
+                  flexDirection="column"
+                  alignItems="center"
+                  justifyContent="center"
+                  minHeight="100vh"
                   padding={2}
                 >
                   <EntriesForm />

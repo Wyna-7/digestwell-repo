@@ -26,7 +26,6 @@ export interface ConsumedItemEntryProps {
     select: string;
     health_impact: string;
   };
-  setItemEntry: FC;
   isEditing: boolean;
 }
 
@@ -38,7 +37,7 @@ export interface EntryToDataBase {
   other_symptoms: string;
   stool_type: string;
   is_bleeding: boolean;
-  userId: number;
+  userId: number | null;
 }
 
 export interface EntryFromDataBase {
@@ -52,4 +51,14 @@ export interface EntryFromDataBase {
   other_symptoms: string;
   userId: number;
   itemId: number;
+}
+
+export type EntryWithEdit = EntryFromDataBase & {
+  isEditing: boolean;
+};
+
+export interface ItemEntryEdit {
+  name: string;
+  select: string;
+  health_impact: string;
 }

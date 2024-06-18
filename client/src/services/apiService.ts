@@ -7,7 +7,7 @@ function isItem(entry: EntryToDataBase | EntryFromDataBase) {
   return entry?.name && entry?.select;
 }
 
-const getEntries = async (userId: number) => {
+const getEntries = async (userId: number): Promise<EntryFromDataBase[]> => {
   const symptoms = await fetch(BASE_URL + `symptoms/${userId}`, { credentials: 'include' }).then((resp) => resp.json());
   const items = await fetch(BASE_URL + `items/${userId}`, { credentials: 'include' }).then((resp) => resp.json());
   const entries = [...symptoms, ...items];
