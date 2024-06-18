@@ -1,14 +1,14 @@
 import { useContext, useState } from 'react';
 import { Button, Box, Paper, TextField, FormControl, InputLabel, Select, MenuItem, FormGroup, FormControlLabel, Checkbox, SelectChangeEvent } from '../../../node_modules/@mui/material/index';
 
-import { postEntry } from '../../apiService';
+import { postEntry } from '../../services/apiService';
 import './style.css';
 import EntriesContext from '../../context/EntriesContext';
 import * as React from 'react';
 
 function EntriesForm() {
   const { setEntriesList, userId } = useContext(EntriesContext);
-
+  //TODO create data type in separate interface in types file, then import and use it here
   const [formData, setFormData] = useState<{ item: string; selectedOption: string; otherSymptoms: string; selectedStoolType: string; bloodInStool: boolean }>({
     item: '',
     selectedOption: '',
@@ -35,6 +35,7 @@ function EntriesForm() {
       return;
     }
 
+    //TODO create newitem type in separate interface in types file, then import and use it here
     const newItem: { name: string; select: string; other_symptoms: string; stool_type: string; is_bleeding: boolean; userId: number } = {
       name: formData.item,
       select: formData.selectedOption,
@@ -44,6 +45,7 @@ function EntriesForm() {
       userId: userId,
     };
 
+    //TODO create newentry type in separate interface in types file, then import and use it here
     postEntry(newItem).then((newEntry: { name: string; select: string; other_symptoms: string; stool_type: string; is_bleeding: boolean; userId: number }) => {
       setEntriesList((prevList: [{}]) => [...prevList, { ...newEntry, isEditing: false }]);
       setFormData({

@@ -2,7 +2,24 @@
 
 DigestWell
 
-## Run the app
+## Setup
+
+1. Create a `server/.env` file and add the following:
+
+```
+DB_URL = 'localhost'
+DB_USER = 'your db username'
+DB_PASSWORD = null or 'your db password'
+PORT = 3000
+JWT_SECRET = 'your secret'
+URL = 'client domain' or 'http://localhost:5173'
+```
+
+2. Create a database named `digestwell` in your PostgreSQL instance.
+3. You'll need to create a user manually in the database. Do a `POST` request to `http://localhost:3000/register` with the 
+following body: `{"email": "test@email.com", "password": "123", "firstName": "John", "lastName": "Doe"}`
+
+## Run the client
 
 `npm run dev`
 

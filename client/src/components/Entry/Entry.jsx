@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { deleteEntry, editEntry } from '../../apiService';
+import { deleteEntry, editEntry } from '../../services/apiService';
 import { Box, Paper, Typography } from '@mui/material';
 import EditCalendarIcon from '@mui/icons-material/EditCalendar';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';

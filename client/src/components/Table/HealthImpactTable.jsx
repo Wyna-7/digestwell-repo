@@ -9,18 +9,13 @@ import Paper from '@mui/material/Paper';
 import { Typography } from '@mui/material';
 import { Box, Container } from '@mui/system';
 
+//TODO implement TS here
 const HealthImpactTable = ({ entriesList }) => {
-  const beneficialItems = entriesList.filter((item) =>
-    item.health_impact === 'Beneficial' ? true : false
-  );
+  const beneficialItems = entriesList.filter((item) => (item.health_impact === 'Beneficial' ? true : false));
 
-  const neutralItems = entriesList.filter((item) =>
-    item.health_impact === 'Neutral' ? true : false
-  );
+  const neutralItems = entriesList.filter((item) => (item.health_impact === 'Neutral' ? true : false));
 
-  const avoidItems = entriesList.filter((item) =>
-    item.health_impact === 'Avoid' ? true : false
-  );
+  const avoidItems = entriesList.filter((item) => (item.health_impact === 'Avoid' ? true : false));
 
   console.log(beneficialItems);
 
@@ -39,13 +34,7 @@ const HealthImpactTable = ({ entriesList }) => {
         p: 10,
       }}
     >
-      <Box
-        display='flex'
-        justifyContent='space-around'
-        width='100%'
-        flexDirection={{ xs: 'column', sm: 'row' }}
-        gap={{ xs: 2, sm: 4 }}
-      >
+      <Box display='flex' justifyContent='space-around' width='100%' flexDirection={{ xs: 'column', sm: 'row' }} gap={{ xs: 2, sm: 4 }}>
         <Box sx={{ flex: '1 1 30%', minWidth: '300px', mx: 2, mb: 4 }}>
           <Typography
             sx={{

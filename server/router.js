@@ -1,28 +1,28 @@
 const router = require('express').Router();
 
-const { postUser, getUser, deleteUser, updateUser,
-        postSymptom, getUserSymptom, deleteSymptom, updateSymptom,
-        postItem, getUserItem, deleteItem, updateItem
+const { postSymptom, getUserSymptom, deleteSymptom, updateSymptom,
+  postItem, getUserItem, deleteItem, updateItem
 } = require('./controllers');
 
-// users
-router.post('/users', postUser);
-router.get('/users/:id', getUser);
-router.delete('/users/:id', deleteUser);
-router.patch('/users/:id', updateUser);
+const { register, login, auth } = require('./controllers/auth');
+const authenticate = require('./middleware/auth');
+
+// auth
+router.post('/register', register);
+router.post('/login', login);
+router.get('/auth', auth);
 
 // symptoms
-router.post('/symptoms', postSymptom);
-router.get('/symptoms/:userId', getUserSymptom);
-router.delete('/symptoms/:id', deleteSymptom);
-router.patch('/symptoms/:id', updateSymptom);
-
+router.post('/symptoms', authenticate, postSymptom);
+router.get('/symptoms/:userId', authenticate, getUserSymptom);
+router.delete('/symptoms/:id', authenticate, deleteSymptom);
+router.patch('/symptoms/:id', authenticate, updateSymptom);
 
 // items
-router.post('/items', postItem);
-router.get('/items/:userId', getUserItem);
-router.delete('/items/:id', deleteItem);
-router.patch('/items/:id', updateItem);
+router.post('/items', authenticate, postItem);
+router.get('/items/:userId', authenticate, getUserItem);
+router.delete('/items/:id', authenticate, deleteItem);
+router.patch('/items/:id', authenticate, updateItem);
 
 
 module.exports = router;
