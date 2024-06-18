@@ -12,7 +12,17 @@ import { EntryProps } from '../../types';
 //TODO change the import of mui when importing several things
 
 export default function Entry(props: EntryProps) {
-  const { name, select, createdAt, id, isEditing, health_impact, stool_type, is_bleeding, other_symptoms } = props;
+  const {
+    name,
+    select,
+    createdAt,
+    id,
+    isEditing,
+    health_impact,
+    stool_type,
+    is_bleeding,
+    other_symptoms,
+  } = props;
 
   const { setEntriesList } = useContext(EntriesContext);
 
@@ -28,12 +38,18 @@ export default function Entry(props: EntryProps) {
 
   const handleDelete = () => {
     deleteEntry(id, { name, select }).then(() => {
-      setEntriesList((prevList: EntryProps[]) => prevList.filter((entry) => entry.id !== id));
+      setEntriesList((prevList: EntryProps[]) =>
+        prevList.filter((entry) => entry.id !== id)
+      );
     });
   };
 
   const toggleEdit = () => {
-    setEntriesList((prevList: EntryProps[]) => prevList.map((entry) => (entry.id === id ? { ...entry, isEditing: !entry.isEditing } : entry)));
+    setEntriesList((prevList: EntryProps[]) =>
+      prevList.map((entry) =>
+        entry.id === id ? { ...entry, isEditing: !entry.isEditing } : entry
+      )
+    );
   };
 
   const handleSave = async () => {
@@ -61,12 +77,35 @@ export default function Entry(props: EntryProps) {
   // };
 
   return (
-    <Paper elevation={10} sx={{ maxWidth: 'md', p: 2, borderRadius: '20px', mb: 2 }}>
-      <Box display='flex' flexDirection='column' justifyContent='space-between' alignItems='flex-start'>
-        <Box display='flex' flexDirection='row' justifyContent='space-between' width='100%'>
+    <Paper
+      elevation={10}
+      sx={{ maxWidth: 'md', p: 2, borderRadius: '20px', mb: 2 }}
+    >
+      <Box
+        display='flex'
+        flexDirection='column'
+        justifyContent='space-between'
+        alignItems='flex-start'
+      >
+        <Box
+          display='flex'
+          flexDirection='row'
+          justifyContent='space-between'
+          width='100%'
+        >
           <Box display='flex' flexDirection='column' gap={1} flexGrow={1}>
-            {(name || select) && <ConsumedItemEntry isEditing={isEditing} itemEntry={itemEntry} setItemEntry={setItemEntry} />}
-            <SymptomsEntry stool_type={stool_type} is_bleeding={is_bleeding} other_symptoms={other_symptoms} />
+            {(name || select) && (
+              <ConsumedItemEntry
+                isEditing={isEditing}
+                itemEntry={itemEntry}
+                setItemEntry={setItemEntry}
+              />
+            )}
+            <SymptomsEntry
+              stool_type={stool_type}
+              is_bleeding={is_bleeding}
+              other_symptoms={other_symptoms}
+            />
           </Box>
 
           <Box display='flex' flexDirection='row' gap={1}>
@@ -93,10 +132,18 @@ export default function Entry(props: EntryProps) {
                 }}
               />
             )}
-            <DeleteOutlineIcon onClick={handleDelete} cursor='pointer' color='error' />
+            <DeleteOutlineIcon
+              onClick={handleDelete}
+              cursor='pointer'
+              color='error'
+            />
           </Box>
         </Box>
-        <Typography variant='body2' color='textSecondary' sx={{ alignSelf: 'flex-end', mt: 2 }}>
+        <Typography
+          variant='body2'
+          color='textSecondary'
+          sx={{ alignSelf: 'flex-end', mt: 2 }}
+        >
           {new Date(createdAt).toLocaleString()}
         </Typography>
       </Box>
