@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import { getEntries } from './services/apiService';
-<<<<<<< HEAD:client/src/App.jsx
 import { auth } from './services/authService';
-=======
->>>>>>> ec309ba (app.jsx to app.tsx):client/src/App.tsx
 import EntriesForm from './components/EntriesForm/EntriesForm';
 import EntriesList from './components/EntriesList/EntriesList';
 import EntriesContext from './context/EntriesContext';
@@ -15,11 +12,11 @@ import MyLists from './components/pages/MyLists/MyLists';
 import SignIn from './components/pages/LoginPage/LoginPage';
 
 function App() {
-  const [userId , setUserId] = useState(null);
+  const [userId, setUserId] = useState(null);
   const [entriesList, setEntriesList] = useState([]);
 
   useEffect(() => {
-    async function startup () {
+    async function startup() {
       const res = await auth();
       if (res.status === 200) {
         const resData = await res.json();
@@ -32,9 +29,11 @@ function App() {
     }
     startup();
   }, []);
-    
+
   return (
-    <EntriesContext.Provider value={{ entriesList, setEntriesList, userId, setUserId }}>
+    <EntriesContext.Provider
+      value={{ entriesList, setEntriesList, userId, setUserId }}
+    >
       <Router>
         <Header />
         <Routes>
