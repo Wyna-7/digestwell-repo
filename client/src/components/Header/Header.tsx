@@ -17,7 +17,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
-const logo = require('../../assets/logo-icon.svg') as string;
+//TODO fix img import
+//const logo = require('../../assets/logo-icon.svg') as string;
 
 const pages = [
   { name: 'My lists', path: '/my-lists' },
@@ -26,9 +27,7 @@ const pages = [
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 export default function Header() {
-  const [anchorElNav, setAnchorElNav] = useState<HTMLButtonElement | null>(
-    null
-  );
+  const [anchorElNav, setAnchorElNav] = useState<HTMLButtonElement | null>(null);
   const [anchorElUser, setAnchorElUser] = useState<HTMLElement | null>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -53,8 +52,8 @@ export default function Header() {
   }
 
   return (
-    <AppBar position='sticky' color='primary'>
-      <Container maxWidth='lg'>
+    <AppBar position="sticky" color="primary">
+      <Container maxWidth="lg">
         <Toolbar
           disableGutters
           sx={{
@@ -63,7 +62,7 @@ export default function Header() {
         >
           <Box
             component={Link}
-            to='/'
+            to="/"
             sx={{
               display: { xs: 'none', md: 'flex' },
               marginRight: '1rem',
@@ -71,18 +70,14 @@ export default function Header() {
               height: '80px',
             }}
           >
-            <img
-              src={logo}
-              alt='logo'
-              style={{ width: '100%', height: '100%' }}
-            />
+            <img src={'../../assets/logo-icon.svg'} alt="logo" style={{ width: '100%', height: '100%' }} />
           </Box>
 
           <Typography
-            variant='h6'
+            variant="h6"
             noWrap
             component={Link}
-            to='/'
+            to="/"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -98,17 +93,17 @@ export default function Header() {
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
-              size='large'
-              aria-label='account of current user'
-              aria-controls='menu-appbar'
-              aria-haspopup='true'
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color='inherit'
+              color="inherit"
             >
               <MenuIcon />
             </IconButton>
             <Menu
-              id='menu-appbar'
+              id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
                 vertical: 'bottom',
@@ -130,7 +125,7 @@ export default function Header() {
                   <Typography
                     component={Link}
                     to={page.path}
-                    textAlign='center'
+                    textAlign="center"
                     style={{ textDecoration: 'none', color: 'inherit' }}
                   >
                     {page.name}
@@ -142,7 +137,7 @@ export default function Header() {
 
           <Box
             component={Link}
-            to='/'
+            to="/"
             sx={{
               display: { xs: 'none', sm: 'flex', md: 'none' },
               marginRight: '1rem',
@@ -150,18 +145,14 @@ export default function Header() {
               height: '70px',
             }}
           >
-            <img
-              src={logo}
-              alt='logo'
-              style={{ width: '100%', height: '100%' }}
-            />
+            <img src={'../../assets/logo-icon.svg'} alt="logo" style={{ width: '100%', height: '100%' }} />
           </Box>
 
           <Typography
-            variant='h5'
+            variant="h5"
             noWrap
             component={Link}
-            to='/'
+            to="/"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -190,21 +181,14 @@ export default function Header() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title='Open settings'>
-              <IconButton
-                onClick={handleOpenUserMenu}
-                sx={{ p: 0, width: 60, height: 60 }}
-              >
-                <Avatar
-                  alt='Mr Beast'
-                  src='/profile-picture.png'
-                  sx={{ p: 0, width: 60, height: 60 }}
-                />
+            <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, width: 60, height: 60 }}>
+                <Avatar alt="Mr Beast" src="/profile-picture.png" sx={{ p: 0, width: 60, height: 60 }} />
               </IconButton>
             </Tooltip>
             <Menu
               sx={{ mt: '45px' }}
-              id='menu-appbar'
+              id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
                 vertical: 'top',
@@ -220,7 +204,7 @@ export default function Header() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign='center'>{setting}</Typography>
+                  <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>
