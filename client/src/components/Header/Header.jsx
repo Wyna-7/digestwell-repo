@@ -22,7 +22,13 @@ const pages = [
   { name: 'My lists', path: '/my-lists' },
   { name: 'Info', path: '/info' },
 ];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
+const settings = [
+  { name: 'Profile', path: '/profile' },
+  { name: 'Account', path: '/account' },
+  { name: 'Dashboard', path: '/dashboard' },
+  { name: 'Logout', path: '/logout' }, 
+];
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -215,9 +221,16 @@ const Header = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign='center'>{setting}</Typography>
+              {settings.map((page) => (
+                <MenuItem key={page.name} onClick={handleCloseUserMenu}>
+                  <Typography
+                    component={Link}
+                    to={page.path}
+                    textAlign='center'
+                    style={{ textDecoration: 'none', color: 'inherit' }}
+                  >
+                    {page.name}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
