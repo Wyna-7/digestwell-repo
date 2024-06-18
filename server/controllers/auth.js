@@ -23,7 +23,7 @@ async function login (req, res) {
       sameSite: 'lax',
       maxAge: 1000 * 60 * 60 * 24, // 1 day
     });
-    res.status(200).send(JSON.stringify({ userId: user.id }));
+    res.status(200).json({ userId: user.id });
   }
   catch (error) {
     console.error(error);
@@ -44,7 +44,7 @@ async function auth (req, res) {
     
     if (!user) return res.status(401).json({ error: 'Unauthorized' });
     
-    res.status(200).send(JSON.stringify({ userId: user.id }));
+    res.status(200).json({ userId: user.id });
   }
   catch (error) {
     console.error(error);
@@ -57,7 +57,7 @@ async function register (req, res) {
     const { email, password, firstName, lastName } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await User.create({ email, password: hashedPassword, firstName, lastName });
-    res.status(201).json({ message: 'Registration successful' });
+    res.status(201).json({ userId: newUser.id });
   }
   catch (error) {
     console.error(error);
