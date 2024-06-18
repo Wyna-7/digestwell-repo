@@ -11,17 +11,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MyLists from './pages/MyLists';
 import SignIn from './pages/LoginPage';
 import Register from './pages/Register';
-
-async function logout() {
-  const res = await logout();
-  if (res.status === 200) {
-    window.location.replace('/');
-  } else {
-    const resData = await res.json();
-    alert(resData.error);
-  }
-}
-
+import Logout from './pages/Logout';
 
 function App() {
   const [userId , setUserId] = useState(null);
@@ -49,7 +39,7 @@ function App() {
         <Routes>
           <Route path='/' element={<SignIn />} />
           <Route path='/register' element={<Register />} />
-          <Route path='/logout' Component={logout} />
+          <Route path='/logout' element={<Logout />} />
           <Route path='/my-lists' element={<MyLists />} />
           <Route
             path='/dashboard'

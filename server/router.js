@@ -10,7 +10,7 @@ const authenticate = require('./middleware/auth');
 // auth
 router.post('/register', register);
 router.post('/login', login);
-router.get('/logout', authenticate, logout);
+router.get('/logout', logout);
 router.get('/auth', auth);
 
 // symptoms
