@@ -1,5 +1,5 @@
 import { createContext } from 'react';
 
-const EntriesContext = createContext(null);
+const EntriesContext = createContext<any>(null);
 
 export default EntriesContext;

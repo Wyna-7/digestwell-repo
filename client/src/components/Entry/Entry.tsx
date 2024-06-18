@@ -8,19 +8,22 @@ import './style.css';
 import ConsumedItemEntry from '../ConsumedItemEntry/ConsumedItemEntry';
 import SymptomsEntry from '../SymptomsEntry/SymptomsEntry';
 import EntriesContext from '../../context/EntriesContext';
+import { EntryProps } from '../../types';
 //TODO change the import of mui when importing several things
 
-export default function Entry({
-  name,
-  select,
-  createdAt,
-  id,
-  isEditing,
-  health_impact,
-  stool_type,
-  is_bleeding,
-  other_symptoms,
-}) {
+export default function Entry(props: EntryProps) {
+  const {
+    name,
+    select,
+    createdAt,
+    id,
+    isEditing,
+    health_impact,
+    stool_type,
+    is_bleeding,
+    other_symptoms,
+  } = props;
+
   const { setEntriesList } = useContext(EntriesContext);
 
   const [itemEntry, setItemEntry] = useState({
@@ -35,12 +38,14 @@ export default function Entry({
 
   const handleDelete = () => {
     deleteEntry(id, { name, select }).then(() => {
-      setEntriesList((prevList) => prevList.filter((entry) => entry.id !== id));
+      setEntriesList((prevList: EntryProps[]) =>
+        prevList.filter((entry) => entry.id !== id)
+      );
     });
   };
 
   const toggleEdit = () => {
-    setEntriesList((prevList) =>
+    setEntriesList((prevList: EntryProps[]) =>
       prevList.map((entry) =>
         entry.id === id ? { ...entry, isEditing: !entry.isEditing } : entry
       )
@@ -50,7 +55,7 @@ export default function Entry({
   const handleSave = async () => {
     await editEntry(id, itemEntry);
 
-    setEntriesList((prevList) => {
+    setEntriesList((prevList: EntryProps[]) => {
       const updatedEntries = prevList.map((entry) => {
         if (entry.id === id) {
           return { ...entry, ...itemEntry, isEditing: false };
@@ -91,10 +96,7 @@ export default function Entry({
           <Box display='flex' flexDirection='column' gap={1} flexGrow={1}>
             {(name || select) && (
               <ConsumedItemEntry
-                name={name}
                 isEditing={isEditing}
-                select={select}
-                health_impact={health_impact}
                 itemEntry={itemEntry}
                 setItemEntry={setItemEntry}
               />

@@ -1,17 +1,34 @@
-import { useState } from 'react';
-import { Box, TextField, Select, MenuItem, Typography } from '@mui/material';
-import { blue } from '@mui/material/colors';
+import { ChangeEvent, FC } from 'react';
 import './style.css';
+import {
+  Box,
+  TextField,
+  Select,
+  MenuItem,
+  Typography,
+  SelectChangeEvent,
+} from '../../../node_modules/@mui/material/index';
 
-export default function ConsumedItemEntry({
-  itemEntry,
-  setItemEntry,
-  isEditing,
-}) {
-  const handleStateChange = (event) => {
+interface ConsumedItemEntryProps {
+  itemEntry: {
+    name: string;
+    select: string;
+    health_impact: string;
+  };
+  setItemEntry: FC;
+  isEditing: boolean;
+}
+export default function ConsumedItemEntry(props: ConsumedItemEntryProps) {
+  let { itemEntry, setItemEntry, isEditing } = props;
+
+  const handleStateChange = (
+    event:
+      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      | SelectChangeEvent<string>
+  ) => {
     const { name, value } = event.target;
 
-    setItemEntry((prev) => ({ ...prev, [name]: value }));
+    setItemEntry((prev: Object) => ({ ...prev, [name]: value }));
   };
 
   return (

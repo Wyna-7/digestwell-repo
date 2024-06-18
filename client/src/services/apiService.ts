@@ -1,12 +1,13 @@
 const BASE_URL = 'http://localhost:3000/';
 
+//TODO import entry interface from types file after merge
 function isItem(entry) {
   return entry?.name && entry?.select;
 }
 
 const getEntries = async (userId) => {
-  const symptoms = await fetch(BASE_URL + `symptoms/${userId}`, {credentials: 'include'}).then((resp) => resp.json());
-  const items = await fetch(BASE_URL + `items/${userId}`, {credentials: 'include'}).then((resp) => resp.json());
+  const symptoms = await fetch(BASE_URL + `symptoms/${userId}`, { credentials: 'include' }).then((resp) => resp.json());
+  const items = await fetch(BASE_URL + `items/${userId}`, { credentials: 'include' }).then((resp) => resp.json());
   const entries = [...symptoms, ...items];
   // add missing properties to each entry
   return entries.map((entry) => {
@@ -28,7 +29,7 @@ const getEntries = async (userId) => {
   });
 };
 
-async function fetchRequest (method, id, data) {
+async function fetchRequest(method, id, data) {
   let endpoint = '';
   if (isItem(data)) {
     endpoint = 'items';

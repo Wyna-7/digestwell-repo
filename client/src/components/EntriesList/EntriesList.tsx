@@ -12,12 +12,9 @@ const EntriesList = () => {
     <Container className='entriesList-container'>
       <Box className='entriesList-box'>
         <Box className='entriesList-ul' component='ul'>
-          {entriesList.map((entry) => (
-            <Entry
-              component='li'
-              key={isItem(entry) ? 'i' + entry.id : 's' + entry.id}
-              {...entry}
-            />
+          {/* TODO create entry type in separate interface in types file, then import and use it here */}
+          {entriesList.map((entry: { name: string; select: string; other_symptoms: string; stool_type: string; is_bleeding: boolean; userId: number; id: number }) => (
+            <Entry component='li' key={isItem(entry) ? 'i' + entry.id : 's' + entry.id} {...entry} />
           ))}
         </Box>
       </Box>
