@@ -15,6 +15,7 @@ import { EntryFromDataBase, EntryWithEdit } from './types';
 function App() {
   const [userId, setUserId] = useState(null);
   const [entriesList, setEntriesList] = useState<EntryWithEdit[]>([]);
+  const [itemEntry, setItemEntry] = useState<EntryWithEdit>();
 
   useEffect(() => {
     async function startup() {
@@ -32,7 +33,7 @@ function App() {
   }, []);
 
   return (
-    <EntriesContext.Provider value={{ entriesList, setEntriesList, userId, setUserId }}>
+    <EntriesContext.Provider value={{ entriesList, setEntriesList, userId, setUserId, itemEntry, setItemEntry }}>
       <Router>
         <Header />
         <Routes>

@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useContext } from 'react';
 import './style.css';
 import {
   Box,
@@ -8,17 +8,19 @@ import {
   Typography,
   SelectChangeEvent,
 } from '../../../node_modules/@mui/material/index';
-import { ConsumedItemEntryProps } from '../../types';
+import { ConsumedItemEntryProps, EntryFromDataBase } from '../../types';
+import EntriesContext from '../../context/EntriesContext';
 
 export default function ConsumedItemEntry(props: ConsumedItemEntryProps) {
-  let { itemEntry, setItemEntry, isEditing } = props;
+  const { itemEntry, setItemEntry } = useContext(EntriesContext);
+  let { isEditing } = props;
 
   const handleStateChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<string>,
   ) => {
     const { name, value } = event.target;
 
-    setItemEntry((prev: Object) => ({ ...prev, [name]: value }));
+    setItemEntry((prev: EntryFromDataBase) => ({ ...prev, [name]: value }));
   };
 
   return (
@@ -28,14 +30,14 @@ export default function ConsumedItemEntry(props: ConsumedItemEntryProps) {
           <TextField
             type="text"
             name="name"
-            value={itemEntry.name}
+            value={itemEntry?.name}
             onChange={handleStateChange}
             variant="outlined"
             margin="normal"
             fullWidth
             required
           />
-          <Select name="select" value={itemEntry.select} onChange={handleStateChange} sx={{ minWidth: 150, mt: 1 }}>
+          <Select name="select" value={itemEntry?.select} onChange={handleStateChange} sx={{ minWidth: 150, mt: 1 }}>
             <MenuItem value="Food">Food</MenuItem>
             <MenuItem value="Beverage">Beverage</MenuItem>
             <MenuItem value="Medication">Medication</MenuItem>
@@ -43,7 +45,7 @@ export default function ConsumedItemEntry(props: ConsumedItemEntryProps) {
           </Select>
           <Select
             name="health_impact"
-            value={itemEntry.health_impact}
+            value={itemEntry?.health_impact}
             onChange={handleStateChange}
             sx={{ minWidth: 150, mt: 1 }}
           >
@@ -55,15 +57,15 @@ export default function ConsumedItemEntry(props: ConsumedItemEntryProps) {
       ) : (
         <>
           <Typography variant="body1" noWrap>
-            {itemEntry.name}
+            {itemEntry?.name}
           </Typography>
-          {itemEntry.select && (
+          {itemEntry?.select && (
             <Typography variant="body1" className="neutral" noWrap>
-              {itemEntry.select}
+              {itemEntry?.select}
             </Typography>
           )}
-          <Typography className={`${itemEntry.health_impact.toLowerCase()} font-weight-bold`} variant="body1" noWrap>
-            {itemEntry.health_impact}
+          <Typography className={`${itemEntry?.health_impact.toLowerCase()} font-weight-bold`} variant="body1" noWrap>
+            {itemEntry?.health_impact}
           </Typography>
         </>
       )}

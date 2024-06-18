@@ -14,7 +14,9 @@ const EntriesList = () => {
       <Box className="entriesList-box">
         <Box className="entriesList-ul" component="ul">
           {entriesList.map((entry: EntryWithEdit) => (
-            <Entry component="li" key={isItem(entry) ? 'i' + entry.id : 's' + entry.id} {...entry} />
+            <li key={isItem(entry) ? 'i' + entry.id : 's' + entry.id}>
+              <Entry {...entry} />
+            </li>
           ))}
         </Box>
       </Box>
