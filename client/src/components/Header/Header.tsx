@@ -15,8 +15,9 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 
 import { Link } from 'react-router-dom';
-import logo from '../../assets/logo-icon.svg';
 import { useLocation } from 'react-router-dom';
+
+const logo = require('../../assets/logo-icon.svg') as string;
 
 const pages = [
   { name: 'My lists', path: '/my-lists' },
@@ -24,14 +25,16 @@ const pages = [
 ];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-const Header = () => {
-  const [anchorElNav, setAnchorElNav] = useState(null);
-  const [anchorElUser, setAnchorElUser] = useState(null);
+export default function Header() {
+  const [anchorElNav, setAnchorElNav] = useState<HTMLButtonElement | null>(
+    null
+  );
+  const [anchorElUser, setAnchorElUser] = useState<HTMLElement | null>(null);
 
-  const handleOpenNavMenu = (event) => {
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorElUser(event.currentTarget);
   };
 
@@ -51,7 +54,7 @@ const Header = () => {
 
   return (
     <AppBar position='sticky' color='primary'>
-      <Container maxWidth='1200'>
+      <Container maxWidth='lg'>
         <Toolbar
           disableGutters
           sx={{
@@ -226,6 +229,4 @@ const Header = () => {
       </Container>
     </AppBar>
   );
-};
-
-export default Header;
+}
