@@ -65,6 +65,7 @@ function EntriesForm() {
       stool_type: formData.selectedStoolType,
       is_bleeding: formData.bloodInStool,
       userId: userId,
+      health_impact: 'Neutral',
     };
 
     console.log('newItem', newItem);

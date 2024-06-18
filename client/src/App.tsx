@@ -15,13 +15,21 @@ import { EntryFromDataBase, EntryWithEdit } from './types';
 function App() {
   const [userId, setUserId] = useState(null);
   const [entriesList, setEntriesList] = useState<EntryWithEdit[]>([]);
-  const [itemEntry, setItemEntry] = useState<EntryWithEdit>();
+
+  useEffect(() => {
+    console.log(entriesList);
+  }, [entriesList]);
 
   useEffect(() => {
     async function startup() {
       const res = await auth();
+      console.log('res', res);
       if (res.status === 200) {
+        console.log('STATUS 200');
+
         const resData = await res.json();
+        console.log('resData', resData);
+
         setUserId(resData.userId);
         getEntries(resData.userId).then((data: EntryFromDataBase[]) =>
           // isEditing: false --> all entries start in view mode (not editable)
@@ -33,7 +41,7 @@ function App() {
   }, []);
 
   return (
-    <EntriesContext.Provider value={{ entriesList, setEntriesList, userId, setUserId, itemEntry, setItemEntry }}>
+    <EntriesContext.Provider value={{ entriesList, setEntriesList, userId, setUserId }}>
       <Router>
         <Header />
         <Routes>

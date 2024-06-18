@@ -8,6 +8,8 @@ export interface SymptomsEntryProps {
 
 export interface ConsumedItemEntryProps {
   isEditing: boolean;
+  setItemEntry: React.Dispatch<React.SetStateAction<EntryWithEdit>>;
+  itemEntry: EntryWithEdit;
 }
 
 //Types to use in all files that need them
@@ -19,6 +21,7 @@ export interface EntryToDataBase {
   stool_type: string;
   is_bleeding: boolean;
   userId: number | null;
+  health_impact: string;
 }
 
 export interface EntryFromDataBase {

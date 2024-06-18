@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { deleteEntry, editEntry } from '../../services/apiService';
 import { Box, Paper, Typography } from '@mui/material';
 import EditCalendarIcon from '@mui/icons-material/EditCalendar';
@@ -7,14 +7,14 @@ import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
 import './style.css';
 import ConsumedItemEntry from '../ConsumedItemEntry/ConsumedItemEntry';
 import SymptomsEntry from '../SymptomsEntry/SymptomsEntry';
-import EntriesContext from '../../context/EntriesContext';
 import { EntryWithEdit } from '../../types';
+import EntriesContext from '../../context/EntriesContext';
 //TODO change the import of mui when importing several things
 
 export default function Entry(props: EntryWithEdit) {
-  const { name, select, createdAt, id, isEditing, stool_type, is_bleeding, other_symptoms } = props;
-
-  const { itemEntry, setEntriesList } = useContext(EntriesContext);
+  const { name, select, createdAt, id, isEditing, stool_type, is_bleeding, other_symptoms, health_impact } = props;
+  const { setEntriesList } = useContext(EntriesContext);
+  const [itemEntry, setItemEntry] = useState<EntryWithEdit>(props);
 
   //TODO change editSymptomsEntry and editConsumedItem
   // const [updatedSymptoms, setUpdatedSymptoms] = useState(symptoms);
@@ -72,7 +72,9 @@ export default function Entry(props: EntryWithEdit) {
       <Box display="flex" flexDirection="column" justifyContent="space-between" alignItems="flex-start">
         <Box display="flex" flexDirection="row" justifyContent="space-between" width="100%">
           <Box display="flex" flexDirection="column" gap={1} flexGrow={1}>
-            {(name || select) && <ConsumedItemEntry isEditing={isEditing} />}
+            {(name || select) && (
+              <ConsumedItemEntry isEditing={isEditing} setItemEntry={setItemEntry} itemEntry={itemEntry} />
+            )}
             <SymptomsEntry stool_type={stool_type} is_bleeding={is_bleeding} other_symptoms={other_symptoms} />
           </Box>
 

@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext } from 'react';
+import { ChangeEvent } from 'react';
 import './style.css';
 import {
   Box,
@@ -8,19 +8,18 @@ import {
   Typography,
   SelectChangeEvent,
 } from '../../../node_modules/@mui/material/index';
-import { ConsumedItemEntryProps, EntryFromDataBase } from '../../types';
-import EntriesContext from '../../context/EntriesContext';
+import { ConsumedItemEntryProps, EntryWithEdit } from '../../types';
 
 export default function ConsumedItemEntry(props: ConsumedItemEntryProps) {
-  const { itemEntry, setItemEntry } = useContext(EntriesContext);
-  let { isEditing } = props;
+  let { isEditing, setItemEntry, itemEntry } = props;
+  console.log('ConsumedItemEntryProps', props);
 
   const handleStateChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<string>,
   ) => {
     const { name, value } = event.target;
 
-    setItemEntry((prev: EntryFromDataBase) => ({ ...prev, [name]: value }));
+    setItemEntry((prev: EntryWithEdit) => ({ ...prev, [name]: value }));
   };
 
   return (
@@ -64,7 +63,7 @@ export default function ConsumedItemEntry(props: ConsumedItemEntryProps) {
               {itemEntry?.select}
             </Typography>
           )}
-          <Typography className={`${itemEntry?.health_impact.toLowerCase()} font-weight-bold`} variant="body1" noWrap>
+          <Typography className={`${itemEntry?.health_impact?.toLowerCase()} font-weight-bold`} variant="body1" noWrap>
             {itemEntry?.health_impact}
           </Typography>
         </>
