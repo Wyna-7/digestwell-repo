@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import { getEntries } from './apiService';
+import { getEntries } from './services/apiService';
 import EntriesForm from './components/EntriesForm/EntriesForm';
 import EntriesList from './components/EntriesList/EntriesList';
 import EntriesContext from './context/EntriesContext';
@@ -9,7 +9,6 @@ import { Box, Container } from '@mui/material';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MyLists from './components/pages/MyLists/MyLists';
 import SignIn from './components/pages/LoginPage/LoginPage';
-
 
 function App() {
   const [entriesList, setEntriesList] = useState([]);
