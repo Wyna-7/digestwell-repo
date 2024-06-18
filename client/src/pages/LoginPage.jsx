@@ -11,10 +11,10 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { ThemeProvider } from '@mui/material/styles';
-import theme from '../../../theme';
+import theme from '../theme';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../../../services/authService';
-import EntriesContext from '../../../context/EntriesContext';
+import { login } from '../services/authService';
+import EntriesContext from '../context/EntriesContext';
 
 export default function SignIn() {
   const { setUserId } = React.useContext(EntriesContext);
@@ -133,8 +133,8 @@ export default function SignIn() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href='#' variant='body2'>
-                  {"Don't have an account? Sign Up"}
+                <Link href='/register' variant='body2'>
+                  {'Don\'t have an account? Sign Up'}
                 </Link>
               </Grid>
             </Grid>

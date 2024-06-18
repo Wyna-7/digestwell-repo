@@ -8,8 +8,9 @@ import EntriesContext from './context/EntriesContext';
 import Header from './components/Header/Header';
 import { Box, Container } from '@mui/material';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import MyLists from './components/pages/MyLists/MyLists';
-import SignIn from './components/pages/LoginPage/LoginPage';
+import MyLists from './pages/MyLists';
+import SignIn from './pages/LoginPage';
+import Register from './pages/Register';
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
         <Header />
         <Routes>
           <Route path='/' element={<SignIn />} />
+          <Route path='/register' element={<Register />} />
           <Route path='/my-lists' element={<MyLists />} />
           <Route
             path='/dashboard'
