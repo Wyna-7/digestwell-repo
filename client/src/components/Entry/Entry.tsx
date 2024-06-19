@@ -12,7 +12,7 @@ import EntriesContext from '../../context/EntriesContext';
 //TODO change the import of mui when importing several things
 
 export default function Entry(props: EntryWithEdit) {
-  const { name, select, createdAt, id, isEditing, stool_type, is_bleeding, other_symptoms, health_impact } = props;
+  const { name, select, createdAt, id, isEditing, stool_type, is_bleeding, other_symptoms } = props;
   const { setEntriesList } = useContext(EntriesContext);
   const [itemEntry, setItemEntry] = useState<EntryWithEdit>(props);
 
