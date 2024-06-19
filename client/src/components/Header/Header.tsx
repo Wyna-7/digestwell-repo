@@ -70,7 +70,7 @@ export default function Header() {
               height: '80px',
             }}
           >
-            <img src={'../../assets/logo-icon.svg'} alt="logo" style={{ width: '100%', height: '100%' }} />
+            <img src="../../assets/logo-icon.svg" alt="logo" style={{ width: '100%', height: '100%' }} />
           </Box>
 
           <Typography
@@ -145,7 +145,7 @@ export default function Header() {
               height: '70px',
             }}
           >
-            <img src={'../../assets/logo-icon.svg'} alt="logo" style={{ width: '100%', height: '100%' }} />
+            <img src="../../assets/logo-icon.svg" alt="logo" style={{ width: '100%', height: '100%' }} />
           </Box>
 
           <Typography

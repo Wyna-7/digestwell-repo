@@ -9,13 +9,12 @@ import { EntryFromDataBase, EntryWithEdit } from '../../types';
 const EntriesList = () => {
   const { entriesList } = useContext(EntriesContext);
 
+  //TODO use fsn library for the sorting
   const sortedEntries = entriesList.sort((a: EntryFromDataBase, b: EntryFromDataBase): number => {
     const c: number = Number(new Date(a.createdAt));
     const d: number = Number(new Date(b.createdAt));
     return d - c;
   });
-
-  console.log('IN ENTRIESLIST', entriesList);
 
   return (
     <Container className="entriesList-container">

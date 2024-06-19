@@ -12,7 +12,6 @@ import { ConsumedItemEntryProps, EntryWithEdit } from '../../types';
 
 export default function ConsumedItemEntry(props: ConsumedItemEntryProps) {
   let { isEditing, setItemEntry, itemEntry } = props;
-  console.log('ConsumedItemEntryProps', props);
 
   const handleStateChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<string>,

@@ -20,8 +20,6 @@ const HealthImpactTable = () => {
 
   const avoidItems = entriesList.filter((item) => (item.health_impact === 'Avoid' ? true : false));
 
-  console.log(beneficialItems);
-
   return (
     <Container
       sx={{

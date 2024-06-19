@@ -68,8 +68,6 @@ function EntriesForm() {
       health_impact: 'Neutral',
     };
 
-    console.log('newItem', newItem);
-
     //TODO create newentry type in separate interface in types file, then import and use it here
     postEntry(newItem).then((newEntry: EntryFromDataBase) => {
       const nextList = (prevList: EntryWithEdit[]): EntryWithEdit[] => [...prevList, { ...newEntry, isEditing: false }];

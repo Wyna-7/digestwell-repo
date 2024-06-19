@@ -17,18 +17,11 @@ function App() {
   const [entriesList, setEntriesList] = useState<EntryWithEdit[]>([]);
 
   useEffect(() => {
-    console.log(entriesList);
-  }, [entriesList]);
-
-  useEffect(() => {
     async function startup() {
       const res = await auth();
-      console.log('res', res);
-      if (res.status === 200) {
-        console.log('STATUS 200');
 
+      if (res.status === 200) {
         const resData = await res.json();
-        console.log('resData', resData);
 
         setUserId(resData.userId);
         getEntries(resData.userId).then((data: EntryFromDataBase[]) =>
