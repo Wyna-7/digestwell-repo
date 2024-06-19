@@ -1,6 +1,7 @@
-import { screen, render, within } from '@testing-library/react';
+import { screen, render, within, prettyDOM, waitFor } from '@testing-library/react';
 import ConsumedItemEntry from './ConsumedItemEntry';
 import { ConsumedItemEntryProps } from '../../types';
+import userEvent from '@testing-library/user-event';
 
 const mockSetItemEntry = vi.fn();
 
@@ -46,10 +47,54 @@ describe('ConsumedItemEntry edits', () => {
     expect(screen.getByTestId('edit-type')).toBeInTheDocument();
     expect(screen.getByTestId('edit-impact')).toBeInTheDocument();
   });
-  it('should display type dropdown', () => {
+
+  it('should display type dropdown and type options', async () => {
     render(
       <ConsumedItemEntry isEditing={true} setItemEntry={mockProps.setItemEntry} itemEntry={mockProps.itemEntry} />,
     );
-    const nameDropdown = expect(screen.getByTestId('edit-name')).toBeInTheDocument();
+    const typeDropdown = within(await screen.findByTestId('edit-type')).getByRole('combobox');
+
+    expect(typeDropdown).toBeInTheDocument();
+
+    await userEvent.click(typeDropdown);
+
+    expect(screen.getByLabelText('id-beverage')).toBeInTheDocument();
   });
 });
+
+//HI SEBASTIAN PLEASE HAVE FUN WITH THIS :)
+
+//   it('should display selected type', async () => {
+//     // const user = userEvent.setup();
+
+//     render(
+//       <ConsumedItemEntry isEditing={true} setItemEntry={mockProps.setItemEntry} itemEntry={mockProps.itemEntry} />,
+//     );
+//     const typeDropdown = within(screen.getByTestId('edit-type')).getByRole('combobox');
+
+//     await userEvent.click(typeDropdown);
+
+//     const beverageOption = screen.getByLabelText('id-beverage');
+
+//     await userEvent.click(beverageOption);
+
+//     await userEvent.click(typeDropdown);
+
+//     await waitFor(() => {
+//       expect(within(screen.getByLabelText('edit-type')).getByRole('combobox')).toHaveTextContent('Beverage');
+//     });
+//   });
+// });
+
+// // const user = userEvent.setup();
+
+// render(<ConsumedItemEntry isEditing={true} setItemEntry={mockProps.setItemEntry} itemEntry={mockProps.itemEntry} />);
+// const typeDropdown = within(await screen.findByTestId('edit-type')).getByRole('combobox');
+
+// await userEvent.click(typeDropdown);
+
+// const beverageOption = await screen.findByTestId('id-beverage');
+// await userEvent.click(beverageOption);
+
+// console.log(prettyDOM(screen.getByLabelText('edit-type', { selector: '[role="combobox"]' })));
+// console.log(prettyDOM(screen.getByLabelText('id-beverage')));

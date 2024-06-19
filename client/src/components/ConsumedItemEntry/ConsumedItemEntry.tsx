@@ -37,16 +37,25 @@ export default function ConsumedItemEntry(props: ConsumedItemEntryProps) {
             required
           />
           <Select
+            aria-label='edit-type'
             data-testid='edit-type'
             name='select'
             value={itemEntry?.select}
             onChange={handleStateChange}
             sx={{ minWidth: 150, mt: 1 }}
           >
-            <MenuItem value='Food'>Food</MenuItem>
-            <MenuItem value='Beverage'>Beverage</MenuItem>
-            <MenuItem value='Medication'>Medication</MenuItem>
-            <MenuItem value='Supplement'>Supplement</MenuItem>
+            <MenuItem aria-label='id-food' value='Food'>
+              Food
+            </MenuItem>
+            <MenuItem aria-label='id-beverage' value='Beverage'>
+              Beverage
+            </MenuItem>
+            <MenuItem aria-label='id-medication' value='Medication'>
+              Medication
+            </MenuItem>
+            <MenuItem aria-label='id-supplement' value='Supplement'>
+              Supplement
+            </MenuItem>
           </Select>
           <Select
             data-testid='edit-impact'
