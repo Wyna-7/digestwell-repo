@@ -16,10 +16,18 @@ beforeAll(async () => {
 
 beforeAll(async () => {
   await sequelize.sync({ force: true });
+  const response = await request(app)
+    .post('/register')
+    .send({'email': 'test2@email.com', 'password': '123', 'firstName': 'John', 'lastName': 'Doe'});
+  
+  const loginResponse = await request(app)
+    .post('/login')
+    .send({ email: 'test2@email.com', password: '123' });
+
+  authCookie = loginResponse.headers['set-cookie'].pop().split(';')[0];
 });
 
 afterAll(async () => {
-  await sequelize.sync({ force: true });
   await sequelize.close();
 });
 
@@ -32,8 +40,9 @@ describe('Register new user, login, auth and logout', () => {
     expect(response.status).toBe(201);
     expect(response.headers['content-type']).toEqual(expect.stringContaining('json'));
     expect(response.body).toBeInstanceOf(Object);
-    expect(response.body).toHaveProperty('userId', 1);
+    expect(response.body).toHaveProperty('userId', 2);
   });
+
   it('should login, set a cookie with the session and return the userId', async () => {
     const response = await request(app)
       .post('/login')
@@ -41,7 +50,7 @@ describe('Register new user, login, auth and logout', () => {
     expect(response.status).toBe(200);
     expect(response.headers['content-type']).toEqual(expect.stringContaining('json'));
     expect(response.body).toBeInstanceOf(Object);
-    expect(response.body).toHaveProperty('userId', 1);
+    expect(response.body).toHaveProperty('userId', 2);
   });
   // login should fail for users that are not registered
   it('should auth, validate the cookie and return the userId', async () => {});
@@ -50,11 +59,13 @@ describe('Register new user, login, auth and logout', () => {
 });
 
 describe('Symptoms CRUD', () => {
+  
   // need to login before saving a new symptom
   it('should save a new symptom', async () => {
     const response = await request(app)
       .post('/symptoms')
-      .send({'userId': 1, 'name': 'Headache', 'description': 'Pain in the head', 'severity': 5});
+      .set('Cookie', authCookie)
+      .send({'userId': 1, 'stool_type': 'Type 1', 'is_bleeding': true, 'other_symptoms': ''});
     expect(response.status).toBe(201);
   });
   it('should get all symptoms for a user', async () => {});
