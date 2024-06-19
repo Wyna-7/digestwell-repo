@@ -1,11 +1,13 @@
+import { EntryFromDataBase, EntryToDataBase } from '../types';
+
 const BASE_URL = 'http://localhost:3000/';
 
 //TODO import entry interface from types file after merge
-function isItem(entry) {
+function isItem(entry: EntryToDataBase | EntryFromDataBase) {
   return entry?.name && entry?.select;
 }
 
-const getEntries = async (userId) => {
+const getEntries = async (userId: number): Promise<EntryFromDataBase[]> => {
   const symptoms = await fetch(BASE_URL + `symptoms/${userId}`, { credentials: 'include' }).then((resp) => resp.json());
   const items = await fetch(BASE_URL + `items/${userId}`, { credentials: 'include' }).then((resp) => resp.json());
   const entries = [...symptoms, ...items];
@@ -29,7 +31,7 @@ const getEntries = async (userId) => {
   });
 };
 
-async function fetchRequest(method, id, data) {
+async function fetchRequest(method: string, id: number | null, data: EntryToDataBase | EntryFromDataBase) {
   let endpoint = '';
   if (isItem(data)) {
     endpoint = 'items';
@@ -50,15 +52,15 @@ async function fetchRequest(method, id, data) {
   return resp;
 }
 
-const editEntry = async (id, data) => {
+const editEntry = async (id: number, data: EntryFromDataBase) => {
   return await fetchRequest('PATCH', id, data);
 };
 
-const postEntry = async (item) => {
+const postEntry = async (item: EntryToDataBase) => {
   return await fetchRequest('POST', null, item);
 };
 
-const deleteEntry = async (id, data) => {
+const deleteEntry = async (id: number, data: EntryFromDataBase) => {
   return await fetchRequest('DELETE', id, data);
 };
 

@@ -21,7 +21,7 @@ export default function SignIn() {
 
   const navigate = useNavigate();
 
-  async function handleSubmit(event) {
+  async function handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const res = await login(data.get('email'), data.get('password'));
@@ -34,11 +34,11 @@ export default function SignIn() {
     }
   }
 
-  function Copyright(props) {
+  function Copyright(props: { sx: { mt: number; mb: number } }) {
     return (
-      <Typography variant='body2' color='text.secondary' align='center' {...props}>
+      <Typography variant="body2" color="text.secondary" align="center" {...props}>
         {'Copyright © '}
-        <Link color='inherit' href='https://mui.com/'>
+        <Link color="inherit" href="https://mui.com/">
           Digest Well
         </Link>{' '}
         {new Date().getFullYear()}
@@ -49,7 +49,7 @@ export default function SignIn() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component='main' maxWidth='xs'>
+      <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
@@ -72,26 +72,44 @@ export default function SignIn() {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main', width: 120, height: 120 }}>
-            <Avatar alt='Mr Beast' src='/profile-picture.png' sx={{ width: 120, height: 120 }} />
+            <Avatar alt="Mr Beast" src="/profile-picture.png" sx={{ width: 120, height: 120 }} />
           </Avatar>
-          <Typography component='h1' variant='h5'>
+          <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component='form' onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            <TextField margin='normal' required fullWidth id='email' label='Email Address' name='email' autoComplete='email' autoFocus />
-            <TextField margin='normal' required fullWidth name='password' label='Password' type='password' id='password' autoComplete='current-password' />
-            <FormControlLabel control={<Checkbox value='remember' color='primary' />} label='Remember me' />
-            <Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
+            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
               Sign In
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href='#' variant='body2' to={'/my-lists'}>
+                <Link href="#" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href='#' variant='body2'>
+                <Link href="#" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
