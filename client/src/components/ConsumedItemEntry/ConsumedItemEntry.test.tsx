@@ -1,4 +1,4 @@
-import { screen, render, within, prettyDOM, waitFor } from '@testing-library/react';
+import { screen, render, within } from '@testing-library/react';
 import ConsumedItemEntry from './ConsumedItemEntry';
 import { ConsumedItemEntryProps } from '../../types';
 import userEvent from '@testing-library/user-event';
