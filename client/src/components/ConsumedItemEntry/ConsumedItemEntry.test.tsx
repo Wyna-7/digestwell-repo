@@ -23,6 +23,12 @@ const mockProps: ConsumedItemEntryProps = {
   },
 };
 
+beforeEach(() => {
+  render(
+    <ConsumedItemEntry isEditing={true} setItemEntry={mockProps.setItemEntry} itemEntry={mockProps.itemEntry} />,
+  );
+});
+
 describe('ConsumedItemEntry tests render', () => {
   it('should render the item name in entry', () => {
     render(<ConsumedItemEntry {...mockProps} />);
@@ -40,61 +46,33 @@ describe('ConsumedItemEntry tests render', () => {
 
 describe('ConsumedItemEntry edits', () => {
   it('should display edit view', () => {
-    render(
-      <ConsumedItemEntry isEditing={true} setItemEntry={mockProps.setItemEntry} itemEntry={mockProps.itemEntry} />,
-    );
     expect(screen.getByTestId('edit-name')).toBeInTheDocument();
     expect(screen.getByTestId('edit-type')).toBeInTheDocument();
     expect(screen.getByTestId('edit-impact')).toBeInTheDocument();
   });
 
   it('should display type dropdown and type options', async () => {
-    render(
-      <ConsumedItemEntry isEditing={true} setItemEntry={mockProps.setItemEntry} itemEntry={mockProps.itemEntry} />,
-    );
     const typeDropdown = within(await screen.findByTestId('edit-type')).getByRole('combobox');
 
     expect(typeDropdown).toBeInTheDocument();
 
     await userEvent.click(typeDropdown);
 
-    expect(screen.getByLabelText('id-beverage')).toBeInTheDocument();
+    expect(await screen.findByTestId('id-food')).toBeInTheDocument();
+    expect(await screen.findByTestId('id-beverage')).toBeInTheDocument();
+    expect(await screen.findByTestId('id-medication')).toBeInTheDocument();
+    expect(await screen.findByTestId('id-supplement')).toBeInTheDocument();
+  });
+
+  it('should display health impact dropdown and health impact options', async () => {
+    const impactDropdown = within(await screen.findByTestId('edit-impact')).getByRole('combobox');
+
+    expect(impactDropdown).toBeInTheDocument();
+
+    await userEvent.click(impactDropdown);
+
+    expect(await screen.findAllByText('Beneficial')).toHaveLength(2);
+    expect(await screen.findByText('Neutral')).toBeInTheDocument();
+    expect(await screen.findByText('Avoid')).toBeInTheDocument();
   });
 });
-
-//HI SEBASTIAN PLEASE HAVE FUN WITH THIS :)
-
-//   it('should display selected type', async () => {
-//     // const user = userEvent.setup();
-
-//     render(
-//       <ConsumedItemEntry isEditing={true} setItemEntry={mockProps.setItemEntry} itemEntry={mockProps.itemEntry} />,
-//     );
-//     const typeDropdown = within(screen.getByTestId('edit-type')).getByRole('combobox');
-
-//     await userEvent.click(typeDropdown);
-
-//     const beverageOption = screen.getByLabelText('id-beverage');
-
-//     await userEvent.click(beverageOption);
-
-//     await userEvent.click(typeDropdown);
-
-//     await waitFor(() => {
-//       expect(within(screen.getByLabelText('edit-type')).getByRole('combobox')).toHaveTextContent('Beverage');
-//     });
-//   });
-// });
-
-// // const user = userEvent.setup();
-
-// render(<ConsumedItemEntry isEditing={true} setItemEntry={mockProps.setItemEntry} itemEntry={mockProps.itemEntry} />);
-// const typeDropdown = within(await screen.findByTestId('edit-type')).getByRole('combobox');
-
-// await userEvent.click(typeDropdown);
-
-// const beverageOption = await screen.findByTestId('id-beverage');
-// await userEvent.click(beverageOption);
-
-// console.log(prettyDOM(screen.getByLabelText('edit-type', { selector: '[role="combobox"]' })));
-// console.log(prettyDOM(screen.getByLabelText('id-beverage')));

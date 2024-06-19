@@ -11,7 +11,7 @@ import {
 import { ConsumedItemEntryProps, EntryWithEdit } from '../../types';
 
 export default function ConsumedItemEntry(props: ConsumedItemEntryProps) {
-  let { isEditing, setItemEntry, itemEntry } = props;
+  const { isEditing, setItemEntry, itemEntry } = props;
 
   const handleStateChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<string>,
@@ -44,16 +44,16 @@ export default function ConsumedItemEntry(props: ConsumedItemEntryProps) {
             onChange={handleStateChange}
             sx={{ minWidth: 150, mt: 1 }}
           >
-            <MenuItem aria-label='id-food' value='Food'>
+            <MenuItem data-testid='id-food' value='Food'>
               Food
             </MenuItem>
-            <MenuItem aria-label='id-beverage' value='Beverage'>
+            <MenuItem data-testid='id-beverage' value='Beverage'>
               Beverage
             </MenuItem>
-            <MenuItem aria-label='id-medication' value='Medication'>
+            <MenuItem data-testid='id-medication' value='Medication'>
               Medication
             </MenuItem>
-            <MenuItem aria-label='id-supplement' value='Supplement'>
+            <MenuItem data-testid='id-supplement' value='Supplement'>
               Supplement
             </MenuItem>
           </Select>
