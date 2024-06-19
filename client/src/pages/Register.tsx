@@ -24,7 +24,7 @@ export default function Register() {
     const resData = await res.json();
     if (res.status === 201) {
       setUserId(resData.userId);
-      return navigate('/dashboard');
+      navigate('/dashboard');
     } else {
       alert(resData.error);
     }
