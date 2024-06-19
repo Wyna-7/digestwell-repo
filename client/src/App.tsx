@@ -45,15 +45,15 @@ function App() {
           <Route path='/logout' element={<Logout />} />
           <Route path='/my-lists' element={<MyLists />} />
           <Route
-            path="/dashboard"
+            path='/dashboard'
             element={
               <Container>
                 <Box
-                  display="flex"
-                  flexDirection="column"
-                  alignItems="center"
-                  justifyContent="center"
-                  minHeight="100vh"
+                  display='flex'
+                  flexDirection='column'
+                  alignItems='center'
+                  justifyContent='center'
+                  minHeight='100vh'
                   padding={2}
                 >
                   <EntriesForm />
