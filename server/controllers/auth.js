@@ -37,7 +37,7 @@ async function auth(req, res) {
 
     const sessionData = verifySession(token);
 
-    if (!sessionData) return res.status(401).json({ error: 'Session data not found' });
+    if (!sessionData) return res.status(401).json({ error: 'Unauthorized' });
 
     const user = await User.findByPk(sessionData.userId);
 
