@@ -4,12 +4,13 @@ const { postSymptom, getUserSymptom, deleteSymptom, updateSymptom,
   postItem, getUserItem, deleteItem, updateItem
 } = require('./controllers');
 
-const { register, login, auth } = require('./controllers/auth');
+const { register, login, logout, auth } = require('./controllers/auth');
 const authenticate = require('./middleware/auth');
 
 // auth
 router.post('/register', register);
 router.post('/login', login);
+router.get('/logout', logout);
 router.get('/auth', auth);
 
 // symptoms

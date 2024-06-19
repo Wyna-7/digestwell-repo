@@ -21,7 +21,15 @@ async function login(email, password) {
   return response;
 }
 
-async function auth() {
+async function logout () {
+  const response = await fetch(BASE_URL + 'logout', {
+    method: 'GET',
+    credentials: 'include', 
+  });
+  return response;
+}
+
+async function auth () {
   const response = await fetch(BASE_URL + 'auth', {
     method: 'GET',
     credentials: 'include',
@@ -29,4 +37,4 @@ async function auth() {
   return response;
 }
 
-export { register, login, auth };
+export { register, login, logout, auth };

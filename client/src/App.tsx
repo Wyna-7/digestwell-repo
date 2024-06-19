@@ -6,8 +6,10 @@ import EntriesContext from './context/EntriesContext';
 import EntriesForm from './components/EntriesForm/EntriesForm';
 import EntriesList from './components/EntriesList/EntriesList';
 import Header from './components/Header/Header';
-import MyLists from './components/pages/MyLists/MyLists';
-import SignIn from './components/pages/LoginPage/LoginPage';
+import MyLists from './pages/MyLists';
+import SignIn from './pages/LoginPage';
+import Register from './pages/Register';
+import Logout from './pages/Logout';
 import { Container, Box } from '../node_modules/@mui/material/index';
 import { BrowserRouter as Router, Route, Routes } from '../node_modules/react-router-dom/dist/index';
 import { EntryFromDataBase, EntryWithEdit } from './types';
@@ -38,8 +40,10 @@ function App() {
       <Router>
         <Header />
         <Routes>
-          <Route path="/" element={<SignIn />} />
-          <Route path="/my-lists" element={<MyLists />} />
+          <Route path='/' element={<SignIn />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/logout' element={<Logout />} />
+          <Route path='/my-lists' element={<MyLists />} />
           <Route
             path="/dashboard"
             element={

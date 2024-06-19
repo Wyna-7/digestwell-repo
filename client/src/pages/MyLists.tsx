@@ -1,4 +1,4 @@
-import HealthImpactTable from '../../Table/HealthImpactTable';
+import HealthImpactTable from '../components/Table/HealthImpactTable';
 
 const MyLists = () => {
   return (
