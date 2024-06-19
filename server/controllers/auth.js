@@ -43,7 +43,6 @@ async function logout(req, res) {
 
 async function auth(req, res) {
   try {
-    console.log('_______________________------_________________', req);
     const token = req.cookies.sessionId;
     if (!token) return res.status(401).json({ error: 'Token not found' });
 
