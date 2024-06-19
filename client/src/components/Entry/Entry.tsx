@@ -7,50 +7,45 @@ import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
 import './style.css';
 import ConsumedItemEntry from '../ConsumedItemEntry/ConsumedItemEntry';
 import SymptomsEntry from '../SymptomsEntry/SymptomsEntry';
+import { EntryWithEdit } from '../../types';
 import EntriesContext from '../../context/EntriesContext';
 //TODO change the import of mui when importing several things
 
-export default function Entry({
-  name,
-  select,
-  createdAt,
-  id,
-  isEditing,
-  health_impact,
-  stool_type,
-  is_bleeding,
-  other_symptoms,
-}) {
+export default function Entry(props: EntryWithEdit) {
+  const { name, select, createdAt, id, isEditing, stool_type, is_bleeding, other_symptoms } = props;
   const { setEntriesList } = useContext(EntriesContext);
-
-  const [itemEntry, setItemEntry] = useState({
-    name: name,
-    select: select,
-    health_impact: health_impact || 'Neutral',
-  });
+  const [itemEntry, setItemEntry] = useState<EntryWithEdit>(props);
 
   //TODO change editSymptomsEntry and editConsumedItem
   // const [updatedSymptoms, setUpdatedSymptoms] = useState(symptoms);
   // const [updatedStoolType, setUpdatedStoolType] = useState(stool_type);
 
   const handleDelete = () => {
-    deleteEntry(id, { name, select }).then(() => {
-      setEntriesList((prevList) => prevList.filter((entry) => entry.id !== id));
+    deleteEntry(id, {
+      name,
+      select,
+      id: 0,
+      createdAt: '',
+      health_impact: '',
+      stool_type: '',
+      is_bleeding: false,
+      other_symptoms: '',
+      userId: 0,
+      itemId: 0,
+    }).then(() => {
+      setEntriesList((prevList: EntryWithEdit[]) => prevList.filter((entry) => entry.id !== id));
     });
   };
 
   const toggleEdit = () => {
-    setEntriesList((prevList) =>
-      prevList.map((entry) =>
-        entry.id === id ? { ...entry, isEditing: !entry.isEditing } : entry
-      )
+    setEntriesList((prevList: EntryWithEdit[]) =>
+      prevList.map((entry) => (entry.id === id ? { ...entry, isEditing: !entry.isEditing } : entry)),
     );
   };
 
   const handleSave = async () => {
     await editEntry(id, itemEntry);
-
-    setEntriesList((prevList) => {
+    const nextList = (prevList: EntryWithEdit[]): EntryWithEdit[] => {
       const updatedEntries = prevList.map((entry) => {
         if (entry.id === id) {
           return { ...entry, ...itemEntry, isEditing: false };
@@ -59,7 +54,8 @@ export default function Entry({
         }
       });
       return updatedEntries;
-    });
+    };
+    setEntriesList(nextList);
   };
 
   //TODO add this edit logic to EditSympromsEntry component
@@ -72,41 +68,17 @@ export default function Entry({
   // };
 
   return (
-    <Paper
-      elevation={10}
-      sx={{ maxWidth: 'md', p: 2, borderRadius: '20px', mb: 2 }}
-    >
-      <Box
-        display='flex'
-        flexDirection='column'
-        justifyContent='space-between'
-        alignItems='flex-start'
-      >
-        <Box
-          display='flex'
-          flexDirection='row'
-          justifyContent='space-between'
-          width='100%'
-        >
-          <Box display='flex' flexDirection='column' gap={1} flexGrow={1}>
+    <Paper elevation={10} sx={{ maxWidth: 'md', p: 2, borderRadius: '20px', mb: 2 }}>
+      <Box display="flex" flexDirection="column" justifyContent="space-between" alignItems="flex-start">
+        <Box display="flex" flexDirection="row" justifyContent="space-between" width="100%">
+          <Box display="flex" flexDirection="column" gap={1} flexGrow={1}>
             {(name || select) && (
-              <ConsumedItemEntry
-                name={name}
-                isEditing={isEditing}
-                select={select}
-                health_impact={health_impact}
-                itemEntry={itemEntry}
-                setItemEntry={setItemEntry}
-              />
+              <ConsumedItemEntry isEditing={isEditing} setItemEntry={setItemEntry} itemEntry={itemEntry} />
             )}
-            <SymptomsEntry
-              stool_type={stool_type}
-              is_bleeding={is_bleeding}
-              other_symptoms={other_symptoms}
-            />
+            <SymptomsEntry stool_type={stool_type} is_bleeding={is_bleeding} other_symptoms={other_symptoms} />
           </Box>
 
-          <Box display='flex' flexDirection='row' gap={1}>
+          <Box display="flex" flexDirection="row" gap={1}>
             {isEditing ? (
               <BookmarkAddedIcon
                 onClick={handleSave}
@@ -130,18 +102,10 @@ export default function Entry({
                 }}
               />
             )}
-            <DeleteOutlineIcon
-              onClick={handleDelete}
-              cursor='pointer'
-              color='error'
-            />
+            <DeleteOutlineIcon onClick={handleDelete} cursor="pointer" color="error" />
           </Box>
         </Box>
-        <Typography
-          variant='body2'
-          color='textSecondary'
-          sx={{ alignSelf: 'flex-end', mt: 2 }}
-        >
+        <Typography variant="body2" color="textSecondary" sx={{ alignSelf: 'flex-end', mt: 2 }}>
           {new Date(createdAt).toLocaleString()}
         </Typography>
       </Box>

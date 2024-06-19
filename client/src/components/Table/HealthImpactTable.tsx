@@ -1,4 +1,3 @@
-import React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -8,21 +7,18 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Typography } from '@mui/material';
 import { Box, Container } from '@mui/system';
+import { useContext } from 'react';
+import EntriesContext from '../../context/EntriesContext';
 
-const HealthImpactTable = ({ entriesList }) => {
-  const beneficialItems = entriesList.filter((item) =>
-    item.health_impact === 'Beneficial' ? true : false
-  );
+//TODO implement TS here
+const HealthImpactTable = () => {
+  const { entriesList } = useContext(EntriesContext);
 
-  const neutralItems = entriesList.filter((item) =>
-    item.health_impact === 'Neutral' ? true : false
-  );
+  const beneficialItems = entriesList.filter((item) => (item.health_impact === 'Beneficial' ? true : false));
 
-  const avoidItems = entriesList.filter((item) =>
-    item.health_impact === 'Avoid' ? true : false
-  );
+  const neutralItems = entriesList.filter((item) => (item.health_impact === 'Neutral' ? true : false));
 
-  console.log(beneficialItems);
+  const avoidItems = entriesList.filter((item) => (item.health_impact === 'Avoid' ? true : false));
 
   return (
     <Container
@@ -40,9 +36,9 @@ const HealthImpactTable = ({ entriesList }) => {
       }}
     >
       <Box
-        display='flex'
-        justifyContent='space-around'
-        width='100%'
+        display="flex"
+        justifyContent="space-around"
+        width="100%"
         flexDirection={{ xs: 'column', sm: 'row' }}
         gap={{ xs: 2, sm: 4 }}
       >
@@ -60,14 +56,14 @@ const HealthImpactTable = ({ entriesList }) => {
             Positive
           </Typography>
           <TableContainer component={Paper} elevation={10}>
-            <Table aria-label='simple table'>
+            <Table aria-label="simple table">
               <TableHead>
                 <TableRow sx={{ bgcolor: 'secondary.light' }}>
                   <TableCell sx={{ fontWeight: 'bold' }}>#</TableCell>
-                  <TableCell align='center' sx={{ fontWeight: 'bold' }}>
+                  <TableCell align="center" sx={{ fontWeight: 'bold' }}>
                     Item
                   </TableCell>
-                  <TableCell align='center' sx={{ fontWeight: 'bold' }}>
+                  <TableCell align="center" sx={{ fontWeight: 'bold' }}>
                     Health Impact
                   </TableCell>
                 </TableRow>
@@ -75,11 +71,11 @@ const HealthImpactTable = ({ entriesList }) => {
               <TableBody>
                 {beneficialItems.map((entry, index) => (
                   <TableRow key={index}>
-                    <TableCell component='th' scope='row'>
+                    <TableCell component="th" scope="row">
                       {index + 1}
                     </TableCell>
-                    <TableCell align='center'>{entry.name}</TableCell>
-                    <TableCell align='center'>{entry.health_impact}</TableCell>
+                    <TableCell align="center">{entry.name}</TableCell>
+                    <TableCell align="center">{entry.health_impact}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -100,14 +96,14 @@ const HealthImpactTable = ({ entriesList }) => {
             Neutral
           </Typography>
           <TableContainer component={Paper} elevation={10}>
-            <Table aria-label='simple table'>
+            <Table aria-label="simple table">
               <TableHead>
                 <TableRow sx={{ bgcolor: 'secondary.light' }}>
                   <TableCell sx={{ fontWeight: 'bold' }}>#</TableCell>
-                  <TableCell align='center' sx={{ fontWeight: 'bold' }}>
+                  <TableCell align="center" sx={{ fontWeight: 'bold' }}>
                     Item
                   </TableCell>
-                  <TableCell align='center' sx={{ fontWeight: 'bold' }}>
+                  <TableCell align="center" sx={{ fontWeight: 'bold' }}>
                     Health Impact
                   </TableCell>
                 </TableRow>
@@ -115,11 +111,11 @@ const HealthImpactTable = ({ entriesList }) => {
               <TableBody>
                 {neutralItems.map((entry, index) => (
                   <TableRow key={index}>
-                    <TableCell component='th' scope='row'>
+                    <TableCell component="th" scope="row">
                       {index + 1}
                     </TableCell>
-                    <TableCell align='center'>{entry.name}</TableCell>
-                    <TableCell align='center'>{entry.health_impact}</TableCell>
+                    <TableCell align="center">{entry.name}</TableCell>
+                    <TableCell align="center">{entry.health_impact}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -140,14 +136,14 @@ const HealthImpactTable = ({ entriesList }) => {
             Negative
           </Typography>
           <TableContainer component={Paper} elevation={10}>
-            <Table aria-label='simple table'>
+            <Table aria-label="simple table">
               <TableHead>
                 <TableRow sx={{ bgcolor: 'secondary.light' }}>
                   <TableCell sx={{ fontWeight: 'bold' }}>#</TableCell>
-                  <TableCell align='center' sx={{ fontWeight: 'bold' }}>
+                  <TableCell align="center" sx={{ fontWeight: 'bold' }}>
                     Item
                   </TableCell>
-                  <TableCell align='center' sx={{ fontWeight: 'bold' }}>
+                  <TableCell align="center" sx={{ fontWeight: 'bold' }}>
                     Health Impact
                   </TableCell>
                 </TableRow>
@@ -155,11 +151,11 @@ const HealthImpactTable = ({ entriesList }) => {
               <TableBody>
                 {avoidItems.map((entry, index) => (
                   <TableRow key={index}>
-                    <TableCell component='th' scope='row'>
+                    <TableCell component="th" scope="row">
                       {index + 1}
                     </TableCell>
-                    <TableCell align='center'>{entry.name}</TableCell>
-                    <TableCell align='center'>{entry.health_impact}</TableCell>
+                    <TableCell align="center">{entry.name}</TableCell>
+                    <TableCell align="center">{entry.health_impact}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

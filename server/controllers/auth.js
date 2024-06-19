@@ -8,13 +8,13 @@ async function login (req, res) {
     const user = await User.findOne({ where: { email } });
 
     if (!user) return res.status(401).json({ error: 'User not found' });
-    
+
     if (!email || !password) return res.status(400).json({ error: 'Missing credentials' });
-    
+
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) return res.status(401).json({ error: 'Invalid password' });
-    
+
     const token = createSession(user.id);
     res.cookie('sessionId', token, {
       httpOnly: true,
@@ -45,15 +45,15 @@ async function logout (req, res) {
 async function auth (req, res) {
   try {
     const token = req.cookies.sessionId;
-    if (!token) return res.status(401).json({ error: 'Unauthorized' });
-    
+    if (!token) return res.status(401).json({ error: 'Token not found' });
+
     const sessionData = verifySession(token);
 
     if (!sessionData) return res.status(401).json({ error: 'Unauthorized' });
 
     const user = await User.findByPk(sessionData.userId);
     
-    if (!user) return res.status(401).json({ error: 'Unauthorized' });
+    if (!user) return res.status(401).json({ error: 'User not found' });
     
     res.status(200).json({ userId: user.id });
   }
