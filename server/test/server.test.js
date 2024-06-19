@@ -34,7 +34,15 @@ describe('Register new user, login, auth and logout', () => {
     expect(response.body).toBeInstanceOf(Object);
     expect(response.body).toHaveProperty('userId', 1);
   });
-  it('should login, set a cookie with the session and return the userId', async () => {});
+  it('should login, set a cookie with the session and return the userId', async () => {
+    const response = await request(app)
+      .post('/login')
+      .send({'email': 'test@email.com', 'password': '123'});
+    expect(response.status).toBe(200);
+    expect(response.headers['content-type']).toEqual(expect.stringContaining('json'));
+    expect(response.body).toBeInstanceOf(Object);
+    expect(response.body).toHaveProperty('userId', 1);
+  });
   // login should fail for users that are not registered
   it('should auth, validate the cookie and return the userId', async () => {});
   // auth should fail for users that are not logged in
