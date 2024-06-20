@@ -68,7 +68,6 @@ describe('Register new user, login, auth and logout', () => {
 });
 
 describe('Auth and logout tests', () => {
-  // login should fail for users that are not registered
   it('should auth, validate the cookie and return the userId', async () => {
     const authResponse = await request(app).get('/auth').set('Cookie', authCookie);
     expect(authResponse.status).toBe(200);
