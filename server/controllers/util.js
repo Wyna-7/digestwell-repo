@@ -30,7 +30,7 @@ async function getModelByUser(Model, req, res) {
 
 async function deleteModel(Model, req, res) {
   try {
-    const model = await Model.destroy({ where: { id: req.params.id } });
+    await Model.destroy({ where: { id: req.params.id } });
 
     const findDel = await Model.findOne({ where: { id: req.params.id } });
     if (!findDel) {

@@ -134,10 +134,56 @@ describe('Symptoms CRUD', () => {
   });
 });
 
-//TODO describe items CRUD
-// describe('Items CRUD', () => {
-//   it('should save a new item', async () => {});
-//   it('should get all items for a user', async () => {});
-//   it('should delete an item', async () => {});
-//   it('should update an item', async () => {});
-// });
+describe('Items CRUD', () => {
+  it('should save a new item', async () => {
+    const saveResponse = await request(app)
+      .post('/items')
+      .set('Cookie', authCookie)
+      .send({ userId: 1, name: 'Chocolate', select: 'Food', health_impact: 'Neutral' });
+    expect(saveResponse.status).toBe(201);
+  });
+  it('should get all items for a user', async () => {
+    const response = await request(app).get(`/items/${userId}`).set('Cookie', authCookie);
+
+    expect(response.status).toBe(200);
+    expect(response.body).toBeInstanceOf(Array);
+  });
+  it('should delete an item', async () => {
+    //create a new item
+    const newItemResponse = await request(app)
+      .post('/items')
+      .set('Cookie', authCookie)
+      .send({ userId: 1, name: 'Tea', select: 'Medication', health_impact: 'Neutral' });
+
+    const newItemId = newItemResponse.body.id;
+
+    const deleteResponse = await request(app).delete(`/items/${newItemId}`).set('Cookie', authCookie);
+
+    expect(deleteResponse.status).toBe(200);
+    expect(deleteResponse.body).toHaveProperty('message', 'Deleted successfully');
+  });
+  it('should update an item', async () => {
+    const newItemResponse = await request(app)
+      .post('/items')
+      .set('Cookie', authCookie)
+      .send({ userId: 1, name: 'Tea', select: 'Medication', health_impact: 'Neutral' });
+
+    const newItemId = newItemResponse.body.id;
+
+    const updateResponse = await request(app)
+      .patch(`/items/${newItemId}`)
+      .set('Cookie', authCookie)
+      .send({ userId: 1, name: 'Tea', select: 'Beverage', health_impact: 'Neutral' });
+
+    expect(updateResponse.request._data).toEqual(
+      expect.objectContaining({
+        userId: 1,
+        name: 'Tea',
+        select: 'Beverage',
+        health_impact: 'Neutral',
+      }),
+    );
+    expect(updateResponse.status).toBe(200);
+    expect(updateResponse.body).toHaveProperty('message', 'Updated successfully');
+  });
+});
