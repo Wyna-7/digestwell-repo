@@ -102,6 +102,7 @@ describe('Symptoms CRUD', () => {
     const newSymptomId = newSymptomResponse.body.id;
 
     const deleteResponse = await request(app).delete(`/symptoms/${newSymptomId}`).set('Cookie', authCookie);
+
     expect(deleteResponse.status).toBe(200);
     expect(deleteResponse.body).toHaveProperty('message', 'Deleted successfully');
   });
@@ -120,6 +121,14 @@ describe('Symptoms CRUD', () => {
       .set('Cookie', authCookie)
       .send({ userId: 1, stool_type: 'Type 3', is_bleeding: false, other_symptoms: 'Headache' });
 
+    expect(updateResponse.request._data).toEqual(
+      expect.objectContaining({
+        userId: 1,
+        stool_type: 'Type 3',
+        is_bleeding: false,
+        other_symptoms: 'Headache',
+      }),
+    );
     expect(updateResponse.status).toBe(200);
     expect(updateResponse.body).toHaveProperty('message', 'Updated successfully');
   });
