@@ -69,7 +69,7 @@ export default function Entry(props: EntryWithEdit) {
 
   return (
     <Paper elevation={10} sx={{ maxWidth: 'md', p: 2, borderRadius: '20px', mb: 2 }}>
-      <Box display="flex" flexDirection="column" justifyContent="space-between" alignItems="flex-start">
+      <Box display="flex" flexDirection="column" justifyContent="space-between" alignItems="flex-start" data-testid='entry'>
         <Box display="flex" flexDirection="row" justifyContent="space-between" width="100%">
           <Box display="flex" flexDirection="column" gap={1} flexGrow={1}>
             {(name || select) && (
