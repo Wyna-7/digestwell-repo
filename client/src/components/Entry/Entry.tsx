@@ -9,7 +9,7 @@ import ConsumedItemEntry from '../ConsumedItemEntry/ConsumedItemEntry';
 import SymptomsEntry from '../SymptomsEntry/SymptomsEntry';
 import { EntryWithEdit } from '../../types';
 import EntriesContext from '../../context/EntriesContext';
-//TODO change the import of mui when importing several things
+
 
 export default function Entry(props: EntryWithEdit) {
   const { name, select, createdAt, id, isEditing, stool_type, is_bleeding, other_symptoms } = props;
