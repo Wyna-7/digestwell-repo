@@ -32,10 +32,7 @@ async function deleteModel(Model, req, res) {
   try {
     await Model.destroy({ where: { id: req.params.id } });
 
-    const findDel = await Model.findOne({ where: { id: req.params.id } });
-    if (!findDel) {
-      res.status(200).send({ message: 'Deleted successfully' });
-    }
+    res.status(200).send({ message: 'Deleted successfully' });
   } catch (e) {
     console.error(e);
     res.status(500).send(e.message);

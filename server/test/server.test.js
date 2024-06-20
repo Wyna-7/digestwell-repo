@@ -14,7 +14,6 @@ app.use(router);
 let authCookie;
 let userId;
 
-//I combined 2 beforeAlls in one
 beforeAll(async () => {
   await sequelize.authenticate();
   await sequelize.sync({ force: true });
@@ -54,6 +53,18 @@ describe('Register new user, login, auth and logout', () => {
     expect(response.headers['set-cookie'][0].includes('sessionId')).toBe(true);
     expect(response.body).toHaveProperty('userId', 2);
   });
+
+  it('should show an error when logging in with incorrect password', async () => {
+    const response = await request(app).post('/login').send({ email: 'test2@email.com', password: '1123' });
+    expect(response.status).toBe(401);
+    expect(response.body).toHaveProperty('error', 'Invalid password');
+  });
+
+  it('should show an error when user does not exist', async () => {
+    const response = await request(app).post('/login').send({ email: 'nonexistant@email.com', password: '123' });
+    expect(response.status).toBe(401);
+    expect(response.body).toHaveProperty('error', 'User not found');
+  });
 });
 
 describe('Auth and logout tests', () => {
@@ -76,7 +87,6 @@ describe('Auth and logout tests', () => {
 });
 
 describe('Symptoms CRUD', () => {
-  // NB: need to login before saving a new symptom
   it('should save a new symptom', async () => {
     const saveResponse = await request(app)
       .post('/symptoms')
