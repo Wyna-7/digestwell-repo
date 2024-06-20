@@ -20,8 +20,6 @@ URL = 'client domain' or 'http://localhost:5173'
 ```
 
 2. Create a database named `digestwell` in your PostgreSQL instance.
-3. You'll need to create a user manually in the database. Do a `POST` request to `http://localhost:3000/register` with the
-   following body: `{"email": "test@email.com", "password": "123", "firstName": "John", "lastName": "Doe"}`
 
 ## Run the client
 
