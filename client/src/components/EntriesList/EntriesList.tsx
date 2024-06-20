@@ -11,8 +11,8 @@ const EntriesList = () => {
 
   //TODO use fsn library for the sorting
   const sortedEntries = entriesList.sort((a: EntryFromDataBase, b: EntryFromDataBase): number => {
-    const c: number = Number(new Date(a.createdAt));
-    const d: number = Number(new Date(b.createdAt));
+    const c: number = (new Date(a.createdAt)).getTime();
+    const d: number = (new Date(b.createdAt)).getTime();
     return d - c;
   });
 

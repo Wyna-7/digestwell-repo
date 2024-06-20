@@ -79,6 +79,8 @@ function EntriesForm() {
         selectedStoolType: '',
         bloodInStool: false,
       });
+    }).catch((error) => {
+      console.error(error);
     });
   };
 

@@ -8,7 +8,7 @@ import MyLists from './pages/MyLists';
 import SignIn from './pages/LoginPage';
 import Register from './pages/Register';
 import Logout from './pages/Logout';
-import { BrowserRouter as Router, Route, Routes } from '../node_modules/react-router-dom/dist/index';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { EntryFromDataBase, EntryWithEdit } from './types';
 import Dashboard from './pages/Dashboard';
 
