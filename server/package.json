@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "start": "node index.js",
+    "dev": "nodemon .",
+    "test": "ENV=test jest",
     "lint": "eslint ."
   },
   "author": "",
@@ -21,6 +23,7 @@
     "sequelize": "^6.37.3"
   },
   "devDependencies": {
+    "nodemon": "^3.1.4",
     "@eslint/js": "^9.4.0",
     "eslint": "^9.4.0",
     "globals": "^15.4.0",

@@ -1,22 +1,19 @@
-require('dotenv').config();
+const dotenv = require('dotenv');
+const filename = process.env.ENV === 'test' ? '.env.test' : '.env';
+dotenv.config({ path: filename });
+
 const { Sequelize } = require('sequelize');
 
 const DB_URL = process.env.DB_URL || 'localhost';
 const DB_USER = process.env.DB_USER || 'postgres';
 const DB_PASSWORD = process.env.DB_PASSWORD || null;
-const DB_NAME = process.env.DB_NAME || 'digestwell';
+const DB_NAME = process.env.DB_NAME || 'disgestwell';
 
-
-const sequelize = new Sequelize(
-  DB_NAME, 
-  DB_USER, 
-  DB_PASSWORD, 
-  {
-    host: DB_URL,
-    dialect: 'postgres',
-    logging: false,
-  });
-
+const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
+  host: DB_URL,
+  dialect: 'postgres',
+  logging: false,
+});
 
 const User = require('./user')(sequelize, Sequelize.DataTypes);
 const Item = require('./item')(sequelize, Sequelize.DataTypes);
