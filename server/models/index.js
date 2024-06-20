@@ -1,9 +1,37 @@
+const dotenv = require('dotenv');
+const filename = process.env.ENV === 'test' ? '.env.test' : '.env';
+dotenv.config({ path: filename });
+
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize('digestwell', 'brice', 'null', {
-  host: 'localhost',
+const DB_URL = process.env.DB_URL || 'localhost';
+const DB_USER = process.env.DB_USER || 'postgres';
+const DB_PASSWORD = process.env.DB_PASSWORD || null;
+const DB_NAME = process.env.DB_NAME || 'disgestwell';
+
+const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
+  host: DB_URL,
   dialect: 'postgres',
   logging: false,
 });
 
-module.exports = sequelize;
+const User = require('./user')(sequelize, Sequelize.DataTypes);
+const Item = require('./item')(sequelize, Sequelize.DataTypes);
+const Symptom = require('./symptom')(sequelize, Sequelize.DataTypes);
+
+User.hasMany(Item, { foreignKey: 'userId' });
+User.hasMany(Symptom, { foreignKey: 'userId' });
+Item.hasMany(Symptom, { foreignKey: 'itemId' });
+
+Item.belongsTo(User, { foreignKey: 'userId' });
+Symptom.belongsTo(User, { foreignKey: 'userId' });
+Symptom.belongsTo(Item, { foreignKey: 'itemId' });
+
+const db = {
+  sequelize,
+  User,
+  Item,
+  Symptom,
+};
+
+module.exports = db;

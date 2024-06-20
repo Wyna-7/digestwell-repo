@@ -1,19 +1,29 @@
 const router = require('express').Router();
 
-const {
-  getEntries,
-  postEntry,
-  modifyEntry,
-  deleteEntry,
-} = require('./controller/entries');
+const { postSymptom, getUserSymptom, deleteSymptom, updateSymptom,
+  postItem, getUserItem, deleteItem, updateItem
+} = require('./controllers');
 
-router.get('/entries', getEntries);
+const { register, login, logout, auth } = require('./controllers/auth');
+const authenticate = require('./middleware/auth');
 
-router.post('/entries', postEntry);
+// auth
+router.post('/register', register);
+router.post('/login', login);
+router.get('/logout', logout);
+router.get('/auth', auth);
 
-// to edit an entry
-router.put('/entries/:id/edit', modifyEntry);
+// symptoms
+router.post('/symptoms', authenticate, postSymptom);
+router.get('/symptoms/:userId', authenticate, getUserSymptom);
+router.delete('/symptoms/:id', authenticate, deleteSymptom);
+router.patch('/symptoms/:id', authenticate, updateSymptom);
 
-router.delete('/entries/:id', deleteEntry);
+// items
+router.post('/items', authenticate, postItem);
+router.get('/items/:userId', authenticate, getUserItem);
+router.delete('/items/:id', authenticate, deleteItem);
+router.patch('/items/:id', authenticate, updateItem);
+
 
 module.exports = router;

@@ -1,0 +1,13 @@
+.avoid {
+  color: var(--avoid);
+}
+.beneficial {
+  color: var(--positive);
+}
+.neutral {
+  color: var(--neutral);
+}
+
+.font-weight-bold {
+  font-weight: 700 !important;
+}
