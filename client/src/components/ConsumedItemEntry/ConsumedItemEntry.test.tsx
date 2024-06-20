@@ -44,7 +44,7 @@ describe('ConsumedItemEntry tests render', () => {
   });
 });
 
-describe('ConsumedItemEntry edits', () => {
+describe('ConsumedItemEntry select menus', () => {
   it('should display edit view', () => {
     expect(screen.getByTestId('edit-name')).toBeInTheDocument();
     expect(screen.getByTestId('edit-type')).toBeInTheDocument();
