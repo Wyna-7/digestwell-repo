@@ -3,7 +3,7 @@ require('dotenv').config();
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
-function createSession (userId) {
+function createSession(userId) {
   const expiry = new Date();
   expiry.setDate(expiry.getDate() + 7);
 
@@ -14,7 +14,7 @@ function createSession (userId) {
   return jwt.sign(newSession, JWT_SECRET);
 }
 
-function verifySession (token) { 
+function verifySession(token) {
   const sessionData = jwt.verify(token, JWT_SECRET);
   if (sessionData.expiresAt < Date.now()) {
     console.log('Session expired');
