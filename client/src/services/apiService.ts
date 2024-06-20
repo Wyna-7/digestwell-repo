@@ -2,9 +2,9 @@ import { EntryFromDataBase, EntryToDataBase } from '../types';
 
 const BASE_URL = 'http://localhost:3000/';
 
-//TODO import entry interface from types file after merge
 function isItem(entry: EntryToDataBase | EntryFromDataBase) {
-  return entry?.name && entry?.select;
+  if (entry?.name && entry?.select) return true;
+  return false;
 }
 
 const getEntries = async (userId: number): Promise<EntryFromDataBase[]> => {
