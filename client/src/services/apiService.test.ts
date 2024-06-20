@@ -62,6 +62,19 @@ const mockEntryFromDataBase = {
   itemId: 1,
 };
 
+const mockEntryFromDataBase2 = {
+  id: 1,
+  createdAt: '2023-01-01T00:00:00Z',
+  name: '',
+  select: '',
+  health_impact: 'Negative',
+  stool_type: '',
+  is_bleeding: false,
+  other_symptoms: '',
+  userId: 1,
+  itemId: 1,
+};
+
 const mockEntryToDataBase = {
   name: 'Chocolate Cake',
   select: 'Food',
@@ -111,8 +124,14 @@ describe('API functions', () => {
   it('deleteEntry should send a DELETE request', async () => {
     nock(BASE_URL)
       .delete(`/items/${mockItem.id}`)
-      .reply(200, mockItem);
-    const response = await deleteEntry(mockItem.id, mockEntryFromDataBase);
+      .reply(200, 'Deleted');
+    let response = await deleteEntry(mockItem.id, mockEntryFromDataBase);
+    expect(response).toEqual(undefined);
+
+    nock(BASE_URL)
+      .delete('/symptoms/1')
+      .reply(200, 'Deleted');
+    response = await deleteEntry(mockItem.id, mockEntryFromDataBase2);
     expect(response).toEqual(undefined);
   });
 
