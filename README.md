@@ -1,8 +1,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/tatyanabortnik/FindUkrainian">
-    <img src="client/src/assets/logo-icon.svg" alt="Logo" height="80">
+  <a href="https://github.com/Wyna-7/digestwell-repo">
+    <img src="client/src/assets/icon-digestwell.svg" alt="Logo" height="80">
   </a>
 </div>
 
